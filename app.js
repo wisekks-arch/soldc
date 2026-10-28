@@ -911,55 +911,250 @@ function initCalculators() {
 
 function initModals() {
   const btnOpenAdd = document.getElementById("btnOpenAddModal");
+  const menuAddProduct = document.getElementById("menuAddProduct");
   const modal = document.getElementById("productModal");
   const backdrop = document.getElementById("productModalBackdrop");
   const closeBtn = document.getElementById("modalCloseBtn");
   const cancelBtn = document.getElementById("modalCancelBtn");
   const submitBtn = document.getElementById("modalSubmitBtn");
 
+  const nameInput = document.getElementById("newProductName");
+  const codeInput = document.getElementById("newProductCode");
+  const amountInput = document.getElementById("newProductAmount");
+  const chipButtons = document.querySelectorAll("#quickProductChips .chip-item");
+  const radioRisk = document.getElementById("labelTypeRisk");
+  const radioSafe = document.getElementById("labelTypeSafe");
+  const preDiagBox = document.getElementById("preDiagnosisBox");
+  const diagCurrentRatio = document.getElementById("diagCurrentRatio");
+  const diagPredictedRatio = document.getElementById("diagPredictedRatio");
+  const diagStatusBadge = document.getElementById("diagStatusBadge");
+  const diagDescText = document.getElementById("diagDescText");
+  const capacityDisplay = document.getElementById("remainingRiskCapacityDisplay");
+
   function openModal() {
-    modal.style.display = "block";
-    backdrop.style.display = "block";
-  }
-  function closeModal() {
-    modal.style.display = "none";
-    backdrop.style.display = "none";
+    if (modal && backdrop) {
+      modal.style.display = "block";
+      backdrop.style.display = "block";
+      updateModalDiagnosis();
+    }
   }
 
+  function closeModal() {
+    if (modal && backdrop) {
+      modal.style.display = "none";
+      backdrop.style.display = "none";
+    }
+  }
+
+  // 메뉴 및 버튼 바인딩
   if (btnOpenAdd) btnOpenAdd.addEventListener("click", openModal);
+  if (menuAddProduct) {
+    menuAddProduct.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
   if (cancelBtn) cancelBtn.addEventListener("click", closeModal);
   if (backdrop) backdrop.addEventListener("click", closeModal);
 
+  // 실시간 70% 사전 진단 함수
+  function updateModalDiagnosis() {
+    const totalVal = pensionState.holdings.reduce((sum, item) => sum + item.currentVal, 0); // 41,602,931
+    const riskVal = pensionState.holdings
+      .filter(item => item.type === "risk")
+      .reduce((sum, item) => sum + item.currentVal, 0); // 24,251,870
+    const currentRiskRatio = ((riskVal / totalVal) * 100).toFixed(1); // 58.3%
+
+    const maxRiskAllowed = Math.floor(totalVal * 0.7);
+    const remCapacity = Math.max(0, maxRiskAllowed - riskVal);
+    if (capacityDisplay) capacityDisplay.textContent = `${(remCapacity / 10000).toFixed(0)}만 원`;
+
+    const amt = parseFloat(amountInput.value) || 0;
+    const selectedRadio = document.querySelector('input[name="productTypeRadio"]:checked');
+    const isRisk = selectedRadio ? selectedRadio.value === "위험" : true;
+
+    const newTotal = totalVal + amt;
+    const newRisk = isRisk ? (riskVal + amt) : riskVal;
+    const newRatio = newTotal > 0 ? ((newRisk / newTotal) * 100).toFixed(1) : currentRiskRatio;
+
+    if (diagCurrentRatio) diagCurrentRatio.textContent = `${currentRiskRatio}%`;
+    if (diagPredictedRatio) diagPredictedRatio.textContent = `${newRatio}%`;
+
+    if (parseFloat(newRatio) <= 70.0) {
+      if (preDiagBox) preDiagBox.classList.remove("limit-exceeded");
+      if (diagStatusBadge) {
+        diagStatusBadge.className = "diag-status-badge safe";
+        diagStatusBadge.textContent = "안전 정상";
+      }
+      if (diagDescText) {
+        diagDescText.innerHTML = `법정 한도 70% 이내로 <strong>안전하게 편입 매수</strong>가 가능합니다. (예상 여력: ${((newTotal * 0.7 - newRisk)/10000).toFixed(0)}만원)`;
+      }
+    } else {
+      if (preDiagBox) preDiagBox.classList.add("limit-exceeded");
+      if (diagStatusBadge) {
+        diagStatusBadge.className = "diag-status-badge danger";
+        diagStatusBadge.textContent = "70% 초과 경고";
+      }
+      if (diagDescText) {
+        const excess = (parseFloat(newRatio) - 70.0).toFixed(1);
+        diagDescText.innerHTML = `<span class="text-danger font-bold"><i class="fa-solid fa-triangle-exclamation"></i> 경고:</span> 법정 한도 70%를 <strong>${excess}%p 초과</strong>합니다! 편입 금액을 줄이거나 안전자산으로 변경해 주세요.`;
+      }
+    }
+  }
+
+  // 추천 상품 퀵 칩 클릭
+  chipButtons.forEach(chip => {
+    chip.addEventListener("click", () => {
+      chipButtons.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+
+      const name = chip.getAttribute("data-name");
+      const code = chip.getAttribute("data-code");
+      const cat = chip.getAttribute("data-cat");
+
+      if (nameInput) nameInput.value = name;
+      if (codeInput) codeInput.value = code;
+
+      // 자산 분류 라디오 반영
+      if (cat === "위험") {
+        if (radioRisk) radioRisk.classList.add("active");
+        if (radioSafe) radioSafe.classList.remove("active");
+        const r = document.querySelector('input[name="productTypeRadio"][value="위험"]');
+        if (r) r.checked = true;
+      } else {
+        if (radioSafe) radioSafe.classList.add("active");
+        if (radioRisk) radioRisk.classList.remove("active");
+        const s = document.querySelector('input[name="productTypeRadio"][value="안전"]');
+        if (s) s.checked = true;
+      }
+
+      updateModalDiagnosis();
+    });
+  });
+
+  // 자산 분류 카드 클릭
+  if (radioRisk) {
+    radioRisk.addEventListener("click", () => {
+      radioRisk.classList.add("active");
+      if (radioSafe) radioSafe.classList.remove("active");
+      const r = document.querySelector('input[name="productTypeRadio"][value="위험"]');
+      if (r) r.checked = true;
+      updateModalDiagnosis();
+    });
+  }
+
+  if (radioSafe) {
+    radioSafe.addEventListener("click", () => {
+      radioSafe.classList.add("active");
+      if (radioRisk) radioRisk.classList.remove("active");
+      const s = document.querySelector('input[name="productTypeRadio"][value="안전"]');
+      if (s) s.checked = true;
+      updateModalDiagnosis();
+    });
+  }
+
+  // 금액 인풋 변경
+  if (amountInput) {
+    amountInput.addEventListener("input", updateModalDiagnosis);
+  }
+
+  // 금액 퀵 칩 클릭
+  const amountChips = document.querySelectorAll(".btn-amount-chip");
+  amountChips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      const addVal = parseFloat(chip.getAttribute("data-add"));
+      if (!isNaN(addVal)) {
+        const cur = parseFloat(amountInput.value) || 0;
+        amountInput.value = cur + addVal;
+        updateModalDiagnosis();
+      }
+    });
+  });
+
+  const btnSetMax = document.getElementById("btnSetMaxCapacity");
+  if (btnSetMax) {
+    btnSetMax.addEventListener("click", () => {
+      const totalVal = pensionState.holdings.reduce((sum, item) => sum + item.currentVal, 0);
+      const riskVal = pensionState.holdings
+        .filter(item => item.type === "risk")
+        .reduce((sum, item) => sum + item.currentVal, 0);
+      const maxRiskAllowed = Math.floor(totalVal * 0.7);
+      const rem = Math.max(0, maxRiskAllowed - riskVal);
+      if (amountInput) amountInput.value = rem;
+      updateModalDiagnosis();
+    });
+  }
+
+  const btnReset = document.getElementById("btnResetAmount");
+  if (btnReset) {
+    btnReset.addEventListener("click", () => {
+      if (amountInput) amountInput.value = "";
+      updateModalDiagnosis();
+    });
+  }
+
+  // 편입 확정 제출
   if (submitBtn) {
     submitBtn.addEventListener("click", () => {
-      const name = document.getElementById("newProductName").value.trim();
-      const cat = document.getElementById("newProductCategory").value;
-      const amount = parseFloat(document.getElementById("newProductAmount").value);
+      const name = nameInput.value.trim();
+      const code = codeInput ? codeInput.value.trim() : "";
+      const selectedRadio = document.querySelector('input[name="productTypeRadio"]:checked');
+      const cat = selectedRadio ? selectedRadio.value : "위험";
+      const amount = parseFloat(amountInput.value);
 
-      if (!name || isNaN(amount) || amount <= 0) {
-        alert("상품명과 금액을 입력해 주세요.");
+      if (!name) {
+        alert("상품명을 입력하거나 상단 추천 상품 칩을 선택해 주세요.");
+        nameInput.focus();
         return;
       }
 
+      if (isNaN(amount) || amount <= 0) {
+        alert("유효한 편입 금액(원)을 입력해 주세요.");
+        amountInput.focus();
+        return;
+      }
+
+      // 법정 70% 초과 차단 검사
+      const totalVal = pensionState.holdings.reduce((sum, item) => sum + item.currentVal, 0);
+      const riskVal = pensionState.holdings.filter(item => item.type === "risk").reduce((sum, item) => sum + item.currentVal, 0);
+      const newTotal = totalVal + amount;
+      const newRisk = (cat === "위험") ? (riskVal + amount) : riskVal;
+      const newRatio = (newRisk / newTotal) * 100;
+
+      if (newRatio > 70.0) {
+        const confirmExceed = confirm(
+          `[법정한도 초과 알림]\n편입 후 위험자산 비중이 ${newRatio.toFixed(1)}%로 법정 한도(70%)를 초과합니다!\n근로자퇴직급여보장법에 따라 편입 금액을 줄이시거나 안전자산으로 변경하시겠습니까?`
+        );
+        if (confirmExceed) {
+          amountInput.focus();
+          return;
+        }
+      }
+
+      // 신규 상품 추가
       pensionState.holdings.push({
         id: "P" + (pensionState.holdings.length + 1),
         name: name,
-        code: "NEW" + Math.floor(Math.random() * 90000 + 10000),
+        code: code || ("NEW" + Math.floor(Math.random() * 90000 + 10000)),
         category: cat === "위험" ? "실적배당형 주식ETF" : "실적배당형 채권혼합",
         type: cat,
         principal: amount,
         profit: 0,
         currentVal: amount,
         returnRate: 0.0,
-        riskLevel: cat === "위험" ? "위험(주식형)" : "안전(혼합형)"
+        riskLevel: cat === "위험" ? "위험(주식형)" : "안전(혼합/예금)"
       });
 
+      // 전체 대시보드 및 지표 갱신
       updateDashboardData();
       renderHoldingsTable(pensionState.currentFilter);
       renderPortfolioDonut();
+      renderRebalanceSimulation();
+      initCustomReturnForecast();
+
       closeModal();
-      alert(`[${name}] 신규 상품이 추가되었습니다. 위험자산 법정한도 70%가 재계산되었습니다.`);
+      alert(`[${name}] 상품이 총 적립금에 정상 편입 매수되었습니다!\n포트폴리오 비중 및 법정 한도 게이지가 실시간으로 재계산되었습니다.`);
     });
   }
 
