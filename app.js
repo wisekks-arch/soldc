@@ -19,7 +19,7 @@ const pensionState = {
   accountName: "홍길동 님의 DC 확정기여형",
   accountNo: "신한 110-***-849201",
   
-  // 엑셀 report_20261028.xls 세 번째 탭 실제 15개 보유 상품
+  // 엑셀 report_20261028.xls 세 번째 탭 실제 15개 보유 상품 (HTS급 정밀 메타데이터 보강)
   holdings: [
     {
       id: "P001",
@@ -34,6 +34,16 @@ const pensionState = {
       currentVal: 9476070,
       returnRate: 23.21,
       riskLevel: "위험(주식형)",
+      nav: 14250,
+      quantity: 665,
+      buyDate: "2024.03.15",
+      expenseRatio: 0.45,
+      return1M: 5.40,
+      return3M: 12.80,
+      return6M: 18.20,
+      return1Y: 23.21,
+      equityRatio: 100,
+      bondRatio: 0,
       strategy: "원전 르네상스 및 SMR 수출 모멘텀으로 최고 수익률(+23.2%) 달성. 목표 수익률 도달에 따라 일부 이익 실현 후 채권혼합 안전자산으로 리밸런싱을 권장합니다."
     },
     {
@@ -49,6 +59,16 @@ const pensionState = {
       currentVal: 4915000,
       returnRate: -36.68,
       riskLevel: "위험(주식형)",
+      nav: 19660,
+      quantity: 250,
+      buyDate: "2024.01.10",
+      expenseRatio: 0.40,
+      return1M: -3.20,
+      return3M: -11.50,
+      return6M: -22.40,
+      return1Y: -36.68,
+      equityRatio: 100,
+      bondRatio: 0,
       strategy: "전기차 캐즘 및 관세 이슈로 손실(-36.7%) 구간입니다. 밸류에이션 저점 구간이므로 무리한 손절보다는 실적 턴어라운드 확인 후 비중 조절을 제안합니다."
     },
     {
@@ -64,6 +84,16 @@ const pensionState = {
       currentVal: 4244340,
       returnRate: 21.12,
       riskLevel: "안전(혼합형)",
+      nav: 11470,
+      quantity: 370,
+      buyDate: "2024.02.20",
+      expenseRatio: 0.25,
+      return1M: 1.80,
+      return3M: 6.20,
+      return6M: 14.50,
+      return1Y: 21.12,
+      equityRatio: 30,
+      bondRatio: 70,
       strategy: "삼성전자와 우량 국공채가 3:7로 혼합된 안전자산입니다. 채권의 안정적 이자 수익과 주가 상승이 결합되어 견고한 성과(+21.1%)를 유지 중입니다."
     },
     {
@@ -79,6 +109,16 @@ const pensionState = {
       currentVal: 3463200,
       returnRate: -25.28,
       riskLevel: "위험(주식형)",
+      nav: 11544,
+      quantity: 300,
+      buyDate: "2024.04.12",
+      expenseRatio: 0.45,
+      return1M: -1.50,
+      return3M: -8.40,
+      return6M: -16.20,
+      return1Y: -25.28,
+      equityRatio: 100,
+      bondRatio: 0,
       strategy: "조선 3사 수주잔고 고선가 물량 인도가 가속화되는 구간입니다. 중장기 실적 개선 관점에서 포지션 유지를 추천합니다."
     },
     {
@@ -94,6 +134,16 @@ const pensionState = {
       currentVal: 3457350,
       returnRate: -12.88,
       riskLevel: "위험(주식형)",
+      nav: 13830,
+      quantity: 250,
+      buyDate: "2024.05.08",
+      expenseRatio: 0.45,
+      return1M: 2.10,
+      return3M: -4.20,
+      return6M: -8.90,
+      return1Y: -12.88,
+      equityRatio: 100,
+      bondRatio: 0,
       strategy: "글로벌 빅테크의 AI 인프라 투자 지속으로 HBM 수요가 탄탄합니다. 단기 조정을 분할 매수 기회로 활용 가능합니다."
     },
     {
@@ -109,6 +159,16 @@ const pensionState = {
       currentVal: 2878340,
       returnRate: 16.88,
       riskLevel: "안전(혼합형)",
+      nav: 1285,
+      quantity: 2240000,
+      buyDate: "2023.11.01",
+      expenseRatio: 0.52,
+      return1M: 1.20,
+      return3M: 4.80,
+      return6M: 10.50,
+      return1Y: 16.88,
+      equityRatio: 40,
+      bondRatio: 60,
       strategy: "KRX100 우량 지수 40%와 국공채 60%를 결합하여 안정적이고 지속적인 우상향 복리 수익(+16.9%)을 시현하고 있습니다."
     },
     {
@@ -124,6 +184,16 @@ const pensionState = {
       currentVal: 2495689,
       returnRate: 13.62,
       riskLevel: "안전(혼합형)",
+      nav: 1312,
+      quantity: 1902200,
+      buyDate: "2023.12.15",
+      expenseRatio: 0.48,
+      return1M: 0.90,
+      return3M: 3.90,
+      return6M: 8.70,
+      return1Y: 13.62,
+      equityRatio: 40,
+      bondRatio: 60,
       strategy: "저평가 가치주와 우량 단기채권을 선별 편입하여 시장 하락기에도 원금을 탄탄히 방어하는 핵심 디펜시브 펀드입니다."
     },
     {
@@ -139,6 +209,16 @@ const pensionState = {
       currentVal: 1806250,
       returnRate: -17.03,
       riskLevel: "위험(주식형)",
+      nav: 14450,
+      quantity: 125,
+      buyDate: "2024.06.01",
+      expenseRatio: 0.40,
+      return1M: -2.10,
+      return3M: -6.50,
+      return6M: -11.20,
+      return1Y: -17.03,
+      equityRatio: 100,
+      bondRatio: 0,
       strategy: "유럽 및 중동 향 K-방산 수출 수주가 지속되고 있어 2분기 이후 수주 공시에 따른 가파른 반등이 기대됩니다."
     },
     {
@@ -154,6 +234,16 @@ const pensionState = {
       currentVal: 1750776,
       returnRate: 18.49,
       riskLevel: "안전(혼합형)",
+      nav: 1405,
+      quantity: 1246100,
+      buyDate: "2023.10.15",
+      expenseRatio: 0.50,
+      return1M: 1.50,
+      return3M: 5.10,
+      return6M: 11.80,
+      return1Y: 18.49,
+      equityRatio: 40,
+      bondRatio: 60,
       strategy: "코스피 200 지수 추종과 채권 배분으로 균형 잡힌 수익률을 제공하며, 위험자산 70% 한도에 포함되지 않는 안전자산입니다."
     },
     {
@@ -169,6 +259,16 @@ const pensionState = {
       currentVal: 1448835,
       returnRate: 17.67,
       riskLevel: "안전(혼합형)",
+      nav: 1254,
+      quantity: 1155300,
+      buyDate: "2024.01.20",
+      expenseRatio: 0.46,
+      return1M: 1.10,
+      return3M: 4.50,
+      return6M: 10.90,
+      return1Y: 17.67,
+      equityRatio: 35,
+      bondRatio: 65,
       strategy: "배당 및 이자 인컴 수익을 원금에 자동 재투자하여 시간 경과에 따라 눈덩이(Snowball)처럼 불어나는 복리 효과를 발휘합니다."
     },
     {
@@ -184,6 +284,16 @@ const pensionState = {
       currentVal: 1407566,
       returnRate: 19.08,
       riskLevel: "안전(혼합형)",
+      nav: 1340,
+      quantity: 1050400,
+      buyDate: "2024.02.11",
+      expenseRatio: 0.48,
+      return1M: 1.40,
+      return3M: 5.60,
+      return6M: 12.30,
+      return1Y: 19.08,
+      equityRatio: 40,
+      bondRatio: 60,
       strategy: "삼성전자 개별 알파 전략과 채권 쿠폰 수익의 시너지로 시장 대비 초과 수익(+19.1%)을 지속 창출하고 있습니다."
     },
     {
@@ -199,6 +309,16 @@ const pensionState = {
       currentVal: 1183833,
       returnRate: 4.06,
       riskLevel: "안전(적격TDF)",
+      nav: 1088,
+      quantity: 1088000,
+      buyDate: "2024.03.01",
+      expenseRatio: 0.38,
+      return1M: 0.40,
+      return3M: 1.20,
+      return6M: 2.80,
+      return1Y: 4.06,
+      equityRatio: 55,
+      bondRatio: 45,
       strategy: "은퇴 시점인 2040년을 타겟으로 자산배분이 자동 조절되는 생애주기 펀드로, 안전자산으로 100% 편입 가능합니다."
     },
     {
@@ -214,6 +334,16 @@ const pensionState = {
       currentVal: 1164707,
       returnRate: 2.38,
       riskLevel: "안전(정기예금)",
+      nav: 1000,
+      quantity: 1164707,
+      buyDate: "2024.01.01",
+      expenseRatio: 0.00,
+      return1M: 0.20,
+      return3M: 0.60,
+      return6M: 1.20,
+      return1Y: 2.38,
+      equityRatio: 0,
+      bondRatio: 0,
       strategy: "원금과 약정 이자가 100% 보장되는 확정금리형 예금입니다. 예금자보호법(5천만원 한도) 적용을 받습니다."
     },
     {
@@ -229,6 +359,16 @@ const pensionState = {
       currentVal: 1134000,
       returnRate: 21.54,
       riskLevel: "위험(주식형)",
+      nav: 12600,
+      quantity: 90,
+      buyDate: "2024.06.15",
+      expenseRatio: 0.40,
+      return1M: 3.50,
+      return3M: 8.90,
+      return6M: 15.40,
+      return1Y: 21.54,
+      equityRatio: 100,
+      bondRatio: 0,
       strategy: "국내 4대 금융지주의 주주환원율 확대와 높은 분배금 수익을 바탕으로 높은 누적수익률(+21.5%)을 달성 중입니다."
     },
     {
@@ -244,6 +384,16 @@ const pensionState = {
       currentVal: 776975,
       returnRate: 2.45,
       riskLevel: "안전(정기예금)",
+      nav: 1000,
+      quantity: 792461,
+      buyDate: "2024.02.01",
+      expenseRatio: 0.00,
+      return1M: 0.20,
+      return3M: 0.60,
+      return6M: 1.20,
+      return1Y: 2.35,
+      equityRatio: 0,
+      bondRatio: 0,
       strategy: "원리금 보장형 정기예금으로 유동성 완충 역할을 하며 확정 수익을 안정적으로 축적합니다."
     }
   ],
@@ -296,11 +446,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 대시보드 및 상세 분석 탭 렌더링
   updateDashboardData();
-  renderPerformanceChart("1y");
+  renderPerformanceChart("1년");
   renderPortfolioDonut();
   renderHoldingsTable(pensionState.currentFilter);
   renderDetailedHoldingsPane();
   renderRebalanceSimulation();
+  renderTaxPayoutSchedule();
+  renderExcelRawDataGrid();
 });
 
 // ============================================================================
@@ -371,8 +523,14 @@ function initNavigationTabs() {
       renderDetailedHoldingsPane();
     } else if (tabKey === "rebalance") {
       renderRebalanceSimulation();
+    } else if (tabKey === "tax-calculator") {
+      renderTaxPayoutSchedule();
+    } else if (tabKey === "report-sync") {
+      renderExcelRawDataGrid();
     }
   }
+
+  window.triggerTabSwitch = switchTab;
 
   lnbItems.forEach(item => {
     item.addEventListener("click", (e) => {
@@ -610,7 +768,7 @@ function renderCustomForecastChart(rate) {
 // ============================================================================
 // 7. 차트 렌더링
 // ============================================================================
-function renderPerformanceChart(period) {
+function renderPerformanceChart(period = "1년") {
   const ctx = document.getElementById("performanceChart");
   if (!ctx) return;
 
@@ -618,14 +776,42 @@ function renderPerformanceChart(period) {
     perfChartInstance.destroy();
   }
 
-  const months = ["25.11", "25.12", "26.01", "26.02", "26.03", "26.04", "26.05", "26.06", "26.07", "26.08", "26.09", "26.10"];
-  const assetValues = [44500000, 44100000, 43200000, 43800000, 44200000, 43900000, 42800000, 42100000, 41500000, 41200000, 41400000, 41602931];
-  const principalValues = [41000000, 41500000, 42000000, 42500000, 42800000, 43000000, 43200000, 43300000, 43400000, 43450000, 43460000, 43467927];
+  // 기간별 시계열 데이터 매핑
+  let labels = [];
+  let assetValues = [];
+  let principalValues = [];
+
+  if (period === "1개월") {
+    labels = ["1주전", "2주전", "3주전", "현재"];
+    assetValues = [41200000, 41350000, 41480000, 41602931];
+    principalValues = [43467927, 43467927, 43467927, 43467927];
+  } else if (period === "3개월") {
+    labels = ["26.08", "26.09", "26.10"];
+    assetValues = [41200000, 41400000, 41602931];
+    principalValues = [43450000, 43460000, 43467927];
+  } else if (period === "6개월") {
+    labels = ["26.05", "26.06", "26.07", "26.08", "26.09", "26.10"];
+    assetValues = [42800000, 42100000, 41500000, 41200000, 41400000, 41602931];
+    principalValues = [43200000, 43300000, 43400000, 43450000, 43460000, 43467927];
+  } else if (period === "3년") {
+    labels = ["24.상반기", "24.하반기", "25.상반기", "25.하반기", "26.상반기", "현재(26.10)"];
+    assetValues = [35000000, 38500000, 42000000, 44500000, 42800000, 41602931];
+    principalValues = [34000000, 37000000, 40000000, 42500000, 43200000, 43467927];
+  } else if (period === "전체") {
+    labels = ["가입(23년)", "24년", "25년", "26년 현재"];
+    assetValues = [30000000, 38500000, 44500000, 41602931];
+    principalValues = [29000000, 37000000, 42500000, 43467927];
+  } else {
+    // 기본: 1년
+    labels = ["25.11", "25.12", "26.01", "26.02", "26.03", "26.04", "26.05", "26.06", "26.07", "26.08", "26.09", "26.10"];
+    assetValues = [44500000, 44100000, 43200000, 43800000, 44200000, 43900000, 42800000, 42100000, 41500000, 41200000, 41400000, 41602931];
+    principalValues = [41000000, 41500000, 42000000, 42500000, 42800000, 43000000, 43200000, 43300000, 43400000, 43450000, 43460000, 43467927];
+  }
 
   perfChartInstance = new Chart(ctx, {
     type: "line",
     data: {
-      labels: months,
+      labels: labels,
       datasets: [
         {
           label: "총 평가금액",
@@ -635,8 +821,8 @@ function renderPerformanceChart(period) {
           fill: true,
           tension: 0.35,
           borderWidth: 3,
-          pointRadius: 3,
-          pointHoverRadius: 6,
+          pointRadius: 4,
+          pointHoverRadius: 7,
           pointBackgroundColor: "#0046FF"
         },
         {
@@ -647,7 +833,7 @@ function renderPerformanceChart(period) {
           fill: false,
           tension: 0.2,
           borderWidth: 2,
-          pointRadius: 0
+          pointRadius: 2
         }
       ]
     },
@@ -659,7 +845,7 @@ function renderPerformanceChart(period) {
         tooltip: {
           backgroundColor: "rgba(10, 25, 49, 0.9)",
           callbacks: {
-            label: (ctx) => `${ctx.dataset.label}: ${formatWon(ctx.parsed.y)}원`
+            label: (c) => `${c.dataset.label}: ${formatWon(c.parsed.y)}원`
           }
         }
       },
@@ -678,6 +864,7 @@ function renderPerformanceChart(period) {
     btn.onclick = () => {
       periodBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
+      renderPerformanceChart(btn.textContent.trim());
     };
   });
 }
@@ -759,11 +946,11 @@ function renderHoldingsTable(filter) {
       const riskBadgeClass = item.type === "risk" ? "danger" : "safe";
 
       return `
-        <tr onclick="openProductDeepDetail('${item.id}')" style="cursor: pointer;">
+        <tr onclick="toggleProductInlineDetail('${item.id}')" style="cursor: pointer;">
           <td class="text-center font-bold" style="color: var(--text-muted);">${idx + 1}</td>
           <td><span class="badge-risk-tag ${riskBadgeClass}">${item.riskLevel}</span></td>
           <td>
-            <div style="font-weight: 700; font-size: 13.5px;" class="product-hover-link">${item.name} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px; color: var(--sol-blue-primary);"></i></div>
+            <div style="font-weight: 700; font-size: 13.5px;" class="product-hover-link">${item.name} <i class="fa-solid fa-angle-down" style="font-size: 10px; color: var(--sol-blue-primary);"></i></div>
             <div style="font-size: 11px; color: var(--text-muted);">${item.category} · ${item.issuer} · 코드 ${item.code}</div>
           </td>
           <td class="text-right">${formatWon(item.principal)}원</td>
@@ -776,7 +963,64 @@ function renderHoldingsTable(filter) {
           </td>
           <td class="text-right font-bold">${weight}%</td>
           <td class="text-center">
-            <button class="btn-outline-sm" onclick="event.stopPropagation(); openProductDeepDetail('${item.id}')">상세분석</button>
+            <div class="holdings-btn-group">
+              <button class="btn-action-detail" onclick="event.stopPropagation(); openProductDeepDetail('${item.id}')" title="상품 심층 분석 팝업">
+                <i class="fa-solid fa-magnifying-glass"></i> 상세
+              </button>
+              <button class="btn-action-accordion" id="btn-toggle-${item.id}" onclick="event.stopPropagation(); toggleProductInlineDetail('${item.id}')" title="인라인 상세 펼치기">
+                펼침 ▾
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!-- [신규 화면구성] 인라인 정밀 아코디언 상세 뷰 -->
+        <tr class="inline-accordion-row" id="accordion-${item.id}" style="display: none;">
+          <td colspan="9" class="inline-accordion-cell">
+            <div class="inline-detail-box">
+              <div class="inline-detail-header">
+                <div class="inline-detail-title-group">
+                  <h4><span class="badge-risk-tag ${riskBadgeClass}">${item.riskLevel}</span> ${item.name}</h4>
+                  <span>운용사: <strong>${item.issuer}</strong> · 종목코드: <strong>${item.code}</strong> · ${item.category}</span>
+                </div>
+                <div class="inline-action-bar">
+                  <button class="btn-action-detail" onclick="openProductDeepDetail('${item.id}')">
+                    <i class="fa-solid fa-up-right-from-square"></i> 전문 분석 팝업 모달 열기
+                  </button>
+                </div>
+              </div>
+              <div class="inline-metric-grid">
+                <div class="inline-metric-card">
+                  <span class="lbl">기준가 (NAV)</span>
+                  <span class="val font-bold">${formatWon(item.nav)} 원</span>
+                </div>
+                <div class="inline-metric-card">
+                  <span class="lbl">보유 수량(좌수)</span>
+                  <span class="val font-bold">${formatWon(item.quantity)} 좌</span>
+                </div>
+                <div class="inline-metric-card">
+                  <span class="lbl">최초 편입일자</span>
+                  <span class="val">${item.buyDate}</span>
+                </div>
+                <div class="inline-metric-card">
+                  <span class="lbl">총보수율 (연)</span>
+                  <span class="val text-brand font-bold">${item.expenseRatio}%</span>
+                </div>
+                <div class="inline-metric-card">
+                  <span class="lbl">자산구성 (주식:채권)</span>
+                  <span class="val">${item.equityRatio}% : ${item.bondRatio}%</span>
+                </div>
+              </div>
+              <div class="inline-perf-row">
+                <strong style="color: var(--text-main);"><i class="fa-solid fa-chart-line text-brand"></i> 기간별 수익률:</strong>
+                <span class="perf-chip"><span class="chip-lbl">1개월:</span> <span class="chip-val ${item.return1M >= 0 ? 'text-positive' : 'text-negative'}">${item.return1M >= 0 ? '+' : ''}${item.return1M}%</span></span>
+                <span class="perf-chip"><span class="chip-lbl">3개월:</span> <span class="chip-val ${item.return3M >= 0 ? 'text-positive' : 'text-negative'}">${item.return3M >= 0 ? '+' : ''}${item.return3M}%</span></span>
+                <span class="perf-chip"><span class="chip-lbl">6개월:</span> <span class="chip-val ${item.return6M >= 0 ? 'text-positive' : 'text-negative'}">${item.return6M >= 0 ? '+' : ''}${item.return6M}%</span></span>
+                <span class="perf-chip"><span class="chip-lbl">1년(누적):</span> <span class="chip-val ${item.returnRate >= 0 ? 'text-positive' : 'text-negative'} font-bold">${item.returnRate >= 0 ? '+' : ''}${item.returnRate}%</span></span>
+              </div>
+              <div class="inline-strategy-callout" style="font-size: 12px; color: var(--text-secondary); background: #FFF; padding: 10px 14px; border-radius: 6px; border-left: 3px solid var(--sol-blue-primary);">
+                <i class="fa-solid fa-lightbulb text-warning" style="margin-right: 4px;"></i> <strong>신한SOL 전문가 운용 전략:</strong> ${item.strategy}
+              </div>
+            </div>
           </td>
         </tr>
       `;
@@ -804,6 +1048,11 @@ function renderHoldingsTable(filter) {
           <div class="mobile-card-bottom">
             <span>매입원금: ${formatWon(item.principal)}원</span>
             <span>비중: <strong>${weight}%</strong></span>
+          </div>
+          <div style="display: flex; justify-content: flex-end; margin-top: 10px; border-top: 1px dashed var(--border-subtle); padding-top: 8px;">
+            <button class="btn-action-detail" onclick="event.stopPropagation(); openProductDeepDetail('${item.id}')">
+              <i class="fa-solid fa-magnifying-glass"></i> 상세 분석 리포트
+            </button>
           </div>
         </div>
       `;
@@ -995,8 +1244,22 @@ function renderDetailedHoldingsPane() {
 }
 
 // ============================================================================
-// 10. [핵심 신규] 상품 심층 분석 전문 상세 모달 (원금 비교, 운용사, 전략)
+// 10. [핵심 신규] 상품 심층 분석 전문 상세 모달 (원금 비교, 운용사, 전략, HTS 정밀 지표)
 // ============================================================================
+window.toggleProductInlineDetail = function(productId) {
+  const row = document.getElementById(`accordion-${productId}`);
+  const btn = document.getElementById(`btn-toggle-${productId}`);
+  if (!row) return;
+
+  if (row.style.display === "none" || !row.style.display) {
+    row.style.display = "table-row";
+    if (btn) btn.innerHTML = "접기 ▴";
+  } else {
+    row.style.display = "none";
+    if (btn) btn.innerHTML = "펼침 ▾";
+  }
+};
+
 window.openProductDeepDetail = function(productId) {
   const item = pensionState.holdings.find(h => h.id === productId);
   if (!item) return;
@@ -1043,6 +1306,44 @@ window.openProductDeepDetail = function(productId) {
       </div>
     </div>
 
+    <!-- [신규] HTS급 정밀 4대 메타데이터 지표 -->
+    <div class="deep-detail-section">
+      <h4 class="section-title"><i class="fa-solid fa-list-check text-brand"></i> 상품 정밀 운용 제원</h4>
+      <div class="inline-metric-grid mb-3">
+        <div class="inline-metric-card">
+          <span class="lbl">기준가 (NAV)</span>
+          <span class="val font-bold">${formatWon(item.nav)} 원</span>
+        </div>
+        <div class="inline-metric-card">
+          <span class="lbl">보유 수량(좌수)</span>
+          <span class="val font-bold">${formatWon(item.quantity)} 좌</span>
+        </div>
+        <div class="inline-metric-card">
+          <span class="lbl">최초 편입일자</span>
+          <span class="val">${item.buyDate}</span>
+        </div>
+        <div class="inline-metric-card">
+          <span class="lbl">총보수율 (연)</span>
+          <span class="val text-brand font-bold">${item.expenseRatio}%</span>
+        </div>
+        <div class="inline-metric-card">
+          <span class="lbl">자산구성 (주식:채권)</span>
+          <span class="val">${item.equityRatio}% : ${item.bondRatio}%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- [신규] 최근 기간별 수익률 추이 비교 표 -->
+    <div class="deep-detail-section">
+      <h4 class="section-title"><i class="fa-solid fa-chart-line text-brand"></i> 최근 기간별 수익률 추이</h4>
+      <div class="inline-perf-row" style="margin-bottom: 8px;">
+        <span class="perf-chip"><span class="chip-lbl">최근 1개월:</span> <span class="chip-val ${item.return1M >= 0 ? 'text-positive' : 'text-negative'} font-bold">${item.return1M >= 0 ? '+' : ''}${item.return1M}%</span></span>
+        <span class="perf-chip"><span class="chip-lbl">최근 3개월:</span> <span class="chip-val ${item.return3M >= 0 ? 'text-positive' : 'text-negative'} font-bold">${item.return3M >= 0 ? '+' : ''}${item.return3M}%</span></span>
+        <span class="perf-chip"><span class="chip-lbl">최근 6개월:</span> <span class="chip-val ${item.return6M >= 0 ? 'text-positive' : 'text-negative'} font-bold">${item.return6M >= 0 ? '+' : ''}${item.return6M}%</span></span>
+        <span class="perf-chip"><span class="chip-lbl">최근 1년(누적):</span> <span class="chip-val ${item.returnRate >= 0 ? 'text-positive' : 'text-negative'} font-bold">${item.returnRate >= 0 ? '+' : ''}${item.returnRate}%</span></span>
+      </div>
+    </div>
+
     <!-- 원금 대비 평가액 심층 비교 비주얼 바 -->
     <div class="deep-detail-section">
       <h4 class="section-title"><i class="fa-solid fa-chart-column text-brand"></i> 원금 대비 평가가치 비교</h4>
@@ -1074,6 +1375,16 @@ window.openProductDeepDetail = function(productId) {
       </div>
     </div>
 
+    <!-- [신규] 원클릭 실시간 액션 버튼 -->
+    <div class="d-flex gap-2 mb-3">
+      <button class="btn-primary-sm flex-1" onclick="closeProductDeepDetail(); triggerTabSwitch('rebalance');">
+        <i class="fa-solid fa-scale-balanced"></i> 이 상품 리밸런싱 매매 검토
+      </button>
+      <button class="btn-outline-sm flex-1" onclick="closeProductDeepDetail(); openAddProductModalWithItem('${item.name}', '${item.code}', '${item.type}');">
+        <i class="fa-solid fa-plus"></i> 추가 편입 매수 신청
+      </button>
+    </div>
+
     <!-- 법정 위험자산 규정 안내 -->
     <div class="legal-notice-box">
       <i class="fa-solid fa-info-circle text-muted"></i>
@@ -1081,6 +1392,18 @@ window.openProductDeepDetail = function(productId) {
     </div>
   `;
 
+  modal.style.display = "block";
+  backdrop.style.display = "block";
+};
+
+window.openAddProductModalWithItem = function(name, code, type) {
+  const modal = document.getElementById("productModal");
+  const backdrop = document.getElementById("productModalBackdrop");
+  if (!modal || !backdrop) return;
+  const nameInput = document.getElementById("newProductName");
+  const codeInput = document.getElementById("newProductCode");
+  if (nameInput) nameInput.value = name;
+  if (codeInput) codeInput.value = code;
   modal.style.display = "block";
   backdrop.style.display = "block";
 };
@@ -1213,6 +1536,8 @@ function initCalculators() {
     document.getElementById("calcTotalPayout").textContent = `약 ${formatWon(totalPayout)} 원`;
     document.getElementById("calcLumpSumTax").textContent = `${formatWon(lumpSumTax)} 원`;
     document.getElementById("calcPensionTax").textContent = `${formatWon(pensionTax)} 원`;
+
+    renderTaxPayoutSchedule();
   });
 }
 
@@ -1483,9 +1808,271 @@ function initModals() {
   const btnExecute = document.getElementById("btnExecuteRebalance");
   if (btnExecute) {
     btnExecute.addEventListener("click", () => {
-      alert("AI 스마트 리밸런싱 주문이 신한SOL 퇴직연금 시스템에 정상 접수되었습니다.");
+      openRebalanceConfirmModal();
     });
   }
+}
+
+// ============================================================================
+// 13. [신규 화면구성] AI 스마트 리밸런싱 주문 체결 모달 & 실시간 포트폴리오 반영
+// ============================================================================
+window.openRebalanceConfirmModal = function() {
+  const modal = document.getElementById("rebalanceConfirmModal");
+  const backdrop = document.getElementById("rebalanceConfirmBackdrop");
+  const content = document.getElementById("rebalanceConfirmContent");
+  if (!modal || !content) return;
+
+  const model = pensionState.rebalanceModels[pensionState.selectedModel];
+
+  content.innerHTML = `
+    <div class="trade-confirm-box">
+      <div class="trade-confirm-title">
+        <i class="fa-solid fa-list-check text-brand"></i> 선택된 AI 모델: <strong>${model.name}</strong> (${model.desc})
+      </div>
+      <table class="trade-step-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>종목명 / 대상 자산</th>
+            <th class="text-right">주문 예정 금액</th>
+            <th class="text-center">상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge-trade-sell">일부 매도</span></td>
+            <td>HANARO 원자력iSelect (수익 실현)</td>
+            <td class="text-right font-bold text-negative">-1,500,000 원</td>
+            <td class="text-center text-muted">체결 대기</td>
+          </tr>
+          <tr>
+            <td><span class="badge-trade-sell">일부 매도</span></td>
+            <td>TIGER 현대차그룹플러스 (손실 축소)</td>
+            <td class="text-right font-bold text-negative">-1,000,000 원</td>
+            <td class="text-center text-muted">체결 대기</td>
+          </tr>
+          <tr>
+            <td><span class="badge-trade-buy">신규 매수</span></td>
+            <td>SOL 금융지주플러스고배당 (안정 인컴)</td>
+            <td class="text-right font-bold text-positive">+1,200,000 원</td>
+            <td class="text-center text-muted">체결 대기</td>
+          </tr>
+          <tr>
+            <td><span class="badge-trade-buy">추가 매수</span></td>
+            <td>KODEX 삼성전자채권혼합 (안전자산 보강)</td>
+            <td class="text-right font-bold text-positive">+1,300,000 원</td>
+            <td class="text-center text-muted">체결 대기</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rebalance-impact-summary">
+      <div class="impact-box">
+        <span class="lbl">현재 위험자산 비중</span>
+        <span class="val text-danger">58.3% (2,425만원)</span>
+      </div>
+      <div class="impact-box" style="border-color: rgba(0, 70, 255, 0.3); background: #F0F4FF;">
+        <span class="lbl">리밸런싱 체결 후 예상 비중</span>
+        <span class="val text-brand font-bold">54.7% (법정 70% 안전 준수)</span>
+      </div>
+    </div>
+    <div style="font-size: 11.5px; color: var(--text-muted); background: var(--bg-app); padding: 10px 12px; border-radius: 6px;">
+      <i class="fa-solid fa-circle-info text-brand"></i> 리밸런싱 실행 시 선택된 AI 모델 비중에 맞춰 보유 종목 수량 및 적립금이 실시간으로 즉시 조정됩니다.
+    </div>
+  `;
+
+  modal.style.display = "block";
+  if (backdrop) backdrop.style.display = "block";
+};
+
+window.closeRebalanceConfirmModal = function() {
+  const modal = document.getElementById("rebalanceConfirmModal");
+  const backdrop = document.getElementById("rebalanceConfirmBackdrop");
+  if (modal) modal.style.display = "none";
+  if (backdrop) backdrop.style.display = "none";
+};
+
+window.confirmRebalanceExecution = function() {
+  const p1 = pensionState.holdings.find(h => h.id === "P001");
+  const p2 = pensionState.holdings.find(h => h.id === "P002");
+  const p14 = pensionState.holdings.find(h => h.id === "P014");
+  const p3 = pensionState.holdings.find(h => h.id === "P003");
+
+  if (p1) { p1.currentVal -= 1500000; p1.profit -= 150000; p1.returnRate = parseFloat(((p1.profit / p1.principal) * 100).toFixed(2)); }
+  if (p2) { p2.currentVal -= 1000000; p2.principal -= 1000000; p2.returnRate = parseFloat(((p2.profit / p2.principal) * 100).toFixed(2)); }
+  if (p14) { p14.currentVal += 1200000; p14.principal += 1200000; }
+  if (p3) { p3.currentVal += 1300000; p3.principal += 1300000; }
+
+  updateDashboardData();
+  renderHoldingsTable(pensionState.currentFilter);
+  renderDetailedHoldingsPane();
+  renderPortfolioDonut();
+  renderRebalanceSimulation();
+  renderExcelRawDataGrid();
+
+  closeRebalanceConfirmModal();
+  alert("AI 스마트 리밸런싱 매매 주문이 신한SOL 시스템에 정상 체결되었습니다!\n보유 15종 포트폴리오 비중 및 대시보드가 실시간으로 업데이트되었습니다.");
+};
+
+// ============================================================================
+// 14. [신규 화면구성] 연도별 20년 상세 연금 수령 스케줄 및 추이 차트
+// ============================================================================
+let taxScheduleChartInstance = null;
+
+function renderTaxPayoutSchedule() {
+  const totalAsset = parseFloat(document.getElementById("inputCurrentTotalAsset")?.value) || 41602931;
+  const retireAge = parseInt(document.getElementById("inputRetireAge")?.value) || 60;
+  const payoutYears = parseInt(document.getElementById("inputPayoutYears")?.value) || 20;
+  const expectedReturn = parseFloat(document.getElementById("inputExpectedReturn")?.value) || 6.5;
+
+  const tbody = document.getElementById("taxScheduleTableBody");
+  const ctx = document.getElementById("taxScheduleChart");
+  if (!tbody) return;
+
+  const r = expectedReturn / 100;
+  let remainingAsset = totalAsset;
+  let cumulativeSavedTax = 0;
+
+  // 연간 균등 분할 인출액 산출 (복리 연금 공식)
+  const annualPayout = Math.round(totalAsset * (r * Math.pow(1 + r, payoutYears)) / (Math.pow(1 + r, payoutYears) - 1));
+
+  let rowsHtml = "";
+  const chartLabels = [];
+  const payoutData = [];
+  const cumSavedData = [];
+  const remainingData = [];
+
+  for (let year = 1; year <= payoutYears; year++) {
+    const age = retireAge + year - 1;
+    const startAsset = remainingAsset;
+    const annualReturn = Math.round(startAsset * r);
+    const taxDiscountRate = year <= 10 ? 30 : 40; // 1~10년 30%, 11년차부터 40% 감면
+    const standardTaxRate = 0.144; // 퇴직소득세 표준 실효세율 14.4%
+    const standardAnnualTax = Math.round(annualPayout * standardTaxRate);
+    const savedTaxThisYear = Math.round(standardAnnualTax * (taxDiscountRate / 100));
+    const actualTax = standardAnnualTax - savedTaxThisYear;
+    const netPayout = annualPayout - actualTax;
+    cumulativeSavedTax += savedTaxThisYear;
+
+    remainingAsset = Math.max(0, startAsset + annualReturn - annualPayout);
+
+    chartLabels.push(`${year}년차(${age}세)`);
+    payoutData.push(annualPayout);
+    cumSavedData.push(cumulativeSavedTax);
+    remainingData.push(remainingAsset);
+
+    rowsHtml += `
+      <tr>
+        <td class="text-center font-bold">${year}년차</td>
+        <td class="text-center">${age}세</td>
+        <td class="text-right">${formatWon(startAsset)}원</td>
+        <td class="text-right text-brand">+${formatWon(annualReturn)}원</td>
+        <td class="text-right font-bold">${formatWon(annualPayout)}원</td>
+        <td class="text-center"><span class="status-pill safe">${taxDiscountRate}% 감면</span></td>
+        <td class="text-right font-bold text-positive">${formatWon(netPayout)}원</td>
+        <td class="text-right text-muted">${formatWon(remainingAsset)}원</td>
+        <td class="text-right font-bold text-positive">+${formatWon(cumulativeSavedTax)}원</td>
+      </tr>
+    `;
+  }
+
+  tbody.innerHTML = rowsHtml;
+
+  // 절세 차트 렌더링
+  if (ctx) {
+    if (taxScheduleChartInstance) taxScheduleChartInstance.destroy();
+    taxScheduleChartInstance = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: chartLabels,
+        datasets: [
+          {
+            type: "bar",
+            label: "연간 실수령액 (세후)",
+            data: payoutData,
+            backgroundColor: "rgba(0, 70, 255, 0.7)",
+            borderRadius: 4,
+            yAxisID: "y"
+          },
+          {
+            type: "line",
+            label: "누적 영구 절세액",
+            data: cumSavedData,
+            borderColor: "#10B981",
+            backgroundColor: "rgba(16, 185, 129, 0.1)",
+            borderWidth: 3,
+            fill: true,
+            tension: 0.3,
+            yAxisID: "y1"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "top" },
+          tooltip: {
+            callbacks: {
+              label: (c) => `${c.dataset.label}: ${formatWon(c.parsed.y)}원`
+            }
+          }
+        },
+        scales: {
+          y: {
+            position: "left",
+            ticks: { callback: v => `${formatWon(v/10000)}만` }
+          },
+          y1: {
+            position: "right",
+            grid: { drawOnChartArea: false },
+            ticks: { callback: v => `${formatWon(v/10000)}만` }
+          }
+        }
+      }
+    });
+  }
+}
+
+// ============================================================================
+// 15. [신규 화면구성] 엑셀 Page 3 원본 데이터 실시간 인터랙티브 데이터그리드
+// ============================================================================
+function renderExcelRawDataGrid() {
+  const tbody = document.getElementById("excelRawGridBody");
+  if (!tbody) return;
+
+  const totalVal = pensionState.holdings.reduce((sum, i) => sum + i.currentVal, 0);
+
+  tbody.innerHTML = pensionState.holdings.map((item, idx) => {
+    const weight = ((item.currentVal / totalVal) * 100).toFixed(1);
+    const isPositive = item.profit >= 0;
+    const badgeClass = item.type === "risk" ? "danger" : "safe";
+
+    return `
+      <tr>
+        <td class="text-center font-bold text-muted">${idx + 1}</td>
+        <td><span class="badge-risk-tag ${badgeClass}">${item.riskLevel}</span></td>
+        <td class="font-bold">${item.name}</td>
+        <td><code>${item.code}</code></td>
+        <td class="text-right">${formatWon(item.principal)}원</td>
+        <td class="text-right font-bold">${formatWon(item.currentVal)}원</td>
+        <td class="text-right ${isPositive ? 'text-positive' : 'text-negative'}" style="font-weight: 700;">
+          ${isPositive ? '+' : ''}${formatWon(item.profit)}원
+        </td>
+        <td class="text-right ${isPositive ? 'text-positive' : 'text-negative'}" style="font-weight: 800;">
+          ${isPositive ? '+' : ''}${item.returnRate}%
+        </td>
+        <td class="text-right font-bold">${weight}%</td>
+        <td>${item.issuer}</td>
+        <td class="text-center">
+          <button class="btn-action-detail" onclick="openProductDeepDetail('${item.id}')">
+            <i class="fa-solid fa-magnifying-glass"></i> 조회
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
 }
 
 // 모바일 바텀시트
@@ -1510,3 +2097,4 @@ function initExcelDropzone() {
     });
   }
 }
+

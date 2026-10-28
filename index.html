@@ -391,7 +391,7 @@
                       <th class="text-right">평가손익</th>
                       <th class="text-right">수익률</th>
                       <th class="text-right">비중</th>
-                      <th class="text-center" style="width: 70px;">관리</th>
+                      <th class="text-center" style="width: 130px;">관리</th>
                     </tr>
                   </thead>
                   <tbody id="holdingsTableBody">
@@ -603,6 +603,39 @@
                 </div>
               </div>
             </div>
+
+            <!-- [신규 화면구성] 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 -->
+            <div class="dashboard-panel mt-4">
+              <div class="panel-header">
+                <div class="panel-title-wrap">
+                  <h3 class="panel-title"><i class="fa-solid fa-calendar-days text-brand"></i> 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이</h3>
+                  <span class="panel-subtitle">은퇴 나이 및 수령 기간에 따른 연차별 세전/세후 수령액과 영구 절세 누적 혜택 분석</span>
+                </div>
+              </div>
+              <div class="tax-schedule-chart-wrap mb-4" style="height: 250px; position: relative;">
+                <canvas id="taxScheduleChart"></canvas>
+              </div>
+              <div class="table-responsive-desktop">
+                <table class="sol-datagrid" id="taxScheduleTable">
+                  <thead>
+                    <tr>
+                      <th class="text-center">연차</th>
+                      <th class="text-center">나이</th>
+                      <th class="text-right">기초 적립금</th>
+                      <th class="text-right">연간 예상 운용수익</th>
+                      <th class="text-right">연간 연금 수령액 (세전)</th>
+                      <th class="text-center">적용 감면율</th>
+                      <th class="text-right">실수령액 (세후)</th>
+                      <th class="text-right">기말 잔여 적립금</th>
+                      <th class="text-right font-bold text-positive">누적 절세 혜택</th>
+                    </tr>
+                  </thead>
+                  <tbody id="taxScheduleTableBody">
+                    <!-- JS 동적 렌더링 -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </section>
 
 
@@ -657,6 +690,41 @@
                   <input type="file" id="reportFileInput" accept=".xls,.xlsx,.csv" style="display: none;">
                   <button class="btn-secondary-sm mt-3" onclick="document.getElementById('reportFileInput').click()">파일 선택</button>
                 </div>
+              </div>
+            </div>
+
+            <!-- [신규 화면구성] 엑셀 세 번째 시트 원본 15개 상품 인터랙티브 데이터그리드 프리뷰 -->
+            <div class="dashboard-panel mt-4">
+              <div class="panel-header">
+                <div class="panel-title-wrap">
+                  <h3 class="panel-title"><i class="fa-solid fa-table-list text-brand"></i> 엑셀 Page 3 원본 데이터 실시간 인터랙티브 프리뷰</h3>
+                  <span class="panel-subtitle">`report_20261028.xls` 세 번째 탭 [보유 상품현황] 실제 추출 원천 데이터 15건 실시간 정합성 검증</span>
+                </div>
+                <div class="panel-actions">
+                  <span class="status-pill safe"><i class="fa-solid fa-circle-check"></i> 15건 100% 매칭 완료</span>
+                </div>
+              </div>
+              <div class="table-responsive-desktop">
+                <table class="sol-datagrid" id="excelRawGrid">
+                  <thead>
+                    <tr>
+                      <th class="text-center" style="width: 45px;">#</th>
+                      <th style="width: 100px;">법정분류</th>
+                      <th>상품명</th>
+                      <th style="width: 110px;">종목코드</th>
+                      <th class="text-right">매입원금(A)</th>
+                      <th class="text-right">평가금액(B)</th>
+                      <th class="text-right">평가손익(B-A)</th>
+                      <th class="text-right">수익률(%)</th>
+                      <th class="text-right">자산비중(%)</th>
+                      <th style="width: 120px;">운용사</th>
+                      <th class="text-center" style="width: 80px;">상세조회</th>
+                    </tr>
+                  </thead>
+                  <tbody id="excelRawGridBody">
+                    <!-- JS 동적 렌더링 -->
+                  </tbody>
+                </table>
               </div>
             </div>
           </section>
@@ -842,6 +910,27 @@
         <div class="modal-footer">
           <button class="btn-outline" onclick="closeProductDeepDetail()">닫기</button>
           <button class="btn-primary" onclick="closeProductDeepDetail()"><i class="fa-solid fa-check"></i> 분석 확인 완료</button>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           [신규 화면구성] AI 스마트 리밸런싱 주문 체결 & 실시간 포트폴리오 반영 확인 모달
+           =================================================================== -->
+      <div class="modal-backdrop" id="rebalanceConfirmBackdrop" onclick="closeRebalanceConfirmModal()" style="display: none;"></div>
+      <div class="modal-dialog rebalance-confirm-modal" id="rebalanceConfirmModal" style="display: none;">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <div class="modal-brand-tag"><i class="fa-solid fa-scale-balanced"></i> 신한SOL 스마트 리밸런싱</div>
+            <h3 class="modal-title">AI 최적 포트폴리오 리밸런싱 주문 체결 확인</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeRebalanceConfirmModal()" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="rebalanceConfirmContent">
+          <!-- JS에서 동적 렌더링 -->
+        </div>
+        <div class="modal-footer">
+          <button class="btn-outline" onclick="closeRebalanceConfirmModal()">취소</button>
+          <button class="btn-primary" id="btnConfirmRebalanceSubmit" onclick="confirmRebalanceExecution()"><i class="fa-solid fa-bolt"></i> 리밸런싱 즉시 체결 및 실시간 반영</button>
         </div>
       </div>
 

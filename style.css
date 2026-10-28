@@ -2591,3 +2591,262 @@ body {
   }
 }
 
+/* ==========================================================================
+   16. [신규 화면구성] 보유상품 관리 항목 [상세] 및 인라인 아코디언 뷰
+   ========================================================================== */
+.holdings-btn-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-action-detail {
+  background: var(--sol-blue-primary);
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-action-detail:hover {
+  background: var(--sol-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 70, 255, 0.3);
+}
+
+.btn-action-accordion {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 4px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-action-accordion:hover {
+  background: var(--bg-hover);
+  color: var(--sol-blue-primary);
+}
+
+/* 인라인 아코디언 행 */
+.inline-accordion-row {
+  background: #F8FAFC !important;
+  transition: all 0.3s ease;
+}
+
+.inline-accordion-cell {
+  padding: 16px 20px !important;
+  border-bottom: 2px solid var(--sol-blue-light) !important;
+}
+
+.inline-detail-box {
+  background: var(--bg-surface);
+  border: 1px solid rgba(0, 70, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.inline-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.inline-detail-title-group h4 {
+  margin: 0 0 3px 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.inline-detail-title-group span {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* 인라인 HTS 정밀 지표 4단 그리드 */
+.inline-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.inline-metric-card {
+  background: var(--bg-app);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.inline-metric-card .lbl {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.inline-metric-card .val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* 최근 기간별 수익률 추이 미니 바 */
+.inline-perf-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-app);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 11.5px;
+}
+
+.perf-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.perf-chip .chip-lbl {
+  color: var(--text-muted);
+}
+
+.perf-chip .chip-val {
+  font-weight: 700;
+}
+
+/* 인라인 하단 액션 버튼 그룹 */
+.inline-action-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 12px;
+}
+
+/* ==========================================================================
+   17. [신규 화면구성] AI 스마트 리밸런싱 주문 체결 전문 모달
+   ========================================================================== */
+.modal-dialog.rebalance-confirm-modal {
+  max-width: 680px;
+  width: 92%;
+}
+
+.trade-confirm-box {
+  background: var(--bg-app);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.trade-confirm-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trade-step-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.trade-step-table th {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.trade-step-table td {
+  padding: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.badge-trade-sell {
+  background: #EFF6FF;
+  color: #0046FF;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-trade-buy {
+  background: #ECFDF5;
+  color: #10B981;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.rebalance-impact-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.impact-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.impact-box .lbl {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.impact-box .val {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   18. [신규 화면구성] 연도별 20년 절세 스케줄 및 엑셀 원본 데이터그리드
+   ========================================================================== */
+#taxScheduleTable thead th {
+  white-space: nowrap;
+}
+
+#taxScheduleTable tbody td {
+  padding: 10px 12px;
+}
+
+#excelRawGrid thead th {
+  white-space: nowrap;
+}
+
+#excelRawGrid tbody td {
+  padding: 10px 12px;
+}
+
+
