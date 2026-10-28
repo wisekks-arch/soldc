@@ -178,259 +178,150 @@
               </div>
             </div>
 
-            <!-- [기획안 1] 은퇴 목표 달성률 & 부족금액 진단 패널 -->
-            <div class="dashboard-panel retirement-goal-panel mb-4">
-              <div class="panel-header-compact">
-                <div class="d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-bullseye text-brand" style="font-size: 18px;"></i>
-                  <h3 class="panel-sub-title">은퇴 목표 자산 달성률</h3>
-                </div>
-                <span class="goal-shortage-badge">은퇴 시 부족금액: <strong>2억 2천만원</strong></span>
-              </div>
-              <div class="retirement-goal-content mt-3">
-                <div class="goal-amounts-grid">
-                  <div class="goal-amount-item">
-                    <span class="sub">은퇴 목표 자산</span>
-                    <strong class="main">10억 원</strong>
+            <!-- [PC 와이드 2열 컴팩트 대시보드 그리드] -->
+            <div class="pc-dashboard-grid-2col mb-4">
+
+              <!-- 좌측 컬럼 (진단 & 목표 & 요약) -->
+              <div class="pc-dashboard-col">
+
+                <!-- 1. 은퇴 목표 달성률 & 부족금액 진단 패널 -->
+                <div class="dashboard-panel retirement-goal-panel">
+                  <div class="panel-header-compact">
+                    <div class="d-flex align-items-center gap-2">
+                      <i class="fa-solid fa-bullseye text-brand" style="font-size: 18px;"></i>
+                      <h3 class="panel-sub-title">은퇴 목표 자산 달성률</h3>
+                    </div>
+                    <span class="goal-shortage-badge">은퇴 시 부족금액: <strong>2억 2천만원</strong></span>
                   </div>
-                  <div class="goal-amount-item">
-                    <span class="sub">현재 추세 예상 자산</span>
-                    <strong class="main text-brand">7억 8천만원</strong>
-                  </div>
-                  <div class="goal-amount-item">
-                    <span class="sub">현재 달성률</span>
-                    <strong class="main text-positive font-bold">78%</strong>
-                  </div>
-                </div>
-                <div class="goal-progress-wrap mt-3">
-                  <div class="goal-progress-track">
-                    <div class="goal-progress-fill" style="width: 78%;">
-                      <span class="fill-label">78%</span>
+                  <div class="retirement-goal-content mt-3">
+                    <div class="goal-amounts-grid">
+                      <div class="goal-amount-item">
+                        <span class="sub">은퇴 목표 자산</span>
+                        <strong class="main">10억 원</strong>
+                      </div>
+                      <div class="goal-amount-item">
+                        <span class="sub">현재 추세 예상 자산</span>
+                        <strong class="main text-brand">7억 8천만원</strong>
+                      </div>
+                      <div class="goal-amount-item">
+                        <span class="sub">현재 달성률</span>
+                        <strong class="main text-positive font-bold">78%</strong>
+                      </div>
+                    </div>
+                    <div class="goal-progress-wrap mt-3">
+                      <div class="goal-progress-track">
+                        <div class="goal-progress-fill" style="width: 78%;">
+                          <span class="fill-label">78%</span>
+                        </div>
+                      </div>
+                      <div class="goal-markers-flex mt-1">
+                        <span>현재 적립 시작</span>
+                        <span class="text-brand font-bold">현재 7.8억 (78%)</span>
+                        <span class="font-bold">목표 10.0억 (100%)</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="goal-markers-flex mt-1">
-                    <span>현재 적립 시작</span>
-                    <span class="text-brand font-bold">현재 7.8억 (78%)</span>
-                    <span class="font-bold">목표 10.0억 (100%)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- [기획안 1 핵심] 퇴직연금 건강점수 배너 & 은퇴 자산 증가 금액 시각화 -->
-            <div class="pension-health-cta-banner mb-4">
-              <div class="health-cta-left">
-                <div class="health-score-circle">
-                  <span class="score-num">82</span>
-                  <span class="score-lbl">점</span>
-                </div>
-                <div class="health-meta">
-                  <div class="d-flex align-items-center gap-2">
-                    <h4 class="health-title">퇴직연금 건강점수 82점 (우수 · 공격형)</h4>
-                    <span class="badge-status-safe">위험관리 필요</span>
-                  </div>
-                  <p class="health-desc">
-                    💡 <strong>"지금 AI 추천대로 리밸런싱을 조정하면 은퇴자산이 +2.3억원 증가하여 10.1억원(101%)을 달성할 수 있습니다!"</strong>
-                  </p>
-                </div>
-              </div>
-              <div class="health-cta-right">
-                <button class="btn-cta-rebalance" onclick="triggerTabSwitch('rebalance')">
-                  <span>지금 리밸런싱 시뮬레이션</span>
-                  <i class="fa-solid fa-arrow-right ms-1"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- [기획안 1] AI 요약 분석 카드 -->
-            <div class="ai-summary-highlight-card mb-4">
-              <div class="d-flex align-items-start gap-3">
-                <div class="ai-bot-avatar">
-                  <i class="fa-solid fa-robot"></i>
-                </div>
-                <div class="ai-summary-content">
-                  <h4 class="summary-title"><i class="fa-solid fa-sparkles text-brand me-1"></i>AI 포트폴리오 요약 분석</h4>
-                  <p class="summary-text mb-2">
-                    현재 포트폴리오는 <strong>해외 미국 주식(65%)</strong> 비중이 매우 높아 시장 급변 시 변동성에 취약하며, <strong>채권(10%) 및 배당 인컴 자산</strong>이 부족합니다.
-                  </p>
-                  <div class="summary-tags-flex">
-                    <span class="tag-pill text-danger"><i class="fa-solid fa-triangle-exclamation"></i> 특정 시장 집중도 높음</span>
-                    <span class="tag-pill text-brand"><i class="fa-solid fa-arrow-up-right-dots"></i> 채권 ETF +15% 및 배당 ETF +10% 편입 권장</span>
-                    <span class="tag-pill text-success"><i class="fa-solid fa-shield-check"></i> 조정 후 변동성 -18%, 장기 예상수익률 상승</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- =============================================================
-                 [신규 기능] 맞춤형 수익률 예측 슬라이더 및 미래 자산 시뮬레이터
-                 ============================================================= -->
-            <div class="dashboard-panel custom-forecast-panel mb-4">
-              <div class="forecast-panel-header">
-                <div>
-                  <h2 class="panel-title">
-                    <i class="fa-solid fa-wand-magic-sparkles text-brand"></i>
-                    AI 맞춤형 수익률 예측 & 미래 자산 시뮬레이터
-                  </h2>
-                  <span class="panel-subtitle">슬라이더를 조절하여 목표 연간 수익률에 따른 복리 자산 성장 추이를 실시간 확인하세요.</span>
-                </div>
-                <div class="slider-rate-badge">
-                  <span class="label">선택 연간 수익률:</span>
-                  <strong class="val text-brand" id="sliderValDisplay">연 6.5%</strong>
-                </div>
-              </div>
-
-              <!-- 인터랙티브 슬라이더 바 -->
-              <div class="slider-control-box">
-                <div class="slider-labels-flex">
-                  <span>보수적 (연 1.0%)</span>
-                  <span>신한 추천 중립 (연 6.5%)</span>
-                  <span>적극 성장 (연 15.0%)</span>
-                </div>
-                <input type="range" id="returnRateSlider" min="1.0" max="15.0" step="0.5" value="6.5" class="sol-range-slider">
-              </div>
-
-              <!-- 기간별 예상 평가액 5대 카드 -->
-              <div class="forecast-result-cards">
-                <div class="forecast-mini-card">
-                  <span class="period">1년 후</span>
-                  <span class="amount" id="forecast1Y">4,431만 원</span>
-                </div>
-                <div class="forecast-mini-card">
-                  <span class="period">3년 후</span>
-                  <span class="amount" id="forecast3Y">5,025만 원</span>
-                </div>
-                <div class="forecast-mini-card">
-                  <span class="period">5년 후</span>
-                  <span class="amount" id="forecast5Y">5,699만 원</span>
-                </div>
-                <div class="forecast-mini-card highlight-forecast">
-                  <span class="period">10년 후</span>
-                  <span class="amount text-brand font-bold" id="forecast10Y">7,810만 원</span>
-                  <span class="profit-badge" id="forecastProfit10Y">+3,650만 원 수익!</span>
-                </div>
-                <div class="forecast-mini-card">
-                  <span class="period">20년 후 (은퇴 시)</span>
-                  <span class="amount" id="forecast20Y">1억 4,659만 원</span>
-                </div>
-              </div>
-
-              <!-- 미래 복리 성장 밴드 차트 -->
-              <div class="chart-canvas-container mt-3" style="height: 220px;">
-                <canvas id="forecastChart"></canvas>
-              </div>
-            </div>
-
-            <!-- 대시보드 2단 레이아웃 (차트 & 포트폴리오 비중) -->
-            <div class="dashboard-charts-grid">
-
-              <!-- 차트 1: 기간별 수익률 추이 -->
-              <div class="dashboard-panel chart-panel">
-                <div class="panel-header">
-                  <div class="panel-title-wrap">
-                    <h2 class="panel-title"><i class="fa-solid fa-chart-line text-brand"></i> 적립금 및 수익률 추이</h2>
-                    <span class="panel-subtitle">최근 12개월간의 월별 자산 가치 변동</span>
-                  </div>
-                  <div class="period-toggle-group">
-                    <button class="period-btn" data-period="1m">1개월</button>
-                    <button class="period-btn" data-period="3m">3개월</button>
-                    <button class="period-btn" data-period="6m">6개월</button>
-                    <button class="period-btn active" data-period="1y">1년</button>
-                    <button class="period-btn" data-period="all">전체</button>
-                  </div>
-                </div>
-                <div class="chart-canvas-container">
-                  <canvas id="performanceChart" height="250"></canvas>
-                </div>
-                <div class="chart-legend-custom">
-                  <div class="legend-item"><span class="dot color-primary"></span> 총 평가금액 (만원)</div>
-                  <div class="legend-item"><span class="dot color-secondary"></span> 납입 원금 (만원)</div>
-                </div>
-              </div>
-
-              <!-- 차트 2: 자산군별 포트폴리오 비중 (실제 15종 분류) -->
-              <div class="dashboard-panel portfolio-panel">
-                <div class="panel-header">
-                  <div class="panel-title-wrap">
-                    <h2 class="panel-title"><i class="fa-solid fa-pie-chart text-brand"></i> 실 보유자산 배분 현황</h2>
-                    <span class="panel-subtitle">위험자산(58.3%) / 안전자산(41.7%)</span>
-                  </div>
-                  <button class="btn-text-action" id="btnGoRebalance">리밸런싱 제안 <i class="fa-solid fa-angle-right"></i></button>
                 </div>
 
-                <div class="portfolio-content-flex">
-                  <div class="donut-chart-box">
-                    <canvas id="portfolioDonutChart" width="180" height="180"></canvas>
-                    <div class="donut-center-info">
-                      <span class="donut-label">위험자산</span>
-                      <span class="donut-val text-brand">58.3%</span>
+                <!-- 2. 퇴직연금 건강점수 배너 & 은퇴 자산 증가 금액 시각화 -->
+                <div class="pension-health-cta-banner">
+                  <div class="health-cta-left">
+                    <div class="health-score-circle">
+                      <span class="score-num">82</span>
+                      <span class="score-lbl">점</span>
+                    </div>
+                    <div class="health-meta">
+                      <div class="d-flex align-items-center gap-2">
+                        <h4 class="health-title">퇴직연금 건강점수 82점 (우수 · 공격형)</h4>
+                        <span class="badge-status-safe">위험관리 필요</span>
+                      </div>
+                      <p class="health-desc">
+                        💡 <strong>"지금 AI 추천대로 리밸런싱을 조정하면 은퇴자산이 +2.4억원 증가하여 10.2억원(102%)을 달성할 수 있습니다!"</strong>
+                      </p>
                     </div>
                   </div>
-
-                  <div class="asset-category-list" id="assetCategoryList">
-                    <!-- JS에서 렌더링 -->
+                  <div class="health-cta-right">
+                    <button class="btn-cta-rebalance" onclick="triggerTabSwitch('rebalance')">
+                      <span>지금 리밸런싱 시뮬레이션</span>
+                      <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </button>
                   </div>
                 </div>
-              </div>
 
-            </div>
-
-            <!-- 보유 15개 상품 리스트 섹션 -->
-            <div class="dashboard-panel holdings-section">
-              <div class="panel-header">
-                <div class="panel-title-wrap">
-                  <h2 class="panel-title"><i class="fa-solid fa-list-check text-brand"></i> 실제 보유 상품 현황</h2>
-                  <span class="panel-subtitle">엑셀 report_20261028.xls 세 번째 탭 연동 총 <strong id="holdingsCount">15</strong>개 종목</span>
-                </div>
-                <div class="panel-actions">
-                  <div class="filter-pills-group">
-                    <button class="pill-btn active" data-filter="all">전체(15)</button>
-                    <button class="pill-btn" data-filter="profit">수익종목(10)</button>
-                    <button class="pill-btn" data-filter="loss">손실종목(5)</button>
-                    <button class="pill-btn" data-filter="risk">위험자산(6)</button>
-                    <button class="pill-btn" data-filter="safe">안전자산(9)</button>
+                <!-- 3. AI 요약 분석 카드 -->
+                <div class="ai-summary-highlight-card">
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="ai-bot-avatar">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="ai-summary-content">
+                      <h4 class="summary-title"><i class="fa-solid fa-sparkles text-brand me-1"></i>AI 포트폴리오 요약 분석</h4>
+                      <p class="summary-text mb-2">
+                        현재 포트폴리오는 <strong>해외 미국 주식(65%)</strong> 비중이 매우 높아 시장 급변 시 변동성에 취약하며, <strong>채권(10%) 및 배당 인컴 자산</strong>이 부족합니다.
+                      </p>
+                      <div class="summary-tags-flex">
+                        <span class="tag-pill text-danger"><i class="fa-solid fa-triangle-exclamation"></i> 특정 시장 집중도 높음</span>
+                        <span class="tag-pill text-brand"><i class="fa-solid fa-arrow-up-right-dots"></i> 채권 ETF +15% 및 배당 ETF +10% 편입 권장</span>
+                        <span class="tag-pill text-success"><i class="fa-solid fa-shield-check"></i> 조정 후 변동성 -18%, 장기 예상수익률 상승</span>
+                      </div>
+                    </div>
                   </div>
-                  <button class="btn-primary-sm d-none-mobile" id="btnOpenAddModal">
-                    <i class="fa-solid fa-plus"></i> 신규 상품 추가
-                  </button>
                 </div>
+
               </div>
 
-              <!-- [PC 와이드 전용] 정밀 마스터 테이블 -->
-              <div class="table-responsive-desktop d-none-mobile">
-                <table class="sol-datagrid" id="holdingsTable">
-                  <thead>
-                    <tr>
-                      <th class="text-center" style="width: 45px;">#</th>
-                      <th style="width: 110px;">자산분류</th>
-                      <th>상품명 / 종목코드</th>
-                      <th class="text-right">매입원금</th>
-                      <th class="text-right">적립금(평가금액)</th>
-                      <th class="text-right">평가손익</th>
-                      <th class="text-right">수익률</th>
-                      <th class="text-right">비중</th>
-                      <th class="text-center" style="width: 85px;">상세조회</th>
-                    </tr>
-                  </thead>
-                  <tbody id="holdingsTableBody">
-                    <!-- JS에서 15개 상품 렌더링 -->
-                  </tbody>
-                </table>
-              </div>
+              <!-- 우측 컬럼 (자산배분 도넛 차트 & 최근 수익률 추이 선그래프) -->
+              <div class="pc-dashboard-col">
 
-              <!-- [갤럭시 S26+ 모바일 전용] 엄지 최적화 터치 카드 리스트 -->
-              <div class="mobile-holdings-cards d-mobile-only" id="mobileHoldingsCards">
-                <!-- JS에서 모바일 전용 카드 렌더링 -->
-              </div>
+                <!-- 4. 실보유 자산배분 원형 차트 -->
+                <div class="dashboard-panel portfolio-panel">
+                  <div class="panel-header">
+                    <div class="panel-title-wrap">
+                      <h2 class="panel-title"><i class="fa-solid fa-pie-chart text-brand"></i> 실 보유자산 배분 현황</h2>
+                      <span class="panel-subtitle">위험자산(58.3%) / 안전자산(41.7%)</span>
+                    </div>
+                    <button class="btn-text-action" onclick="triggerTabSwitch('holdings')">상세 자산현황 <i class="fa-solid fa-angle-right"></i></button>
+                  </div>
 
-              <div class="panel-bottom-bar">
-                <div class="sync-status">
-                  <i class="fa-solid fa-circle-check text-success"></i>
-                  <span>데이터 원천: <strong>`report_20261028.xls` 세 번째 탭 (실제 보유 현황)</strong> 실시간 연동 중</span>
+                  <div class="portfolio-content-flex">
+                    <div class="donut-chart-box">
+                      <canvas id="portfolioDonutChart" width="180" height="180"></canvas>
+                      <div class="donut-center-info">
+                        <span class="donut-label">위험자산</span>
+                        <span class="donut-val text-brand">58.3%</span>
+                      </div>
+                    </div>
+
+                    <div class="asset-category-list" id="assetCategoryList">
+                      <!-- JS에서 렌더링 -->
+                    </div>
+                  </div>
                 </div>
-                <div class="bottom-btns">
-                  <button class="btn-outline-sm" id="btnExportExcel"><i class="fa-solid fa-file-excel text-success"></i> 15종 CSV 내려받기</button>
+
+                <!-- 5. 적립금 및 수익률 추이 선그래프 -->
+                <div class="dashboard-panel chart-panel">
+                  <div class="panel-header">
+                    <div class="panel-title-wrap">
+                      <h2 class="panel-title"><i class="fa-solid fa-chart-line text-brand"></i> 적립금 및 수익률 추이</h2>
+                      <span class="panel-subtitle">최근 12개월간의 월별 자산 가치 변동</span>
+                    </div>
+                    <div class="period-toggle-group">
+                      <button class="period-btn" data-period="1m">1개월</button>
+                      <button class="period-btn" data-period="3m">3개월</button>
+                      <button class="period-btn" data-period="6m">6개월</button>
+                      <button class="period-btn active" data-period="1y">1년</button>
+                      <button class="period-btn" data-period="all">전체</button>
+                    </div>
+                  </div>
+                  <div class="chart-canvas-container">
+                    <canvas id="performanceChart"></canvas>
+                  </div>
+                  <div class="chart-legend-custom">
+                    <div class="legend-item"><span class="dot color-primary"></span> 총 평가금액 (만원)</div>
+                    <div class="legend-item"><span class="dot color-secondary"></span> 납입 원금 (만원)</div>
+                  </div>
                 </div>
+
               </div>
 
             </div>
@@ -1209,105 +1100,108 @@
               </div>
             </div>
 
-            <!-- 상품 수동 등록 폼 & 엑셀 일괄 등록 2단 그리드 -->
-            <div class="calc-grid-layout mb-4">
-              <!-- 좌측: 상품 수동 등록 폼 -->
-              <div class="dashboard-panel">
-                <div class="panel-header-compact">
-                  <h3 class="panel-sub-title"><i class="fa-solid fa-plus-circle text-brand"></i> 상품 수동 등록</h3>
-                  <span class="text-muted font-11">종목 검색 후 즉시 추가</span>
+            <!-- PC 2열 스플릿 레이아웃: 좌측 380px(수동 등록 + 엑셀 업로드) + 우측 1fr(보유 상품 목록 15종 테이블) -->
+            <div class="pc-two-column-split mb-4">
+              <!-- 좌측 컬럼: 등록 컨트롤러 (수동등록 + 엑셀업로드) -->
+              <div class="pc-dashboard-col">
+                <!-- 상품 수동 등록 폼 -->
+                <div class="dashboard-panel">
+                  <div class="panel-header-compact">
+                    <h3 class="panel-sub-title"><i class="fa-solid fa-plus-circle text-brand"></i> 상품 수동 등록</h3>
+                    <span class="text-muted font-11">종목 검색 후 즉시 추가</span>
+                  </div>
+                  <form id="formManualProductAdd" class="mt-3">
+                    <div class="form-group">
+                      <label for="manualProdSearch">상품 검색 (종목명 / 코드)</label>
+                      <div class="input-with-search-btn">
+                        <input type="text" id="manualProdSearch" placeholder="예: ACE 미국S&P500, TIGER 나스닥" class="sol-input" required>
+                        <button type="button" class="btn-search-trigger" id="btnSearchProduct"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-6">
+                        <label for="manualProdPrice">매수가격 (원)</label>
+                        <input type="number" id="manualProdPrice" value="12500" class="sol-input" required>
+                      </div>
+                      <div class="form-group col-6">
+                        <label for="manualProdQty">보유수량 (주/좌)</label>
+                        <input type="number" id="manualProdQty" value="100" class="sol-input" required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-6">
+                        <label for="manualProdDate">매수일자</label>
+                        <input type="date" id="manualProdDate" value="2026-01-01" class="sol-input">
+                      </div>
+                      <div class="form-group col-6">
+                        <label for="manualProdAssetClass">자산분류</label>
+                        <select id="manualProdAssetClass" class="sol-input">
+                          <option value="해외주식">해외주식 (위험)</option>
+                          <option value="국내주식">국내주식 (위험)</option>
+                          <option value="채권">채권 (안전)</option>
+                          <option value="TDF/혼합">TDF / 혼합 (안전)</option>
+                          <option value="원리금보장">원리금보장 예금</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-brand-full mt-2" id="btnAddManualProduct">
+                      <i class="fa-solid fa-circle-check"></i> 보유상품 등록하기
+                    </button>
+                  </form>
                 </div>
-                <form id="formManualProductAdd" class="mt-3">
-                  <div class="form-group">
-                    <label for="manualProdSearch">상품 검색 (종목명 / 코드)</label>
-                    <div class="input-with-search-btn">
-                      <input type="text" id="manualProdSearch" placeholder="예: ACE 미국S&P500, TIGER 나스닥" class="sol-input" required>
-                      <button type="button" class="btn-search-trigger" id="btnSearchProduct"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+
+                <!-- 엑셀 자동 등록 & 퀵 가이드 -->
+                <div class="dashboard-panel">
+                  <div class="panel-header-compact">
+                    <h3 class="panel-sub-title"><i class="fa-solid fa-file-excel text-success"></i> 엑셀 파일 자동 등록</h3>
+                    <span class="badge-pill badge-safe">금융사 다운로드 파일 지원</span>
+                  </div>
+                  <div class="excel-quick-drop-box mt-3 text-center">
+                    <i class="fa-solid fa-cloud-arrow-up text-brand" style="font-size: 36px;"></i>
+                    <h4 class="mt-2" style="font-size: 14px; font-weight: 700;">금융사 퇴직연금 잔고 엑셀 업로드</h4>
+                    <p class="text-muted font-12">신한, 미래에셋, 삼성, KB 등 증권사/은행 리포트 파일(.xls, .xlsx, .csv)</p>
+                    <label class="btn-outline-primary-upload">
+                      <i class="fa-solid fa-folder-open me-1"></i> 파일 선택
+                      <input type="file" id="inputProductExcelFile" accept=".xls,.xlsx,.csv" style="display: none;">
+                    </label>
+                  </div>
+                  <div class="quick-sample-chips mt-3">
+                    <span class="label font-11 text-muted">등록 예시 퀵 추가:</span>
+                    <div class="d-flex flex-wrap gap-2 mt-1">
+                      <button class="chip-sample-add" onclick="quickAddSampleProd('ACE 미국S&P500', 15000000, 12.0, '해외주식')">+ S&P500</button>
+                      <button class="chip-sample-add" onclick="quickAddSampleProd('TIGER 미국나스닥100', 12000000, 18.0, '해외주식')">+ 나스닥100</button>
+                      <button class="chip-sample-add" onclick="quickAddSampleProd('KODEX 미국채10년', 5000000, 3.0, '채권')">+ 미국채권ETF</button>
+                      <button class="chip-sample-add" onclick="quickAddSampleProd('KB스타 글로벌AI', 3000000, 9.5, '해외주식')">+ 글로벌AI</button>
                     </div>
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col-6">
-                      <label for="manualProdPrice">매수가격 (원)</label>
-                      <input type="number" id="manualProdPrice" value="12500" class="sol-input" required>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="manualProdQty">보유수량 (주/좌)</label>
-                      <input type="number" id="manualProdQty" value="100" class="sol-input" required>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-6">
-                      <label for="manualProdDate">매수일자</label>
-                      <input type="date" id="manualProdDate" value="2026-01-01" class="sol-input">
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="manualProdAssetClass">자산분류</label>
-                      <select id="manualProdAssetClass" class="sol-input">
-                        <option value="해외주식">해외주식 (위험)</option>
-                        <option value="국내주식">국내주식 (위험)</option>
-                        <option value="채권">채권 (안전)</option>
-                        <option value="TDF/혼합">TDF / 혼합 (안전)</option>
-                        <option value="원리금보장">원리금보장 예금</option>
-                      </select>
-                    </div>
-                  </div>
-                  <button type="button" class="btn-brand-full mt-2" id="btnAddManualProduct">
-                    <i class="fa-solid fa-circle-check"></i> 보유상품 등록하기
-                  </button>
-                </form>
+                </div>
               </div>
 
-              <!-- 우측: 엑셀 자동 등록 & 퀵 가이드 -->
+              <!-- 우측 컬럼: 등록 보유 상품 목록 테이블 -->
               <div class="dashboard-panel">
                 <div class="panel-header-compact">
-                  <h3 class="panel-sub-title"><i class="fa-solid fa-file-excel text-success"></i> 엑셀 파일 자동 등록</h3>
-                  <span class="badge-pill badge-safe">금융사 다운로드 파일 지원</span>
+                  <h3 class="panel-sub-title"><i class="fa-solid fa-list text-brand"></i> 등록 보유 상품 목록</h3>
+                  <span class="text-muted font-12">총 <strong id="manageProdCount">15</strong>개 종목 관리 중</span>
                 </div>
-                <div class="excel-quick-drop-box mt-3 text-center">
-                  <i class="fa-solid fa-cloud-arrow-up text-brand" style="font-size: 36px;"></i>
-                  <h4 class="mt-2" style="font-size: 14px; font-weight: 700;">금융사 퇴직연금 잔고 엑셀 업로드</h4>
-                  <p class="text-muted font-12">신한, 미래에셋, 삼성, KB 등 증권사/은행 리포트 파일(.xls, .xlsx, .csv)</p>
-                  <label class="btn-outline-primary-upload">
-                    <i class="fa-solid fa-folder-open me-1"></i> 파일 선택
-                    <input type="file" id="inputProductExcelFile" accept=".xls,.xlsx,.csv" style="display: none;">
-                  </label>
+                <div class="table-responsive-desktop mt-3">
+                  <table class="sol-datagrid">
+                    <thead>
+                      <tr>
+                        <th class="text-center" style="width: 45px;">#</th>
+                        <th>계좌구분</th>
+                        <th>상품명</th>
+                        <th class="text-right">수량</th>
+                        <th class="text-right">평가금액</th>
+                        <th class="text-right">수익률</th>
+                        <th class="text-right">포트폴리오 비중</th>
+                        <th class="text-center" style="width: 140px;">관리</th>
+                      </tr>
+                    </thead>
+                    <tbody id="registeredProductTableBody">
+                      <!-- JS 연동 -->
+                    </tbody>
+                  </table>
                 </div>
-                <div class="quick-sample-chips mt-3">
-                  <span class="label font-11 text-muted">등록 예시 퀵 추가:</span>
-                  <div class="d-flex flex-wrap gap-2 mt-1">
-                    <button class="chip-sample-add" onclick="quickAddSampleProd('ACE 미국S&P500', 15000000, 12.0, '해외주식')">+ S&P500</button>
-                    <button class="chip-sample-add" onclick="quickAddSampleProd('TIGER 미국나스닥100', 12000000, 18.0, '해외주식')">+ 나스닥100</button>
-                    <button class="chip-sample-add" onclick="quickAddSampleProd('KODEX 미국채10년', 5000000, 3.0, '채권')">+ 미국채권ETF</button>
-                    <button class="chip-sample-add" onclick="quickAddSampleProd('KB스타 글로벌AI', 3000000, 9.5, '해외주식')">+ 글로벌AI</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 등록 상품 목록 테이블 -->
-            <div class="dashboard-panel mb-4">
-              <div class="panel-header-compact">
-                <h3 class="panel-sub-title"><i class="fa-solid fa-list text-brand"></i> 등록 보유 상품 목록</h3>
-                <span class="text-muted font-12">총 <strong id="manageProdCount">15</strong>개 종목 관리 중</span>
-              </div>
-              <div class="table-responsive-desktop mt-3">
-                <table class="sol-datagrid">
-                  <thead>
-                    <tr>
-                      <th class="text-center" style="width: 45px;">#</th>
-                      <th>계좌구분</th>
-                      <th>상품명</th>
-                      <th class="text-right">수량</th>
-                      <th class="text-right">평가금액</th>
-                      <th class="text-right">수익률</th>
-                      <th class="text-right">포트폴리오 비중</th>
-                      <th class="text-center" style="width: 140px;">관리</th>
-                    </tr>
-                  </thead>
-                  <tbody id="registeredProductTableBody">
-                    <!-- JS 연동 -->
-                  </tbody>
-                </table>
               </div>
             </div>
           </section>
@@ -1385,8 +1279,9 @@
               </div>
             </div>
 
-            <div class="calc-grid-layout mb-4">
-              <!-- 좌측: 입력 파라미터 -->
+            <!-- PC 2열 스플릿 레이아웃: 좌측 380px(조건 설정) + 우측 1fr(3대 시나리오 카드 + 성장곡선 차트) -->
+            <div class="pc-two-column-split mb-4">
+              <!-- 좌측 컬럼: 시뮬레이션 조건 설정 폼 -->
               <div class="dashboard-panel">
                 <h3 class="panel-sub-title mb-3"><i class="fa-solid fa-calculator text-brand"></i> 은퇴 시뮬레이션 조건 설정</h3>
                 <div class="form-row">
@@ -1418,43 +1313,46 @@
                 </button>
               </div>
 
-              <!-- 우측: 3대 시나리오 결과 카드 -->
-              <div class="dashboard-panel">
-                <h3 class="panel-sub-title mb-3"><i class="fa-solid fa-chart-simple text-brand"></i> 65세 은퇴 시점 3대 시나리오 예상 자산</h3>
-                <div class="scenarios-vertical-list">
-                  <div class="scenario-item conservative">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <span class="badge-type">보수적 시나리오 (연 4%)</span>
-                      <strong class="amount">4억 8,000만 원</strong>
+              <!-- 우측 컬럼: 3대 시나리오 결과 카드 + 복리 성장곡선 차트 -->
+              <div class="pc-dashboard-col">
+                <!-- 3대 시나리오 결과 카드 -->
+                <div class="dashboard-panel">
+                  <h3 class="panel-sub-title mb-3"><i class="fa-solid fa-chart-simple text-brand"></i> 65세 은퇴 시점 3대 시나리오 예상 자산</h3>
+                  <div class="scenarios-vertical-list">
+                    <div class="scenario-item conservative">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-type">보수적 시나리오 (연 4%)</span>
+                        <strong class="amount">4억 8,000만 원</strong>
+                      </div>
+                      <span class="sub text-muted font-11">채권·예금 중심 안정형 운용 시</span>
                     </div>
-                    <span class="sub text-muted font-11">채권·예금 중심 안정형 운용 시</span>
-                  </div>
-                  <div class="scenario-item neutral active">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <span class="badge-type">중립적 시나리오 (연 6%) [추천]</span>
-                      <strong class="amount text-brand">6억 5,000만 원</strong>
+                    <div class="scenario-item neutral active">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-type">중립적 시나리오 (연 6%) [추천]</span>
+                        <strong class="amount text-brand">6억 5,000만 원</strong>
+                      </div>
+                      <span class="sub text-muted font-11">신한 밸런스드 자산배분 모델 적용 시</span>
                     </div>
-                    <span class="sub text-muted font-11">신한 밸런스드 자산배분 모델 적용 시</span>
-                  </div>
-                  <div class="scenario-item aggressive">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <span class="badge-type">공격적 시나리오 (연 8%)</span>
-                      <strong class="amount text-positive">9억 2,000만 원</strong>
+                    <div class="scenario-item aggressive">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-type">공격적 시나리오 (연 8%)</span>
+                        <strong class="amount text-positive">9억 2,000만 원</strong>
+                      </div>
+                      <span class="sub text-muted font-11">미국 주식 및 혁신 테마 분산 성장 시</span>
                     </div>
-                    <span class="sub text-muted font-11">미국 주식 및 혁신 테마 분산 성장 시</span>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- 복리 성장곡선 차트 (1년, 3년, 5년, 10년, 은퇴시점) -->
-            <div class="dashboard-panel mb-4">
-              <div class="panel-header-compact">
-                <h3 class="panel-sub-title"><i class="fa-solid fa-arrow-trend-up text-brand"></i> 시나리오별 복리 자산 성장 곡선 추이</h3>
-                <span class="text-muted font-12">1년 · 3년 · 5년 · 10년 · 은퇴 시점</span>
-              </div>
-              <div class="chart-canvas-container mt-3" style="height: 300px;">
-                <canvas id="scenarioGrowthCurveChart"></canvas>
+                <!-- 복리 성장곡선 차트 (1년, 3년, 5년, 10년, 은퇴시점) -->
+                <div class="dashboard-panel">
+                  <div class="panel-header-compact">
+                    <h3 class="panel-sub-title"><i class="fa-solid fa-arrow-trend-up text-brand"></i> 시나리오별 복리 자산 성장 곡선 추이</h3>
+                    <span class="text-muted font-12">1년 · 3년 · 5년 · 10년 · 은퇴 시점</span>
+                  </div>
+                  <div class="chart-canvas-container mt-3" style="height: 280px;">
+                    <canvas id="scenarioGrowthCurveChart"></canvas>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -1487,8 +1385,8 @@
               </div>
             </div>
 
-            <!-- [핵심 기능] 양방향 인터랙티브 비중 조절 시뮬레이터 그리드 -->
-            <div class="calc-grid-layout mb-4">
+            <!-- [핵심 기능] 양방향 인터랙티브 비중 조절 시뮬레이터 (PC 2분할 460px:1fr 스플릿) -->
+            <div class="pc-two-column-split rebalance-split mb-4">
               <!-- 좌측: 실시간 슬라이더 컨트롤러 -->
               <div class="dashboard-panel">
                 <div class="panel-header-compact">
@@ -1635,7 +1533,7 @@
                 <h3 class="panel-sub-title"><i class="fa-solid fa-cubes text-brand"></i> 유형별 AI 추천 프리미엄 상품</h3>
                 <span class="text-muted font-12">성장형 · 안정형 · 배당형</span>
               </div>
-              <div class="detailed-products-grid mt-3">
+              <div class="detailed-products-grid pc-three-column-grid mt-3">
                 <!-- 성장형 -->
                 <div class="detailed-product-card">
                   <div class="card-top-row">

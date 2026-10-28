@@ -4098,3 +4098,81 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   21. [PC 와이드 뷰포트 UI/UX 전면 최적화 레이아웃 시스템]
+   ========================================================================== */
+
+/* 대시보드 PC 2열 그리드 */
+.pc-dashboard-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.pc-dashboard-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 2열 스플릿 레이아웃 (폼 380px + 콘텐츠 1fr) */
+.pc-two-column-split {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.pc-two-column-split.rebalance-split {
+  grid-template-columns: 460px 1fr;
+}
+
+/* 카드 및 패널 세부 디테일 최적화 */
+.dashboard-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: 0 4px 16px rgba(10, 25, 49, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-panel:hover {
+  box-shadow: 0 8px 24px rgba(10, 25, 49, 0.08);
+}
+
+.dashboard-panel .panel-header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* 대시보드 내 컴팩트 차트 높이 최적화 */
+.pc-dashboard-col .chart-canvas-container {
+  height: 240px;
+  position: relative;
+}
+
+/* 3단 가로 그리드 */
+.pc-three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* 1024px 이하 태블릿/모바일 반응형 자동 1열 전환 */
+@media (max-width: 1024px) {
+  .pc-dashboard-grid-2col {
+    grid-template-columns: 1fr;
+  }
+  .pc-two-column-split,
+  .pc-two-column-split.rebalance-split {
+    grid-template-columns: 1fr;
+  }
+  .pc-three-column-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
