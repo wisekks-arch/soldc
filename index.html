@@ -408,28 +408,729 @@
               </div>
             </div>
 
-            <!-- 분석 통계 바 -->
-            <div class="holdings-stat-summary">
-              <div class="stat-box">
-                <span class="label">최고 수익 종목</span>
-                <span class="val text-positive">HANARO 원자력iSelect (+23.21%)</span>
+            <!-- =============================================================
+                 [보유상품 정밀 분석 섹션 1: 포트폴리오 4대 핵심 제원 배너]
+                 ============================================================= -->
+            <div class="detailed-summary-banner mb-4">
+              <div class="summary-col">
+                <span class="sub"><i class="fa-solid fa-vault text-brand me-1"></i>총 평가 적립금</span>
+                <strong class="main-val">41,602,931 원</strong>
+                <span class="foot-desc text-muted">엑셀 15종 실보유 합계</span>
               </div>
-              <div class="stat-box">
-                <span class="label">최대 손실 종목</span>
-                <span class="val text-negative">TIGER 현대차그룹플러스 (-36.68%)</span>
+              <div class="summary-col">
+                <span class="sub"><i class="fa-solid fa-money-bill-transfer me-1"></i>총 납입 원금</span>
+                <strong class="main-val">43,467,927 원</strong>
+                <span class="foot-desc text-muted">실제 투자 매입원금</span>
               </div>
-              <div class="stat-box">
-                <span class="label">최대 비중 상품</span>
-                <span class="val">HANARO 원자력iSelect (22.8%)</span>
+              <div class="summary-col">
+                <span class="sub"><i class="fa-solid fa-chart-line text-negative me-1"></i>총 평가 손익</span>
+                <strong class="main-val text-negative">-1,864,996 원 (-4.29%)</strong>
+                <span class="foot-desc text-negative"><i class="fa-solid fa-arrow-trend-down"></i> 원금 대비 -4.3% 구간</span>
               </div>
-              <div class="stat-box">
-                <span class="label">원리금 보장 비중</span>
-                <span class="val text-success">4.7% (저축은행 2종)</span>
+              <div class="summary-col">
+                <span class="sub"><i class="fa-solid fa-scale-balanced text-brand me-1"></i>운용 승률 및 분포</span>
+                <strong class="main-val text-brand">수익 10종 / 손실 5종</strong>
+                <span class="foot-desc text-success">종목 승률 66.7% 유지</span>
               </div>
             </div>
 
-            <div class="dashboard-panel mt-3">
-              <div id="detailedHoldingsContainer"></div>
+            <!-- =============================================================
+                 [보유상품 정밀 분석 섹션 2: 자산군별 3대 배분 비중 & 법정 70% 진단]
+                 ============================================================= -->
+            <div class="dashboard-panel mb-4">
+              <div class="panel-header-compact">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-chart-pie text-brand"></i>
+                  <h3 class="panel-sub-title">포트폴리오 자산군별 배분 비중 및 위험자산 법정 70% 진단</h3>
+                </div>
+                <span class="tag-status-safe"><i class="fa-solid fa-circle-check"></i> 위험자산 58.3% (법정한도 70% 안전 준수)</span>
+              </div>
+
+              <!-- 멀티 컬러 자산 비중 프로그레스 바 -->
+              <div class="asset-allocation-bar-wrap mt-3">
+                <div class="allocation-multi-bar">
+                  <div class="bar-segment equity" style="width: 58.3%;" title="주식형/테마ETF (58.3%)">58.3%</div>
+                  <div class="bar-segment bond" style="width: 37.0%;" title="채권 및 TDF/혼합형 (37.0%)">37.0%</div>
+                  <div class="bar-segment deposit" style="width: 4.7%;" title="원리금보장 예금 (4.7%)">4.7%</div>
+                </div>
+                <div class="allocation-legend-grid mt-3">
+                  <div class="legend-card">
+                    <span class="dot equity"></span>
+                    <div class="meta">
+                      <span class="type">주식형 / 위험자산 (6종)</span>
+                      <strong class="val">24,256,070원 <small class="text-brand">(58.3%)</small></strong>
+                      <span class="desc">원자력, 현대차, KODEX200, S&P500 등</span>
+                    </div>
+                  </div>
+                  <div class="legend-card">
+                    <span class="dot bond"></span>
+                    <div class="meta">
+                      <span class="type">채권 · 혼합 · TDF (7종)</span>
+                      <strong class="val">15,381,000원 <small class="text-success">(37.0%)</small></strong>
+                      <span class="desc">신한 2045 TDF, 종합채권, 미국배당 등</span>
+                    </div>
+                  </div>
+                  <div class="legend-card">
+                    <span class="dot deposit"></span>
+                    <div class="meta">
+                      <span class="type">원리금 보장 예금 (2종)</span>
+                      <strong class="val">1,965,861원 <small class="text-warning">(4.7%)</small></strong>
+                      <span class="desc">OK저축은행(103만), SBI저축은행(92만)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- =============================================================
+                 [보유상품 정밀 분석 섹션 3: 15종 종목별 손익 기여도 인포그래픽]
+                 ============================================================= -->
+            <div class="dashboard-panel mb-4">
+              <div class="panel-header-compact">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-arrow-trend-up text-brand"></i>
+                  <h3 class="panel-sub-title">15종 종목별 손익 기여도 및 양극화 진단</h3>
+                </div>
+                <span class="text-muted font-12">최대 수익: <strong>원자력(+178만)</strong> / 최대 손실: <strong>현대차(-284만)</strong></span>
+              </div>
+              <div class="profit-contribution-strip mt-3">
+                <div class="strip-header d-flex justify-content-between mb-2">
+                  <span class="badge-profit-sum"><i class="fa-solid fa-plus text-positive me-1"></i>수익 종목 10종 누적 이익: <strong>+3,494,649원</strong></span>
+                  <span class="badge-loss-sum"><i class="fa-solid fa-minus text-negative me-1"></i>손실 종목 5종 누적 손실: <strong>-5,359,645원</strong></span>
+                </div>
+                <div class="quick-performance-chips-wrap">
+                  <span class="perf-chip high-profit" title="HANARO 원자력iSelect (+23.21%)">HANARO 원자력 <strong>+23.2%</strong></span>
+                  <span class="perf-chip high-profit" title="ACE 미국나스닥100 (+19.29%)">ACE 미국나스닥100 <strong>+19.3%</strong></span>
+                  <span class="perf-chip high-profit" title="TIGER 미국S&P500 (+13.78%)">TIGER 미국S&P500 <strong>+13.8%</strong></span>
+                  <span class="perf-chip mid-profit" title="신한 2045 TDF (+5.00%)">신한 2045 TDF <strong>+5.0%</strong></span>
+                  <span class="perf-chip mid-profit" title="KODEX 200 (+4.80%)">KODEX 200 <strong>+4.8%</strong></span>
+                  <span class="perf-chip mid-profit" title="TIGER 미국배당다우존스 (+4.00%)">TIGER 미국배당 <strong>+4.0%</strong></span>
+                  <span class="perf-chip safe-profit" title="OK저축은행 (+3.80%)">OK저축은행 <strong>+3.8%</strong></span>
+                  <span class="perf-chip safe-profit" title="SBI저축은행 (+3.74%)">SBI저축은행 <strong>+3.7%</strong></span>
+                  <span class="perf-chip safe-profit" title="신한마음편한 (+3.17%)">신한마음편한 <strong>+3.2%</strong></span>
+                  <span class="perf-chip safe-profit" title="KODEX 종합채권 (+1.80%)">KODEX 종합채권 <strong>+1.8%</strong></span>
+                  <span class="perf-chip low-loss" title="ACE 글로벌반도체TOP4 (-1.67%)">ACE 글로벌반도체 <strong>-1.7%</strong></span>
+                  <span class="perf-chip low-loss" title="KBSTAR 미국채10년선물 (-3.50%)">KBSTAR 미국채 <strong>-3.5%</strong></span>
+                  <span class="perf-chip high-loss" title="TIGER 200 중공업 (-25.32%)">TIGER 중공업 <strong>-25.3%</strong></span>
+                  <span class="perf-chip critical-loss" title="TIGER 현대차그룹플러스 (-36.68%)">TIGER 현대차 <strong>-36.7%</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- =============================================================
+                 [보유상품 정밀 분석 섹션 4: 인터랙티브 툴바 & 15종 전 종목 상세 워크스테이션]
+                 ============================================================= -->
+            <div class="dashboard-panel mb-4">
+              <!-- 컨트롤 툴바: 실시간 검색 & 정렬 & 필터 탭 -->
+              <div class="detailed-toolbar mb-3">
+                <div class="toolbar-left d-flex align-items-center gap-3">
+                  <div class="filter-chips-nav">
+                    <button class="chip-filter active" data-holdings-filter="all">전체 15종</button>
+                    <button class="chip-filter" data-holdings-filter="risk">주식형(6)</button>
+                    <button class="chip-filter" data-holdings-filter="safe">채권/혼합(7)</button>
+                    <button class="chip-filter" data-holdings-filter="deposit">원리금보장(2)</button>
+                    <button class="chip-filter" data-holdings-filter="profit">수익 종목(10)</button>
+                    <button class="chip-filter" data-holdings-filter="loss">손실 종목(5)</button>
+                  </div>
+                  <span class="toolbar-count">총 <strong id="holdingsVisibleCount">15</strong>개 상품</span>
+                </div>
+                <div class="toolbar-right d-flex align-items-center gap-2">
+                  <div class="holdings-search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="holdingsSearchInput" placeholder="종목명, 코드, 운용사 검색..." class="sol-input-sm">
+                  </div>
+                  <select id="selectHoldingsSort" class="sol-select-sm">
+                    <option value="return-desc">수익률 높은 순 ↑</option>
+                    <option value="return-asc">손실 큰 순 ↓</option>
+                    <option value="val-desc">평가금액 큰 순</option>
+                    <option value="principal-desc">매입원금 큰 순</option>
+                    <option value="profit-desc">평가손익 높은 순</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 15종 정밀 그리드 컨테이너 (정적 마크업 기본 내장 + JS 동적 연동 지원) -->
+              <div id="detailedHoldingsContainer">
+                <div class="detailed-products-grid">
+                  <!-- #1 HANARO 원자력iSelect -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P001')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#1</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">NH-Amundi자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>22.8%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>HANARO 원자력iSelect</h4>
+                      <span class="product-code">종목코드: 438100 · 실적배당형 (원자력 테마 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini">
+                        <span class="lbl">매입원금</span>
+                        <strong class="val">7,690,945원</strong>
+                      </div>
+                      <div class="stat-mini">
+                        <span class="lbl">현재 평가금액</span>
+                        <strong class="val text-brand font-bold">9,476,070원</strong>
+                      </div>
+                      <div class="stat-mini">
+                        <span class="lbl">평가손익 (수익률)</span>
+                        <strong class="val text-positive font-bold">+1,785,125원 (+23.21%)</strong>
+                      </div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+23.21% (원금 초과 달성)</span>
+                      </div>
+                      <div class="card-progress-track">
+                        <div class="card-progress-fill positive" style="width: 123.2%;"></div>
+                      </div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>원전 르네상스 및 SMR 수출 모멘텀으로 최고 수익률 달성. 일부 이익 실현 후 안전자산 리밸런싱 권장.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P001')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #2 TIGER 현대차그룹플러스 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P002')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#2</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">미래에셋자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>11.8%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>TIGER 현대차그룹플러스</h4>
+                      <span class="product-code">종목코드: 105840 · 실적배당형 (자동차 섹터 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini">
+                        <span class="lbl">매입원금</span>
+                        <strong class="val">7,761,645원</strong>
+                      </div>
+                      <div class="stat-mini">
+                        <span class="lbl">현재 평가금액</span>
+                        <strong class="val text-brand font-bold">4,915,000원</strong>
+                      </div>
+                      <div class="stat-mini">
+                        <span class="lbl">평가손익 (수익률)</span>
+                        <strong class="val text-negative font-bold">-2,846,645원 (-36.68%)</strong>
+                      </div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-negative font-bold">-36.68% (최대 손실 종목)</span>
+                      </div>
+                      <div class="card-progress-track">
+                        <div class="card-progress-fill negative" style="width: 63.3%;"></div>
+                      </div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>완성차 밸류에이션 저평가 구간. AI 리밸런싱을 통해 분할 추가 매수 또는 비중 축소 전략 검토 필요.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P002')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #3 KODEX 200 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P003')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#3</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">삼성자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>13.7%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>KODEX 200</h4>
+                      <span class="product-code">종목코드: 069500 · 실적배당형 (국내 대표지수 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">5,420,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">5,680,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+260,000원 (+4.80%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+4.80% (안정적 상승)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 104.8%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>국내 대표 코스피200 추종 핵심 자산. 코리아 밸류업 프로그램 수혜로 지속 보유 추천.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P003')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #4 TIGER 미국S&P500 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P004')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#4</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">미래에셋자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>12.3%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>TIGER 미국S&P500</h4>
+                      <span class="product-code">종목코드: 360750 · 실적배당형 (해외 지수 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">4,500,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">5,120,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+620,000원 (+13.78%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+13.78% (견고한 우상향)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 113.8%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>미국 대형주 500개 분산 투자. 환노출 효과 및 장기 우상향에 따른 퇴직연금 최우선 핵심 축.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P004')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #5 TIGER 200 중공업 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P005')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#5</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">미래에셋자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>5.6%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>TIGER 200 중공업</h4>
+                      <span class="product-code">종목코드: 139260 · 실적배당형 (조선/기계 테마 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">3,100,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">2,315,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-negative font-bold">-785,000원 (-25.32%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-negative font-bold">-25.32% (낙폭 과대)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill negative" style="width: 74.7%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>조선 슈퍼사이클 진입 및 선가 상승 지속 전망. 손실폭이 크나 중장기 회복 기대 구간.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P005')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #6 ACE 미국나스닥100 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P006')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#6</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">한국투자신탁운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>8.0%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>ACE 미국나스닥100</h4>
+                      <span class="product-code">종목코드: 367380 · 실적배당형 (글로벌 혁신기술 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">2,800,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">3,340,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+540,000원 (+19.29%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+19.29% (고성장 수혜)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 119.3%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>빅테크 및 생성형 AI 인프라 성장 주도. 포트폴리오의 대표적 수익 견인 엔진.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P006')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #7 신한 2045 TDF -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P007')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#7</span>
+                        <span class="badge-pill badge-safe">안전(혼합TDF)</span>
+                        <span class="issuer-tag">신한자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>7.6%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>신한 2045 TDF 증권투자신탁</h4>
+                      <span class="product-code">종목코드: KR5230911234 · 실적배당형 (생애주기 TDF 펀드)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">3,000,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">3,150,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+150,000원 (+5.00%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+5.00% (자동 글라이드패스)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 105.0%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>은퇴 시점에 맞추어 위험자산 비중을 스스로 줄여나가는 신한 대표 생애주기 맞춤 펀드.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P007')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #8 KODEX 종합채권(AA-이상)액티브 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P008')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#8</span>
+                        <span class="badge-pill badge-safe">안전(채권형)</span>
+                        <span class="issuer-tag">삼성자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>6.1%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>KODEX 종합채권(AA-이상)액티브</h4>
+                      <span class="product-code">종목코드: 273130 · 실적배당형 (국내 우량채권 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">2,500,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">2,545,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+45,000원 (+1.80%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+1.80% (방어적 안전판)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 101.8%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>AA- 이상 우량 채권 중심의 방어 자산. 금리 인하기 자본 이득 및 안정적 이자 수익 수취.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P008')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #9 KBSTAR 미국채10년선물(H) -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P009')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#9</span>
+                        <span class="badge-pill badge-safe">안전(해외채권)</span>
+                        <span class="issuer-tag">KB자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>4.6%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>KBSTAR 미국채10년선물(H)</h4>
+                      <span class="product-code">종목코드: 304380 · 실적배당형 (미국 중장기국채 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">2,000,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">1,930,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-negative font-bold">-70,000원 (-3.50%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-negative font-bold">-3.50% (금리 변동 구간)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill negative" style="width: 96.5%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>미국 국채 10년물 금리 고점 통과 시 강력한 가격 상승 탄력 기대. 안전자산 규정 100% 인정.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P009')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #10 TIGER 미국배당다우존스 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P010')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#10</span>
+                        <span class="badge-pill badge-safe">안전(배당혼합)</span>
+                        <span class="issuer-tag">미래에셋자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>3.7%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>TIGER 미국배당다우존스</h4>
+                      <span class="product-code">종목코드: 458730 · 실적배당형 (월배당 고배당 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">1,500,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">1,560,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+60,000원 (+4.00%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+4.00% (월배당 현금흐름)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 104.0%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>한국판 SCHD. 매월 안정적인 분배금 재투자로 복리 증식 효과를 극대화하는 인컴 자산.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P010')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #11 신한마음편한 밸런스채권혼합 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P011')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#11</span>
+                        <span class="badge-pill badge-safe">안전(혼합채권)</span>
+                        <span class="issuer-tag">신한자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>3.0%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>신한마음편한 밸런스채권혼합</h4>
+                      <span class="product-code">종목코드: KR5129944321 · 실적배당형 (공모 채권혼합형)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">1,200,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">1,238,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+38,000원 (+3.17%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+3.17% (중위험 중수익)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 103.2%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>채권 60% 이상 편입으로 변동성을 억제하면서 주식 알파 수익을 추구하는 자산배분 펀드.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P011')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #12 KODEX 단기채권PLUS -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P012')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#12</span>
+                        <span class="badge-pill badge-safe">안전(단기채권)</span>
+                        <span class="issuer-tag">삼성자산운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>2.5%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>KODEX 단기채권PLUS</h4>
+                      <span class="product-code">종목코드: 214980 · 실적배당형 (초단기 채권 MMF형)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">1,000,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">1,023,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+23,000원 (+2.30%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+2.30% (현금성 대기자금)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 102.3%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>초단기 파킹형 ETF. 저가 매수 기회 발생 시 즉시 리밸런싱을 실행할 유동성 완충재.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P012')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #13 ACE 글로벌반도체TOP4 -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P013')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#13</span>
+                        <span class="badge-pill badge-risk">위험(주식형)</span>
+                        <span class="issuer-tag">한국투자신탁운용</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>2.1%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>ACE 글로벌반도체TOP4 Plus</h4>
+                      <span class="product-code">종목코드: 429580 · 실적배당형 (반도체 글로벌 ETF)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">900,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">885,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-negative font-bold">-15,000원 (-1.67%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-negative font-bold">-1.67% (단기 조정)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill negative" style="width: 98.3%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-lightbulb text-warning"></i>
+                      <span>엔비디아, TSMC, ASML, 삼성전자 집중 투자. 장기 AI 반도체 수요 확장 국면 수혜주.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P013')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #14 OK저축은행 정기예금 (DC원리금) -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P014')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#14</span>
+                        <span class="badge-pill badge-safe" style="background:#0D9488; color:#fff;">원리금보장</span>
+                        <span class="issuer-tag">OK저축은행</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>2.5%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>OK저축은행 정기예금 (DC원리금)</h4>
+                      <span class="product-code">종목코드: SB00192 · 원리금보장형 (정기예금 1년제)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">1,000,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">1,038,000원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+38,000원 (+3.80%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+3.80% (원리금 확정보장)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 103.8%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-shield text-success"></i>
+                      <span>예금자보호법 5천만원 한도 보호 상품. 확정 금리 3.8%로 원금 손실 위험 제로(0).</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P014')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- #15 SBI저축은행 회전정기예금 (DC) -->
+                  <div class="detailed-product-card" onclick="openProductDeepDetail('P015')">
+                    <div class="card-top-row">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="card-index-tag">#15</span>
+                        <span class="badge-pill badge-safe" style="background:#0D9488; color:#fff;">원리금보장</span>
+                        <span class="issuer-tag">SBI저축은행</span>
+                      </div>
+                      <span class="weight-tag">포트폴리오 비중 <strong>2.2%</strong></span>
+                    </div>
+                    <div class="card-product-title">
+                      <h4>SBI저축은행 회전정기예금 (DC)</h4>
+                      <span class="product-code">종목코드: SB00245 · 원리금보장형 (회전식 정기예금)</span>
+                    </div>
+                    <div class="card-stat-boxes">
+                      <div class="stat-mini"><span class="lbl">매입원금</span><strong class="val">895,337원</strong></div>
+                      <div class="stat-mini"><span class="lbl">현재 평가금액</span><strong class="val text-brand font-bold">928,861원</strong></div>
+                      <div class="stat-mini"><span class="lbl">평가손익 (수익률)</span><strong class="val text-positive font-bold">+33,524원 (+3.74%)</strong></div>
+                    </div>
+                    <div class="card-progress-section">
+                      <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
+                        <span>원금 기준선 (100%)</span>
+                        <span class="text-positive font-bold">+3.74% (원리금 확정보장)</span>
+                      </div>
+                      <div class="card-progress-track"><div class="card-progress-fill positive" style="width: 103.7%;"></div></div>
+                    </div>
+                    <div class="card-strategy-preview">
+                      <i class="fa-solid fa-shield text-success"></i>
+                      <span>회전 주기마다 시장 실세 금리를 반영하는 확정 금리형 안전자산. 원금 100% 보장.</span>
+                    </div>
+                    <div class="card-bottom-action">
+                      <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('P015')">
+                        <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
           </section>
 

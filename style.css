@@ -2832,4 +2832,558 @@ body {
   padding: 10px 12px;
 }
 
+/* ==========================================================================
+   19. [보유상품(15종) 정밀 분석 화면 HTS급 전용 디자인 시스템]
+   ========================================================================== */
+
+/* 상단 4대 종합 요약 배너 */
+.detailed-summary-banner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 244, 255, 0.95) 100%);
+  border: 1px solid rgba(0, 70, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: 0 4px 16px rgba(0, 30, 100, 0.05);
+}
+
+.detailed-summary-banner .summary-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  padding-right: 16px;
+}
+
+.detailed-summary-banner .summary-col:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.detailed-summary-banner .summary-col .sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.detailed-summary-banner .summary-col .main-val {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+}
+
+.detailed-summary-banner .summary-col .foot-desc {
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+/* 패널 헤더 컴팩트 */
+.panel-header-compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.panel-sub-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.tag-status-safe {
+  background: #ECFDF5;
+  color: #059669;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 자산군별 멀티 컬러 프로그레스 바 */
+.asset-allocation-bar-wrap {
+  width: 100%;
+}
+
+.allocation-multi-bar {
+  display: flex;
+  height: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #E2E8F0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.allocation-multi-bar .bar-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #FFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: width 0.4s ease;
+}
+
+.allocation-multi-bar .bar-segment.equity {
+  background: linear-gradient(90deg, #0046FF 0%, #2563EB 100%);
+}
+
+.allocation-multi-bar .bar-segment.bond {
+  background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+}
+
+.allocation-multi-bar .bar-segment.deposit {
+  background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+}
+
+.allocation-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.legend-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  transition: all 0.2s ease;
+}
+
+.legend-card:hover {
+  border-color: var(--sol-blue-primary);
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.08);
+}
+
+.legend-card .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.legend-card .dot.equity { background: #0046FF; }
+.legend-card .dot.bond { background: #10B981; }
+.legend-card .dot.deposit { background: #F59E0B; }
+
+.legend-card .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.legend-card .meta .type {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.legend-card .meta .val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.legend-card .meta .desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* 손익 기여도 칩 스트립 */
+.profit-contribution-strip {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.badge-profit-sum {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #DC2626;
+}
+
+.badge-loss-sum {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2563EB;
+}
+
+.quick-performance-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.perf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  cursor: default;
+  transition: transform 0.15s ease;
+}
+
+.perf-chip:hover {
+  transform: translateY(-2px);
+}
+
+.perf-chip.high-profit {
+  border-color: rgba(220, 38, 38, 0.3);
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+.perf-chip.mid-profit {
+  border-color: rgba(239, 68, 68, 0.2);
+  background: #FFF1F2;
+  color: #E11D48;
+}
+
+.perf-chip.safe-profit {
+  border-color: rgba(16, 185, 129, 0.25);
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.perf-chip.low-loss {
+  border-color: rgba(37, 99, 235, 0.2);
+  background: #EFF6FF;
+  color: #2563EB;
+}
+
+.perf-chip.high-loss {
+  border-color: rgba(30, 64, 175, 0.3);
+  background: #EEF2FF;
+  color: #1D4ED8;
+}
+
+.perf-chip.critical-loss {
+  border-color: rgba(30, 58, 138, 0.4);
+  background: #E0E7FF;
+  color: #1E40AF;
+  font-weight: 800;
+}
+
+/* 컨트롤 툴바: 칩 필터 & 검색 */
+.detailed-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.filter-chips-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip-filter {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-filter:hover {
+  background: #E2E8F0;
+  color: var(--text-main);
+}
+
+.chip-filter.active {
+  background: var(--sol-blue-primary);
+  border-color: var(--sol-blue-primary);
+  color: #FFF;
+  box-shadow: 0 2px 8px rgba(0, 70, 255, 0.3);
+}
+
+.toolbar-count {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.holdings-search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.holdings-search-input-wrap i {
+  position: absolute;
+  left: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.holdings-search-input-wrap .sol-input-sm {
+  height: 36px;
+  padding-left: 32px;
+  padding-right: 12px;
+  font-size: 12.5px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-app);
+  color: var(--text-main);
+  width: 220px;
+  outline: none;
+}
+
+.holdings-search-input-wrap .sol-input-sm:focus {
+  border-color: var(--sol-blue-primary);
+  box-shadow: 0 0 0 3px rgba(0, 70, 255, 0.1);
+}
+
+.sol-select-sm {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+}
+
+/* 15종 정밀 그리드 카드 리스트 */
+.detailed-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.detailed-product-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.detailed-product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sol-blue-primary);
+  box-shadow: 0 8px 24px rgba(0, 70, 255, 0.12);
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-index-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+  background: var(--bg-app);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.badge-pill.badge-risk {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.badge-pill.badge-safe {
+  background: #E0E7FF;
+  color: #3730A3;
+}
+
+.issuer-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.weight-tag {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.weight-tag strong {
+  color: var(--sol-blue-primary);
+  font-weight: 800;
+}
+
+.card-product-title h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.product-code {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.card-stat-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: var(--bg-app);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.stat-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-mini .lbl {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.stat-mini .val {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.card-progress-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-progress-track {
+  width: 100%;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.card-progress-fill.positive {
+  background: linear-gradient(90deg, #F87171 0%, #DC2626 100%);
+}
+
+.card-progress-fill.negative {
+  background: linear-gradient(90deg, #60A5FA 0%, #2563EB 100%);
+}
+
+.card-strategy-preview {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11.5px;
+  color: #92400E;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.card-bottom-action {
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.btn-detail-view {
+  width: 100%;
+  height: 38px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--sol-blue-primary);
+  font-size: 12.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-detail-view:hover {
+  background: var(--sol-blue-primary);
+  border-color: var(--sol-blue-primary);
+  color: #FFF;
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.2);
+}
+
+/* 모바일 반응형 적응 (갤럭시 S26+ 등) */
+@media (max-width: 768px) {
+  .detailed-summary-banner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .detailed-summary-banner .summary-col:nth-child(2) {
+    border-right: none;
+  }
+  .allocation-legend-grid {
+    grid-template-columns: 1fr;
+  }
+  .detailed-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .detailed-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar-right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .holdings-search-input-wrap .sol-input-sm {
+    width: 100%;
+  }
+}
+
+
 

@@ -443,6 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCustomReturnForecast();
   initModals();
   initExcelDropzone();
+  initDetailedHoldingsControls();
 
   // 대시보드 및 상세 분석 탭 렌더링
   updateDashboardData();
@@ -1015,8 +1016,10 @@ function renderHoldingsTable(filter) {
 }
 
 // ============================================================================
-// 9. [보유상품(15종) 분석] 전용 탭 화면 전면 렌더링 (심층 분석 뷰)
+// 9. [보유상품(15종) 분석] 전용 탭 화면 전면 렌더링 (심층 분석 뷰 & 실시간 필터/정렬)
 // ============================================================================
+let currentHoldingsFilter = "all";
+
 function renderDetailedHoldingsPane() {
   const container = document.getElementById("detailedHoldingsContainer");
   if (!container) return;
@@ -1026,9 +1029,37 @@ function renderDetailedHoldingsPane() {
   const totalProfit = totalVal - totalPrincipal;
   const overallReturn = ((totalProfit / totalPrincipal) * 100).toFixed(2);
 
-  // 정렬 적용
+  // 1. 기본 리스트 복사
   let list = [...pensionState.holdings];
-  const sortMode = pensionState.holdingsSort;
+
+  // 2. 카테고리/손익 칩 필터 적용
+  if (currentHoldingsFilter === "risk") {
+    list = list.filter(item => item.type === "risk");
+  } else if (currentHoldingsFilter === "safe") {
+    list = list.filter(item => item.type === "safe" && !item.category.includes("원리금보장형"));
+  } else if (currentHoldingsFilter === "deposit") {
+    list = list.filter(item => item.category.includes("원리금보장형") || item.group === "원리금보장");
+  } else if (currentHoldingsFilter === "profit") {
+    list = list.filter(item => item.profit >= 0);
+  } else if (currentHoldingsFilter === "loss") {
+    list = list.filter(item => item.profit < 0);
+  }
+
+  // 3. 검색어 필터
+  const searchInput = document.getElementById("holdingsSearchInput");
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+  if (query) {
+    list = list.filter(item => 
+      item.name.toLowerCase().includes(query) ||
+      item.code.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query) ||
+      item.issuer.toLowerCase().includes(query)
+    );
+  }
+
+  // 4. 정렬 적용
+  const sortSelect = document.getElementById("selectHoldingsSort");
+  const sortMode = sortSelect ? sortSelect.value : (pensionState.holdingsSort || "return-desc");
 
   if (sortMode === "return-desc") {
     list.sort((a, b) => b.returnRate - a.returnRate);
@@ -1042,67 +1073,32 @@ function renderDetailedHoldingsPane() {
     list.sort((a, b) => b.profit - a.profit);
   }
 
-  // 검색어 필터
-  const searchInput = document.getElementById("holdingsSearchInput");
-  const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
-  if (query) {
-    list = list.filter(item => 
-      item.name.toLowerCase().includes(query) ||
-      item.code.toLowerCase().includes(query) ||
-      item.category.toLowerCase().includes(query) ||
-      item.issuer.toLowerCase().includes(query)
-    );
+  // 5. 건수 표시 갱신
+  const countEl = document.getElementById("holdingsVisibleCount");
+  if (countEl) countEl.innerText = list.length;
+
+  // 6. 결과 없을 때 표시
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state-card text-center p-5">
+        <i class="fa-solid fa-folder-open text-muted" style="font-size: 40px; margin-bottom: 12px;"></i>
+        <h4 style="font-size: 16px; font-weight: 700; color: #334155;">조건에 맞는 보유상품이 없습니다</h4>
+        <p style="font-size: 13px; color: #64748B;">검색어나 필터 조건을 변경해 보세요.</p>
+        <button class="btn btn-outline-primary btn-sm mt-2" onclick="resetHoldingsFilter()">전체 15종 보기</button>
+      </div>
+    `;
+    return;
   }
 
-  // 15종 개별 심층 카드 HTML 조립
+  // 7. 15종 카드 그리드 조립
   container.innerHTML = `
-    <!-- 상단 종합 진단 카드 바 -->
-    <div class="detailed-summary-banner mb-4">
-      <div class="summary-col">
-        <span class="sub">총 평가 적립금</span>
-        <strong class="main-val">${formatWon(totalVal)} 원</strong>
-      </div>
-      <div class="summary-col">
-        <span class="sub">총 납입 원금</span>
-        <strong class="main-val">${formatWon(totalPrincipal)} 원</strong>
-      </div>
-      <div class="summary-col">
-        <span class="sub">총 평가 손익</span>
-        <strong class="main-val ${totalProfit >= 0 ? 'text-positive' : 'text-negative'}">
-          ${totalProfit >= 0 ? '+' : ''}${formatWon(totalProfit)} 원 (${overallReturn}%)
-        </strong>
-      </div>
-      <div class="summary-col">
-        <span class="sub">운용 성과 (승률)</span>
-        <strong class="main-val text-brand">수익 10종 / 손실 5종 (66.7%)</strong>
-      </div>
-    </div>
-
-    <!-- 컨트롤 툴바: 실시간 검색 & 다중 정렬 드롭다운 -->
-    <div class="detailed-toolbar mb-3">
-      <div class="toolbar-left">
-        <span class="toolbar-count">총 <strong>${list.length}</strong>개 상품 검색됨</span>
-      </div>
-      <div class="toolbar-right">
-        <label for="selectHoldingsSort" class="me-2" style="font-size: 12px; font-weight: 700;">정렬 기준:</label>
-        <select id="selectHoldingsSort" class="sol-select-sm">
-          <option value="return-desc" ${sortMode === 'return-desc' ? 'selected' : ''}>수익률 높은 순 ↑</option>
-          <option value="return-asc" ${sortMode === 'return-asc' ? 'selected' : ''}>손실 큰 순 ↓</option>
-          <option value="val-desc" ${sortMode === 'val-desc' ? 'selected' : ''}>평가금액 큰 순</option>
-          <option value="principal-desc" ${sortMode === 'principal-desc' ? 'selected' : ''}>매입원금 큰 순</option>
-          <option value="profit-desc" ${sortMode === 'profit-desc' ? 'selected' : ''}>평가손익 높은 순</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 15종 정밀 그리드 카드 리스트 -->
     <div class="detailed-products-grid">
       ${list.map((item, index) => {
         const weight = ((item.currentVal / totalVal) * 100).toFixed(1);
         const isPositive = item.profit >= 0;
-        const riskBadge = item.type === "risk" ? "badge-risk" : "badge-safe";
-
-        // 원금 대비 평가액 바 비율 (최대 150%)
+        const isDeposit = item.category.includes("원리금보장형") || item.group === "원리금보장";
+        const riskBadge = isDeposit ? "badge-safe" : (item.type === "risk" ? "badge-risk" : "badge-safe");
+        const badgeStyle = isDeposit ? "background:#0D9488; color:#fff;" : "";
         const progressRatio = Math.min(150, Math.max(10, (item.currentVal / item.principal) * 100));
 
         return `
@@ -1110,10 +1106,12 @@ function renderDetailedHoldingsPane() {
             <div class="card-top-row">
               <div class="d-flex align-items-center gap-2">
                 <span class="card-index-tag">#${index + 1}</span>
-                <span class="badge-pill ${riskBadge}">${item.riskLevel}</span>
+                <span class="badge-pill ${riskBadge}" style="${badgeStyle}">
+                  ${isDeposit ? '원리금보장' : item.riskLevel}
+                </span>
                 <span class="issuer-tag">${item.issuer}</span>
               </div>
-              <span class="weight-tag">비중 <strong>${weight}%</strong></span>
+              <span class="weight-tag">포트폴리오 비중 <strong>${weight}%</strong></span>
             </div>
 
             <div class="card-product-title">
@@ -1121,7 +1119,6 @@ function renderDetailedHoldingsPane() {
               <span class="product-code">종목코드: ${item.code} · ${item.category}</span>
             </div>
 
-            <!-- 핵심 금액 지표 3단 -->
             <div class="card-stat-boxes">
               <div class="stat-mini">
                 <span class="lbl">매입원금</span>
@@ -1132,35 +1129,33 @@ function renderDetailedHoldingsPane() {
                 <strong class="val text-brand font-bold">${formatWon(item.currentVal)}원</strong>
               </div>
               <div class="stat-mini">
-                <span class="lbl">평가손익(수익률)</span>
-                <strong class="val ${isPositive ? 'text-positive' : 'text-negative'}">
+                <span class="lbl">평가손익 (수익률)</span>
+                <strong class="val ${isPositive ? 'text-positive' : 'text-negative'} font-bold">
                   ${isPositive ? '+' : ''}${formatWon(item.profit)}원 (${isPositive ? '+' : ''}${item.returnRate}%)
                 </strong>
               </div>
             </div>
 
-            <!-- 원금 대비 평가액 비주얼 게이지 -->
             <div class="card-progress-section">
               <div class="d-flex justify-content-between mb-1" style="font-size: 11px;">
                 <span>원금 기준선 (100%)</span>
-                <span class="${isPositive ? 'text-positive' : 'text-negative'} font-bold">${isPositive ? '+' : ''}${item.returnRate}%</span>
+                <span class="${isPositive ? 'text-positive' : 'text-negative'} font-bold">
+                  ${isPositive ? '+' : ''}${item.returnRate}% ${isDeposit ? '(원리금 확정보장)' : (isPositive ? '(원금 초과)' : '(손실 구간)')}
+                </span>
               </div>
               <div class="card-progress-track">
                 <div class="card-progress-fill ${isPositive ? 'positive' : 'negative'}" style="width: ${progressRatio}%;"></div>
-                <div class="card-progress-baseline" style="left: 100%;"></div>
               </div>
             </div>
 
-            <!-- 전문가 투자 가이드 프리뷰 -->
             <div class="card-strategy-preview">
-              <i class="fa-solid fa-lightbulb text-warning"></i>
+              <i class="fa-solid ${isDeposit ? 'fa-shield text-success' : 'fa-lightbulb text-warning'}"></i>
               <span>${item.strategy}</span>
             </div>
 
             <div class="card-bottom-action">
               <button class="btn-detail-view" onclick="event.stopPropagation(); openProductDeepDetail('${item.id}')">
-                <span>상세 분석 보고서 보기</span>
-                <i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-chart-pie me-1"></i><span>상세 분석 팝업 보기</span><i class="fa-solid fa-angle-right ms-1"></i>
               </button>
             </div>
           </div>
@@ -1168,22 +1163,46 @@ function renderDetailedHoldingsPane() {
       }).join("")}
     </div>
   `;
+}
 
-  // 정렬 셀렉트 이벤트 바인딩
-  const selectSort = document.getElementById("selectHoldingsSort");
-  if (selectSort) {
-    selectSort.onchange = (e) => {
-      pensionState.holdingsSort = e.target.value;
-      renderDetailedHoldingsPane();
-    };
-  }
-
-  // 검색 인풋 실시간 바인딩
+// 보유상품 분석 탭 툴바 및 필터 컨트롤 이벤트 초기화
+function initDetailedHoldingsControls() {
+  const searchInput = document.getElementById("holdingsSearchInput");
   if (searchInput) {
     searchInput.oninput = () => {
       renderDetailedHoldingsPane();
     };
   }
+
+  const sortSelect = document.getElementById("selectHoldingsSort");
+  if (sortSelect) {
+    sortSelect.onchange = (e) => {
+      pensionState.holdingsSort = e.target.value;
+      renderDetailedHoldingsPane();
+    };
+  }
+
+  const filterChips = document.querySelectorAll(".filter-chips-nav .chip-filter");
+  filterChips.forEach(chip => {
+    chip.onclick = () => {
+      filterChips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      currentHoldingsFilter = chip.getAttribute("data-holdings-filter") || "all";
+      renderDetailedHoldingsPane();
+    };
+  });
+}
+
+function resetHoldingsFilter() {
+  currentHoldingsFilter = "all";
+  const searchInput = document.getElementById("holdingsSearchInput");
+  if (searchInput) searchInput.value = "";
+  const filterChips = document.querySelectorAll(".filter-chips-nav .chip-filter");
+  filterChips.forEach(c => {
+    if (c.getAttribute("data-holdings-filter") === "all") c.classList.add("active");
+    else c.classList.remove("active");
+  });
+  renderDetailedHoldingsPane();
 }
 
 // ============================================================================
