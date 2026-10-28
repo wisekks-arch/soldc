@@ -66,13 +66,6 @@
           <button class="mobile-menu-trigger" id="mobileMenuTrigger" aria-label="메뉴 열기">
             <i class="fa-solid fa-bars"></i>
           </button>
-          <div class="brand-logo">
-            <div class="logo-symbol">SOL</div>
-            <div class="logo-text">
-              <span class="bank-name">신한은행</span>
-              <span class="service-name">퇴직연금 DC Smart</span>
-            </div>
-          </div>
           <div class="account-selector-dropdown">
             <span class="account-type-badge">DC 확정기여형</span>
             <span class="account-number">신한 110-***-849201</span>
@@ -98,9 +91,9 @@
             <span class="notification-badge">2</span>
           </div>
           <div class="user-profile-badge">
-            <div class="user-avatar">홍</div>
+            <div class="user-avatar">김</div>
             <div class="user-meta d-none-mobile">
-              <span class="user-name">홍길동 님</span>
+              <span class="user-name">김광수 님</span>
               <span class="user-grade">신한 SOL 프라임</span>
             </div>
           </div>
@@ -111,6 +104,14 @@
       <div class="app-body app-layout-with-sidebar">
         <!-- 좌측 슬림 LNB 사이드바 (220px) -->
         <aside class="app-sidebar-lnb" id="appSidebarLnb">
+          <!-- 모바일 전용 닫기 헤더 -->
+          <div class="sidebar-mobile-header">
+            <span class="sidebar-mobile-title"><i class="fa-solid fa-layer-group text-brand me-1"></i> 전체 메뉴</span>
+            <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="메뉴 닫기">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
           <!-- 카테고리 1: 포트폴리오 분석 -->
           <div class="sidebar-category">
             <span class="category-title"><i class="fa-solid fa-chart-pie me-1"></i> 포트폴리오 분석</span>
@@ -173,6 +174,9 @@
           </div>
         </aside>
 
+        <!-- 모바일 사이드바 반투명 백드롭 -->
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
         <!-- 우측 본문 콘텐츠 -->
         <main class="app-main-content" id="mainContent">
 
@@ -185,7 +189,7 @@
             <div class="user-greeting-banner mb-3">
               <div class="greeting-left">
                 <span class="greeting-sub">SOL 퇴직연금 AI 어드바이저</span>
-                <h1 class="greeting-title">안녕하세요, <strong>홍길동</strong> 님!</h1>
+                <h1 class="greeting-title">안녕하세요, <strong>김광수</strong> 님!</h1>
               </div>
               <div class="greeting-kpi-bar">
                 <div class="kpi-mini-col">
@@ -1726,7 +1730,7 @@
             <div class="dashboard-panel report-document-panel mb-4">
               <div class="report-paper-header text-center mb-4 pb-3" style="border-bottom: 2px solid #0046FF;">
                 <span class="badge-pill badge-safe mb-2">신한SOL Pension AI Advisor 정기 진단서</span>
-                <h3 style="font-size: 22px; font-weight: 800; color: #0A1931;">홍길동 님의 퇴직연금 종합 자산관리 리포트</h3>
+                <h3 style="font-size: 22px; font-weight: 800; color: #0A1931;">김광수 님의 퇴직연금 종합 자산관리 리포트</h3>
                 <span class="text-muted font-12">발행일시: 2026년 10월 28일 · 평가 기준일: 실시간</span>
               </div>
 
@@ -1762,7 +1766,7 @@
               </div>
 
               <div class="report-footer-actions mt-4 pt-3 d-flex justify-content-end gap-2" style="border-top: 1px solid var(--border-light);">
-                <button class="btn-outline-sm" onclick="alert('홍길동님의 등록된 이메일로 리포트가 성공적으로 발송되었습니다!')"><i class="fa-solid fa-envelope"></i> 이메일 발송</button>
+                <button class="btn-outline-sm" onclick="alert('김광수님의 등록된 이메일로 리포트가 성공적으로 발송되었습니다!')"><i class="fa-solid fa-envelope"></i> 이메일 발송</button>
                 <button class="btn-outline-sm" onclick="alert('마이페이지 [저장된 리포트함]에 영구 보관되었습니다.')"><i class="fa-solid fa-bookmark"></i> 리포트 저장</button>
               </div>
             </div>
@@ -2144,7 +2148,7 @@
             <div class="chat-msg bot">
               <div class="bot-avatar"><i class="fa-solid fa-robot"></i></div>
               <div class="bubble">
-                안녕하세요 홍길동 님! <strong>Pension AI Advisor</strong>입니다.<br>
+                안녕하세요 김광수 님! <strong>Pension AI Advisor</strong>입니다.<br>
                 현재 고객님의 연금 건강점수는 <strong>82점</strong>이며, 은퇴 목표(10억) 달성률은 <strong>78%</strong>입니다.<br>
                 궁금하신 점을 질문하시거나 아래 추천 질문을 선택해 보세요.
               </div>

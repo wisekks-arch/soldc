@@ -367,15 +367,17 @@ body {
 }
 
 .account-selector-dropdown {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
   background: var(--sol-blue-subtle);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   border: 1px solid rgba(0, 70, 255, 0.15);
   font-size: 12px;
   cursor: pointer;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
   transition: var(--transition-fast);
 }
 
@@ -390,17 +392,22 @@ body {
   font-weight: 700;
   padding: 2px 7px;
   border-radius: var(--radius-full);
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .account-number {
   font-weight: 600;
   color: var(--text-main);
+  white-space: nowrap !important;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
 }
 
 .search-box-wrap {
@@ -472,15 +479,17 @@ body {
 }
 
 .user-profile-badge {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
   cursor: pointer;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .user-avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4A90E2 0%, #0046FF 100%);
   color: #FFF;
@@ -489,22 +498,31 @@ body {
   justify-content: center;
   font-size: 13px;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .user-meta {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
 }
 
 .user-name {
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap !important;
 }
 
 .user-grade {
   font-size: 11px;
   color: var(--sol-blue-primary);
   font-weight: 600;
+  white-space: nowrap !important;
+  background: rgba(0, 70, 255, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
 }
 
 /* ==========================================================================
@@ -607,18 +625,21 @@ body {
 }
 
 .top-risk-mini-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
   background: var(--bg-app);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-full);
-  padding: 6px 14px;
+  padding: 6px 12px;
   font-size: 12px;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .top-risk-mini-badge .label {
   color: var(--text-secondary);
+  white-space: nowrap !important;
 }
 
 .top-risk-mini-badge .pill-safe {
@@ -628,20 +649,23 @@ body {
   font-weight: 800;
   padding: 1px 7px;
   border-radius: var(--radius-full);
+  white-space: nowrap !important;
 }
 
 .btn-top-export {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
   background: var(--sol-blue-subtle);
   border: 1px solid rgba(0, 70, 255, 0.25);
   border-radius: var(--radius-full);
-  padding: 7px 16px;
+  padding: 7px 14px;
   color: var(--sol-blue-primary);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
   transition: var(--transition-fast);
 }
 
@@ -4346,16 +4370,180 @@ body {
   padding: 22px 24px !important;
 }
 
+/* ==========================================================================
+   22. 모바일/태블릿(1024px 이하 및 갤럭시 S26+) 슬라이딩 사이드바 드로어 시스템
+   ========================================================================== */
+.sidebar-mobile-header {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .app-layout-with-sidebar {
-    flex-direction: column !important;
-  }
-  .app-sidebar-lnb {
-    width: 100% !important;
-    height: auto !important;
+    display: block !important;
     position: relative !important;
-    top: 0 !important;
   }
+
+  .mobile-menu-trigger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: var(--bg-app);
+    border: 1px solid var(--border-light);
+    color: var(--text-main);
+    font-size: 17px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* 좌측 메뉴 리스트 슬라이딩 방식: 평소에는 화면 밖(-320px)으로 완전 숨김 */
+  .app-sidebar-lnb {
+    position: fixed !important;
+    top: 0 !important;
+    left: -320px !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: #0A1931 !important;
+    z-index: 2500 !important;
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 16px 12px 30px !important;
+    overflow-y: auto !important;
+  }
+
+  /* 햄버거 메뉴를 누르면 화면에 스르륵 나타남 */
+  .app-sidebar-lnb.open {
+    left: 0 !important;
+  }
+
+  /* 사이드바 뒷배경 어두운 블러 백드롭 */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 25, 49, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 2490;
+  }
+
+  .sidebar-backdrop.active {
+    display: block !important;
+  }
+
+  /* 사이드바 상단 닫기 헤더 */
+  .sidebar-mobile-header {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px 12px 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 14px;
+  }
+
+  .sidebar-mobile-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .sidebar-close-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: background 0.2s ease;
+  }
+
+  .sidebar-close-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* 모바일 본문 영역 100% 쾌적 확장 */
+  .app-main-content {
+    width: 100% !important;
+    padding: 14px 12px 80px !important;
+  }
+
+  /* 모바일 대시보드 2열 -> 1열 전환 */
+  .pc-dashboard-grid-2col {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .greeting-kpi-bar {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+  }
+}
+
+/* 갤럭시 S26+ 시뮬레이터 모드 내 슬라이딩 드로어 */
+.device-galaxy .mobile-menu-trigger {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.device-galaxy .app-sidebar-lnb {
+  position: absolute !important;
+  top: 0 !important;
+  left: -320px !important;
+  width: 280px !important;
+  height: 100% !important;
+  z-index: 2500 !important;
+  transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  background: #0A1931 !important;
+}
+
+.device-galaxy .app-sidebar-lnb.open {
+  left: 0 !important;
+}
+
+.device-galaxy .sidebar-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 25, 49, 0.65);
+  z-index: 2490;
+}
+
+.device-galaxy .sidebar-backdrop.active {
+  display: block !important;
+}
+
+.device-galaxy .sidebar-mobile-header {
+  display: flex !important;
+}
+
+.device-galaxy .app-main-content {
+  width: 100% !important;
+  padding: 12px 10px 80px !important;
 }
 
 

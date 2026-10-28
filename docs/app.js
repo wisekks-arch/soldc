@@ -16,7 +16,7 @@ function formatWon(num) {
 
 // 1. 실제 퇴직연금 엑셀 3번째 시트 기반 데이터 상태 (운용사 및 전략 가이드 보강)
 const pensionState = {
-  accountName: "홍길동 님의 DC 확정기여형",
+  accountName: "김광수 님의 DC 확정기여형",
   accountNo: "신한 110-***-849201",
   
   // 엑셀 report_20261028.xls 세 번째 탭 실제 15개 보유 상품 (HTS급 정밀 메타데이터 보강)
@@ -535,6 +535,10 @@ function initNavigationTabs() {
     } else if (tabKey === "report-manage") {
       // 리포트 탭
     }
+
+    if (window.closeSidebar) {
+      window.closeSidebar();
+    }
   }
 
   window.triggerTabSwitch = switchTab;
@@ -584,23 +588,39 @@ window.closeTaxScheduleModal = function() {
 
 function initMobileDrawer() {
   const trigger = document.getElementById("mobileMenuTrigger");
-  const sidebar = document.getElementById("appSidebar");
+  const sidebar = document.getElementById("appSidebarLnb") || document.getElementById("appSidebar");
   const backdrop = document.getElementById("sidebarBackdrop");
   const closeBtn = document.getElementById("sidebarCloseBtn");
 
   function openSidebar() {
-    sidebar.classList.add("open");
-    backdrop.classList.add("active");
+    if (sidebar) sidebar.classList.add("open");
+    if (backdrop) backdrop.classList.add("active");
   }
   function closeSidebar() {
-    sidebar.classList.remove("open");
-    backdrop.classList.remove("active");
+    if (sidebar) sidebar.classList.remove("open");
+    if (backdrop) backdrop.classList.remove("active");
   }
 
+  window.openSidebar = openSidebar;
   window.closeSidebar = closeSidebar;
-  if (trigger) trigger.addEventListener("click", openSidebar);
-  if (closeBtn) closeBtn.addEventListener("click", closeSidebar);
-  if (backdrop) backdrop.addEventListener("click", closeSidebar);
+  if (trigger) {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      openSidebar();
+    });
+  }
+  if (closeBtn) {
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeSidebar();
+    });
+  }
+  if (backdrop) {
+    backdrop.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeSidebar();
+    });
+  }
 }
 
 function initThemeToggle() {
