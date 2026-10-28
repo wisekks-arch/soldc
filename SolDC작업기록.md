@@ -159,10 +159,11 @@
    - 💬 **AI 투자 코치 챗봇 모달 (`#floatingAiCoachBtn`, `#aiCoachModal`)**:
      - 우측 하단 플로팅 버튼 및 상단 GNB 퀵 버튼 연동.
      - "은퇴 자산 부족금액은 얼마인가요?", "지금 조정하면 은퇴자산이 얼마나 늘어나나요?", "추천 매수 상품은?" 등 퀵 질의응답 및 사용자 질문 응대 챗봇 엔진 탑재.
-4. **GitHub Pages 배포 및 Jekyll 빌드 우회(.nojekyll) 적용**:
-   - GitHub Pages `gh-pages` 브랜치 자동 빌드 시 한글 마크다운 문서로 인한 Jekyll 빌드 실패 현상 규명.
-   - 루트 경로에 `.nojekyll` 설정 파일을 추가하여 Jekyll 컴파일을 완전 우회하고 순수 정적 웹 호스팅 모드로 전환.
-   - `main` 및 `gh-pages` 브랜치에 동기화 반영하여 실서버 100% 정상 개통 보장.
+4. **GitHub Pages 배포 및 자동 파이프라인(.github/workflows/deploy.yml) 완비**:
+   - `shop`, `tour` 프로젝트와 100% 동일한 GitHub Actions 기반의 최신 정적 배포 파이프라인(`.github/workflows/deploy.yml`) 탑재.
+   - 0바이트 `.nojekyll` 설정으로 서버 빌드 불일치 원천 차단.
+   - `main` 브랜치 및 `gh-pages` 브랜치에 동기화 반영 완료 (커밋: `c7966f5`).
+
 
 
 
