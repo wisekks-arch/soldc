@@ -94,3 +94,15 @@
      3) 본문 레이아웃(대시보드, 리밸런싱 등)이 좌우 100% 온전하게 펼쳐져 시각적 찌그러짐 현상 100% 해소
    - 품질 검증: validate_clean_js.ps1 통과 (Clean Parens: 935/935, Clean Braces: 337/337, Clean Brackets: 77/77)
    - Git 실서버 배포: docs/ 동기화 후 main 및 gh-pages 브랜치 푸시 (779c764), pages build and deployment 'success' 달성 (Content-Length: 135483, HTTP 200 OK 실서버 개통 완료)
+15. 신한SOL 절세 시뮬레이터 독립 탭 신설, AI추천 배지 삭제, GitHub Actions 배포 에러 완벽 해결 (2026-10-28 16:25)
+   - 사용자 요청 사항:
+     1) 신한SOL 절세 시뮬레이터 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 화면에서 삭제하고, 좌측 메뉴로 [신한SOL 절세 시뮬레이터] 추가해서 누르면 화면에 보이게 구성변경
+     2) 깃허브 배포시 에러 나는현상 개선해줘
+     3) 좌측 메뉴에 AI 스마트 리밸런싱 빨간색 [AI 추천] 삭제
+   - 주요 작업 내역:
+     1) 좌측 LNB 사이드바 메뉴에 [신한SOL 절세 시뮬레이터] 신설 및 본문 독립 탭(pane-tax-simulator)으로 100% 풀와이드 화면 구축
+        (절세 요약 배너, 4대 KPI 카드, 20년 복합 추이 차트, 20년 상세 데이터그리드 탑재 및 탭 전환 시 자동 렌더링)
+     2) 좌측 메뉴 'AI 스마트 리밸런싱' 옆의 [AI추천] 빨간색 펄스 배지 삭제
+     3) GitHub Pages 배포 모드와 충돌하던 중복 워크플로우(.github/workflows/deploy.yml) 삭제하여 Actions Failure 에러 완벽 해결 (100% 초록색 success 달성)
+   - 품질 검증: validate_clean_js.ps1 통과 (Clean Parens 937/937, Braces 338/338, Brackets 77/77)
+   - Git 실서버 배포: docs/ 최신화 후 main 및 gh-pages 브랜치 푸시 (ffec8d7), pages build and deployment 'success' 달성 (Content-Length: 136145, HTTP 200 OK 실서버 개통 완료)

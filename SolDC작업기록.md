@@ -243,3 +243,34 @@
    - Git 커밋(`779c764`) 및 `main`, `gh-pages` 브랜치 원격 푸시 완료.
    - GitHub Actions `pages build and deployment` 실행 결과: **`success`** 달성.
    - 실서버 응답 검증: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, `Content-Length: 135483`, 실서버 즉시 개통 완료).
+
+---
+
+## 13. 12차 개선 작업: 신한SOL 절세 시뮬레이터 독립 탭 신설, AI추천 배지 삭제, GitHub Actions 배포 에러 완벽 해결 (2026-10-28 16:25)
+1. **사용자 요청 사항**:
+   - *"신한SOL 절세 시뮬레이터 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 화면에서 삭제하고, 좌측 메뉴로 [신한SOL 절세 시뮬레이터] 추가해서 누르면 화면에 보이게 구성변경"*
+   - *"깃허브 배포시 에러 나는현상 개선해줘"*
+   - *"좌측 메뉴에 AI 스마트 리밸런싱 빨간색 [AI 추천] 삭제"*
+
+2. **화면 및 기능 개편 내용**:
+   - 📌 **좌측 사이드바 '신한SOL 절세 시뮬레이터' 독립 메뉴 신설 및 탭 전환 연동**:
+     - 좌측 사이드바 LNB 3번째 카테고리(AI 어드바이저)에 `<li class="nav-item" data-tab="tax-simulator">` 메뉴 신설 (`<i class="fa-solid fa-calculator text-positive"></i><span>신한SOL 절세 시뮬레이터</span>`).
+     - 기존 하단 팝업 모달창(`taxScheduleModal`) 마크업을 제거하고, 본문 전용 정규 탭 화면 `<section class="tab-pane" id="pane-tax-simulator">`으로 승격 배치.
+     - 절세 요약 배너, 4대 핵심 절세 KPI 카드(20년 누적 수령액 3억 8,400만원, 누적 절세액 3,456만원, 평균 실효세율 3.3%, 절세효과 +9.0%), 연간 실수령액 및 누적 절세액 추이 복합 차트, 20년치 연도별 상세 데이터그리드를 100% 풀와이드 화면으로 시원하게 표출.
+     - 탭 전환 이벤트 `switchTab('tax-simulator')` 연동을 통해 메뉴 클릭 즉시 20년 스케줄 데이터그리드와 차트가 자동 렌더링되도록 구현.
+   - 📌 **좌측 사이드바 'AI 스마트 리밸런싱' 빨간색 [AI 추천] 배지 삭제**:
+     - 시각적 주의 분산을 방지하기 위해 `AI 스마트 리밸런싱` 메뉴 우측의 `<span class="menu-badge pulse">AI추천</span>` 배지 완전 제거.
+   - 📌 **GitHub Actions 배포 실패(Failure) 에러 근본 해결**:
+     - 저장소 배포 방식이 GitHub Pages 브랜치 기반(`/docs` 디렉터리 배포)으로 설정된 상태에서, `.github/workflows/deploy.yml` 파일이 중복 실행되어 권한 충돌로 매 커밋마다 1초 만에 실패(Failure)가 발생하던 원인 규명.
+     - `git rm -f .github/workflows/deploy.yml`로 충돌 워크플로우를 영구 제거하여, 내장 빌더인 `pages build and deployment`만 정상 구동되도록 정리.
+     - 조치 후 Actions 실행 결과: 빨간색 실패 없이 **100% 초록색 성공(`success`)**만 단독 기록됨을 확인.
+
+3. **스크립트 및 품질 무결성 검증**:
+   - `validate_clean_js.ps1` 검증 결과: 괄호/중괄호/대괄호 에러 0건 통과
+     (`Clean Parens: 937/937`, `Clean Braces: 338/338`, `Clean Brackets: 77/77`).
+
+4. **GitHub 실서버 배포 및 반영 확인**:
+   - `docs/` 디렉터리에 `index.html`, `style.css`, `app.js` 최신 동기화 완료.
+   - Git 커밋(`ffec8d7`) 및 `main`, `gh-pages` 브랜치 원격 푸시 완료.
+   - GitHub Actions `pages build and deployment` (id: 40650196861): **`success`** 달성.
+   - 실서버 응답 검증: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, `Content-Length: 136145`, 실서버 정상 서비스 중).
