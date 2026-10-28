@@ -528,6 +528,8 @@ function initNavigationTabs() {
       renderScenarioGrowthChart();
     } else if (tabKey === "rebalance") {
       renderRebalanceSliderSimulator();
+    } else if (tabKey === "tax-simulator") {
+      renderTaxPayoutSchedule();
     } else if (tabKey === "report-manage") {
       // 리포트 탭
     }

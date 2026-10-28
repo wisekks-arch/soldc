@@ -148,7 +148,10 @@
                 <a href="#forecast"><i class="fa-solid fa-wand-magic-sparkles"></i><span>미래은퇴 시뮬레이션</span></a>
               </li>
               <li class="nav-item" data-tab="rebalance">
-                <a href="#rebalance"><i class="fa-solid fa-scale-balanced"></i><span>AI 스마트 리밸런싱</span><span class="menu-badge pulse">AI추천</span></a>
+                <a href="#rebalance"><i class="fa-solid fa-scale-balanced"></i><span>AI 스마트 리밸런싱</span></a>
+              </li>
+              <li class="nav-item" data-tab="tax-simulator">
+                <a href="#tax-simulator"><i class="fa-solid fa-calculator text-positive"></i><span>신한SOL 절세 시뮬레이터</span></a>
               </li>
               <li class="nav-item" data-tab="ai-recommend">
                 <a href="#ai-recommend"><i class="fa-solid fa-gem"></i><span>맞춤 상품 추천</span></a>
@@ -165,13 +168,6 @@
               </li>
               <li class="nav-item" data-tab="settings">
                 <a href="#settings"><i class="fa-solid fa-gear"></i><span>시스템 설정</span></a>
-              </li>
-              <li class="nav-item-tool mt-2">
-                <button type="button" class="btn-sidebar-tax-popup" onclick="openTaxScheduleModal()">
-                  <i class="fa-solid fa-calendar-days text-positive"></i>
-                  <span>20년 절세 스케줄 팝업</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square font-10 ms-auto"></i>
-                </button>
               </li>
             </ul>
           </div>
@@ -1506,6 +1502,89 @@
 
 
           <!-- =================================================================
+               [메뉴: 💰 신한SOL 절세 시뮬레이터] (사용자 요청 독립 탭 화면)
+               ================================================================= -->
+          <section class="tab-pane" id="pane-tax-simulator">
+            <div class="pane-header-box">
+              <div class="title-meta">
+                <h2>💰 신한SOL 절세 시뮬레이터</h2>
+                <p>은퇴 나이 및 수령 기간에 따른 연차별 세전/세후 수령액과 영구 절세 누적 혜택을 20년 단위로 정밀 분석합니다.</p>
+              </div>
+            </div>
+
+            <!-- 절세 요약 하이라이트 배너 -->
+            <div class="calc-highlight-box mb-3">
+              <div class="label">연금 수령 시 총 절세 혜택 (감면액)</div>
+              <div class="value text-positive" id="calcTaxSavedAmount">약 2,096,787 원 절세!</div>
+              <div class="desc">일시금 수령 대비 퇴직소득세의 <strong>30%~40%</strong>가 영구 감면됩니다. (연금 수령 11년차부터 40% 감면율 적용)</div>
+            </div>
+
+            <!-- 4대 핵심 지표 카드 -->
+            <div class="sim-kpi-grid mb-4">
+              <div class="sim-kpi-card">
+                <span class="lbl">예상 월 연금 수령액 (세전)</span>
+                <strong class="val text-brand font-bold" id="calcMonthlyPayout">약 310,000 원/월</strong>
+                <span class="diff text-muted font-11">20년 균등 분할 인출 기준</span>
+              </div>
+              <div class="sim-kpi-card">
+                <span class="lbl">은퇴 기간 총 수령 예상액</span>
+                <strong class="val text-brand font-bold" id="calcTotalPayout">약 74,400,000 원</strong>
+                <span class="diff text-success font-11">복리 운용수익 포함</span>
+              </div>
+              <div class="sim-kpi-card">
+                <span class="lbl">일시금 수령 시 예상 세액</span>
+                <strong class="val text-danger font-bold" id="calcLumpSumTax">5,990,822 원</strong>
+                <span class="diff text-danger font-11">표준 실효세율 14.4% 적용</span>
+              </div>
+              <div class="sim-kpi-card highlight-sim">
+                <span class="lbl">연금 수령 시 최종 납부 세액</span>
+                <strong class="val text-positive font-bold" id="calcPensionTax">3,894,035 원</strong>
+                <span class="diff text-positive font-11">영구 절세 감면 혜택 반영</span>
+              </div>
+            </div>
+
+            <!-- 연간 실수령액 및 누적 영구 절세액 추이 차트 -->
+            <div class="dashboard-panel mb-4">
+              <div class="panel-header-compact">
+                <h3 class="panel-sub-title"><i class="fa-solid fa-chart-column text-brand"></i> 연간 실수령액 및 누적 영구 절세액 추이</h3>
+                <span class="text-muted font-12">1년차 ~ 20년차 시계열 분석</span>
+              </div>
+              <div class="tax-schedule-chart-wrap mt-3" style="height: 260px; position: relative;">
+                <canvas id="taxScheduleChart"></canvas>
+              </div>
+            </div>
+
+            <!-- 20년 상세 스케줄 데이터그리드 -->
+            <div class="dashboard-panel mb-4">
+              <div class="panel-header-compact d-flex justify-content-between align-items-center">
+                <h3 class="panel-sub-title"><i class="fa-solid fa-calendar-days text-brand"></i> 연도별 20년 상세 연금 수령 스케줄표</h3>
+                <button class="btn-outline-sm" onclick="window.print()"><i class="fa-solid fa-print"></i> 스케줄 인쇄 / PDF 저장</button>
+              </div>
+              <div class="table-responsive-desktop mt-3">
+                <table class="sol-datagrid" id="taxScheduleTable">
+                  <thead>
+                    <tr>
+                      <th class="text-center">연차</th>
+                      <th class="text-center">나이</th>
+                      <th class="text-right">기초 적립금</th>
+                      <th class="text-right">연간 예상 운용수익</th>
+                      <th class="text-right">연간 연금 수령액 (세전)</th>
+                      <th class="text-center">적용 감면율</th>
+                      <th class="text-right">실수령액 (세후)</th>
+                      <th class="text-right">기말 잔여 적립금</th>
+                      <th class="text-right font-bold text-positive">누적 절세 혜택</th>
+                    </tr>
+                  </thead>
+                  <tbody id="taxScheduleTableBody">
+                    <!-- JS 동적 렌더링 -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- =================================================================
                [메뉴 7: 🤖 AI 추천] (신규 기획안 10 & 11 반영: 매수/매도 제안 & 3대 추천엔진)
                ================================================================= -->
           <section class="tab-pane" id="pane-ai-recommend">
@@ -2040,78 +2119,6 @@
         <div class="modal-footer">
           <button class="btn-outline" onclick="closeRebalanceConfirmModal()">취소</button>
           <button class="btn-primary" id="btnConfirmRebalanceSubmit" onclick="confirmRebalanceExecution()"><i class="fa-solid fa-bolt"></i> 리밸런싱 즉시 체결 및 실시간 반영</button>
-        </div>
-      </div>
-
-      <!-- ===================================================================
-           [사용자 요청 전용 팝업창] 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 모달
-           =================================================================== -->
-      <div class="modal-backdrop" id="taxScheduleBackdrop" onclick="closeTaxScheduleModal()" style="display: none;"></div>
-      <div class="modal-dialog tax-schedule-modal-dialog" id="taxScheduleModal" style="display: none;">
-        <div class="modal-header">
-          <div class="modal-title-group">
-            <div class="modal-brand-tag"><i class="fa-solid fa-calendar-days"></i> 신한SOL 절세 시뮬레이터</div>
-            <h3 class="modal-title">연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이</h3>
-          </div>
-          <button class="modal-close-btn" onclick="closeTaxScheduleModal()" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="modal-body modal-body-scroll">
-          <!-- 절세 요약 하이라이트 -->
-          <div class="calc-highlight-box mb-3">
-            <div class="label">연금 수령 시 총 절세 혜택 (감면액)</div>
-            <div class="value text-positive" id="calcTaxSavedAmount">약 2,096,787 원 절세!</div>
-            <div class="desc">일시금 수령 대비 퇴직소득세의 <strong>30%~40%</strong>가 영구 감면됩니다. (11년차부터 40% 감면율 적용)</div>
-          </div>
-
-          <div class="calc-breakdown-list mb-4">
-            <div class="breakdown-item">
-              <span class="name">예상 월 연금 수령액 (세전)</span>
-              <span class="val font-bold" id="calcMonthlyPayout">약 310,000 원/월</span>
-            </div>
-            <div class="breakdown-item">
-              <span class="name">은퇴 기간 총 수령 예상액</span>
-              <span class="val text-brand font-bold" id="calcTotalPayout">약 74,400,000 원</span>
-            </div>
-            <div class="breakdown-item">
-              <span class="name">일시금 수령 시 예상 세액</span>
-              <span class="val text-danger" id="calcLumpSumTax">5,990,822 원</span>
-            </div>
-            <div class="breakdown-item">
-              <span class="name">연금 수령 시 납부 세액</span>
-              <span class="val text-positive" id="calcPensionTax">3,894,035 원</span>
-            </div>
-          </div>
-
-          <!-- 누적 절세 추이 차트 -->
-          <div class="tax-schedule-chart-wrap mb-4" style="height: 260px; position: relative;">
-            <canvas id="taxScheduleChart"></canvas>
-          </div>
-
-          <!-- 20년 상세 스케줄 데이터그리드 -->
-          <div class="table-responsive-desktop">
-            <table class="sol-datagrid" id="taxScheduleTable">
-              <thead>
-                <tr>
-                  <th class="text-center">연차</th>
-                  <th class="text-center">나이</th>
-                  <th class="text-right">기초 적립금</th>
-                  <th class="text-right">연간 예상 운용수익</th>
-                  <th class="text-right">연간 연금 수령액 (세전)</th>
-                  <th class="text-center">적용 감면율</th>
-                  <th class="text-right">실수령액 (세후)</th>
-                  <th class="text-right">기말 잔여 적립금</th>
-                  <th class="text-right font-bold text-positive">누적 절세 혜택</th>
-                </tr>
-              </thead>
-              <tbody id="taxScheduleTableBody">
-                <!-- JS 동적 렌더링 -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-outline" onclick="closeTaxScheduleModal()">닫기</button>
-          <button class="btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> 스케줄 인쇄 / PDF 저장</button>
         </div>
       </div>
 
