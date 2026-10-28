@@ -498,14 +498,14 @@ function resizeCharts() {
 // 4. 네비게이션 탭
 // ============================================================================
 function initNavigationTabs() {
-  const lnbItems = document.querySelectorAll(".nav-menu-list .nav-item");
+  const topNavItems = document.querySelectorAll(".app-top-nav .nav-item");
   const bottomNavItems = document.querySelectorAll(".galaxy-bottom-nav .bottom-nav-item");
   const tabPanes = document.querySelectorAll(".tab-pane");
 
   function switchTab(tabKey) {
     if (tabKey === "add-product") return; // 모달 액션
 
-    lnbItems.forEach(item => {
+    topNavItems.forEach(item => {
       item.classList.toggle("active", item.getAttribute("data-tab") === tabKey);
     });
     bottomNavItems.forEach(item => {
@@ -514,8 +514,6 @@ function initNavigationTabs() {
     tabPanes.forEach(pane => {
       pane.classList.toggle("active", pane.id === `pane-${tabKey}`);
     });
-
-    closeSidebar();
 
     if (tabKey === "dashboard") {
       resizeCharts();
@@ -532,7 +530,7 @@ function initNavigationTabs() {
 
   window.triggerTabSwitch = switchTab;
 
-  lnbItems.forEach(item => {
+  topNavItems.forEach(item => {
     item.addEventListener("click", (e) => {
       const tab = item.getAttribute("data-tab");
       if (tab) {
@@ -946,11 +944,11 @@ function renderHoldingsTable(filter) {
       const riskBadgeClass = item.type === "risk" ? "danger" : "safe";
 
       return `
-        <tr onclick="toggleProductInlineDetail('${item.id}')" style="cursor: pointer;">
+        <tr onclick="openProductDeepDetail('${item.id}')" style="cursor: pointer;">
           <td class="text-center font-bold" style="color: var(--text-muted);">${idx + 1}</td>
           <td><span class="badge-risk-tag ${riskBadgeClass}">${item.riskLevel}</span></td>
           <td>
-            <div style="font-weight: 700; font-size: 13.5px;" class="product-hover-link">${item.name} <i class="fa-solid fa-angle-down" style="font-size: 10px; color: var(--sol-blue-primary);"></i></div>
+            <div style="font-weight: 700; font-size: 13.5px;" class="product-hover-link">${item.name} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px; color: var(--sol-blue-primary);"></i></div>
             <div style="font-size: 11px; color: var(--text-muted);">${item.category} · ${item.issuer} · 코드 ${item.code}</div>
           </td>
           <td class="text-right">${formatWon(item.principal)}원</td>
@@ -963,64 +961,9 @@ function renderHoldingsTable(filter) {
           </td>
           <td class="text-right font-bold">${weight}%</td>
           <td class="text-center">
-            <div class="holdings-btn-group">
-              <button class="btn-action-detail" onclick="event.stopPropagation(); openProductDeepDetail('${item.id}')" title="상품 심층 분석 팝업">
-                <i class="fa-solid fa-magnifying-glass"></i> 상세
-              </button>
-              <button class="btn-action-accordion" id="btn-toggle-${item.id}" onclick="event.stopPropagation(); toggleProductInlineDetail('${item.id}')" title="인라인 상세 펼치기">
-                펼침 ▾
-              </button>
-            </div>
-          </td>
-        </tr>
-        <!-- [신규 화면구성] 인라인 정밀 아코디언 상세 뷰 -->
-        <tr class="inline-accordion-row" id="accordion-${item.id}" style="display: none;">
-          <td colspan="9" class="inline-accordion-cell">
-            <div class="inline-detail-box">
-              <div class="inline-detail-header">
-                <div class="inline-detail-title-group">
-                  <h4><span class="badge-risk-tag ${riskBadgeClass}">${item.riskLevel}</span> ${item.name}</h4>
-                  <span>운용사: <strong>${item.issuer}</strong> · 종목코드: <strong>${item.code}</strong> · ${item.category}</span>
-                </div>
-                <div class="inline-action-bar">
-                  <button class="btn-action-detail" onclick="openProductDeepDetail('${item.id}')">
-                    <i class="fa-solid fa-up-right-from-square"></i> 전문 분석 팝업 모달 열기
-                  </button>
-                </div>
-              </div>
-              <div class="inline-metric-grid">
-                <div class="inline-metric-card">
-                  <span class="lbl">기준가 (NAV)</span>
-                  <span class="val font-bold">${formatWon(item.nav)} 원</span>
-                </div>
-                <div class="inline-metric-card">
-                  <span class="lbl">보유 수량(좌수)</span>
-                  <span class="val font-bold">${formatWon(item.quantity)} 좌</span>
-                </div>
-                <div class="inline-metric-card">
-                  <span class="lbl">최초 편입일자</span>
-                  <span class="val">${item.buyDate}</span>
-                </div>
-                <div class="inline-metric-card">
-                  <span class="lbl">총보수율 (연)</span>
-                  <span class="val text-brand font-bold">${item.expenseRatio}%</span>
-                </div>
-                <div class="inline-metric-card">
-                  <span class="lbl">자산구성 (주식:채권)</span>
-                  <span class="val">${item.equityRatio}% : ${item.bondRatio}%</span>
-                </div>
-              </div>
-              <div class="inline-perf-row">
-                <strong style="color: var(--text-main);"><i class="fa-solid fa-chart-line text-brand"></i> 기간별 수익률:</strong>
-                <span class="perf-chip"><span class="chip-lbl">1개월:</span> <span class="chip-val ${item.return1M >= 0 ? 'text-positive' : 'text-negative'}">${item.return1M >= 0 ? '+' : ''}${item.return1M}%</span></span>
-                <span class="perf-chip"><span class="chip-lbl">3개월:</span> <span class="chip-val ${item.return3M >= 0 ? 'text-positive' : 'text-negative'}">${item.return3M >= 0 ? '+' : ''}${item.return3M}%</span></span>
-                <span class="perf-chip"><span class="chip-lbl">6개월:</span> <span class="chip-val ${item.return6M >= 0 ? 'text-positive' : 'text-negative'}">${item.return6M >= 0 ? '+' : ''}${item.return6M}%</span></span>
-                <span class="perf-chip"><span class="chip-lbl">1년(누적):</span> <span class="chip-val ${item.returnRate >= 0 ? 'text-positive' : 'text-negative'} font-bold">${item.returnRate >= 0 ? '+' : ''}${item.returnRate}%</span></span>
-              </div>
-              <div class="inline-strategy-callout" style="font-size: 12px; color: var(--text-secondary); background: #FFF; padding: 10px 14px; border-radius: 6px; border-left: 3px solid var(--sol-blue-primary);">
-                <i class="fa-solid fa-lightbulb text-warning" style="margin-right: 4px;"></i> <strong>신한SOL 전문가 운용 전략:</strong> ${item.strategy}
-              </div>
-            </div>
+            <button class="btn-action-detail" onclick="event.stopPropagation(); openProductDeepDetail('${item.id}')" title="상품 심층 분석 팝업창 열기">
+              <i class="fa-solid fa-magnifying-glass"></i> 상세
+            </button>
           </td>
         </tr>
       `;

@@ -99,22 +99,12 @@
         </div>
       </header>
 
-      <!-- [메인 바디 레이아웃: LNB 사이드바(PC) + 메인 콘텐츠] -->
-      <div class="app-body">
-
-        <!-- 좌측 LNB 사이드바 (PC 모드 고정, 모바일 모드 시 드로어) -->
-        <nav class="app-sidebar" id="appSidebar">
-          <div class="sidebar-user-summary d-mobile-only">
-            <div class="avatar-lg">홍</div>
-            <div class="user-info">
-              <div class="name">홍길동 고객님</div>
-              <div class="sub">DC 확정기여형 · 신한금융그룹</div>
-            </div>
-            <button class="sidebar-close-btn" id="sidebarCloseBtn"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-
-          <div class="nav-section-title">자산 & 연금 관리</div>
-          <ul class="nav-menu-list">
+      <!-- ===================================================================
+           [상단 가로 탭 내비게이션 바: 위-아래 단순화 구조 & 100% 와이드 뷰]
+           =================================================================== -->
+      <nav class="app-top-nav" id="appTopNav">
+        <div class="top-nav-inner">
+          <ul class="top-nav-menu">
             <li class="nav-item active" data-tab="dashboard">
               <a href="#dashboard"><i class="fa-solid fa-chart-pie"></i><span>종합 대시보드</span></a>
             </li>
@@ -135,35 +125,22 @@
             </li>
           </ul>
 
-          <div class="nav-section-title">퇴직연금 법정 가이드</div>
-          <div class="sidebar-guide-card">
-            <div class="guide-title"><i class="fa-solid fa-circle-exclamation text-brand"></i> 위험자산 70% 룰이란?</div>
-            <p class="guide-desc">근로자퇴직급여보장법에 따라 주식형 등 위험자산은 총 적립금의 <strong>최대 70%</strong>까지만 투자가 가능합니다.</p>
-            <div class="guide-status-bar">
-              <div class="gauge-label">
-                <span>현재 위험자산</span>
-                <span class="text-brand font-bold" id="sidebarGaugeText">58.3%</span>
-              </div>
-              <div class="progress-bar-bg">
-                <div class="progress-bar-fill" style="width: 58.3%;"></div>
-                <div class="progress-limit-marker" style="left: 70%;" title="법정 한도 70%"></div>
-              </div>
-              <div class="limit-caption">법정 한도 70% 내 안전 운용 중</div>
+          <div class="top-nav-right-tools">
+            <div class="top-risk-mini-badge" title="근로자퇴직급여보장법 위험자산 70% 준수">
+              <span class="label">위험자산 비중</span>
+              <strong class="val text-brand" id="sidebarGaugeText">58.3%</strong>
+              <span class="pill-safe">안전 준수</span>
             </div>
-          </div>
-
-          <div class="sidebar-bottom-tools">
-            <button class="btn-sidebar-action" id="btnQuickExcelExport">
-              <i class="fa-solid fa-download"></i> <span>보유 15종 리포트 다운</span>
+            <button class="btn-top-export" id="btnQuickExcelExport">
+              <i class="fa-solid fa-download"></i> <span>15종 리포트 다운</span>
             </button>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        <!-- 사이드바 모바일 백드롭 오버레이 -->
-        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
-
-        <!-- 메인 콘텐츠 영역 -->
-        <main class="app-main-content" id="mainContent">
+      <!-- [메인 바디 레이아웃: 100% 풀와이드 본문] -->
+      <div class="app-body full-width-layout">
+        <main class="app-main-content full-width" id="mainContent">
 
           <!-- =================================================================
                [탭 1: 종합 대시보드]
@@ -391,7 +368,7 @@
                       <th class="text-right">평가손익</th>
                       <th class="text-right">수익률</th>
                       <th class="text-right">비중</th>
-                      <th class="text-center" style="width: 130px;">관리</th>
+                      <th class="text-center" style="width: 85px;">상세조회</th>
                     </tr>
                   </thead>
                   <tbody id="holdingsTableBody">

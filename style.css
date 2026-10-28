@@ -508,178 +508,161 @@ body {
 }
 
 /* ==========================================================================
-   4. 바디 레이아웃 및 좌측 LNB 사이드바 (PC 모드)
+   4. 상단 가로 탭 내비게이션 바 (Top Nav - 위-아래 단순화 구조)
    ========================================================================== */
-.app-body {
-  display: flex;
-  flex: 1;
-}
-
-.app-sidebar {
-  width: 250px;
+.app-top-nav {
   background: var(--bg-surface);
-  border-right: 1px solid var(--border-light);
-  padding: 24px 16px;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  min-height: calc(100vh - 113px);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  position: sticky;
+  top: 55px;
+  z-index: 100;
+  width: 100%;
 }
 
-.nav-section-title {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 16px 10px 8px;
-}
-
-.nav-menu-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.nav-item a {
+.top-nav-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 32px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: var(--radius-md);
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.top-nav-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  margin: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.top-nav-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.top-nav-menu .nav-item {
+  white-space: nowrap;
+}
+
+.top-nav-menu .nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 13.5px;
-  font-weight: 600;
-  transition: var(--transition-fast);
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--bg-app);
+  border: 1px solid transparent;
 }
 
-.nav-item a i {
-  font-size: 15px;
-  width: 20px;
-  text-align: center;
+.top-nav-menu .nav-item a i {
+  font-size: 14px;
 }
 
-.nav-item:hover a {
+.top-nav-menu .nav-item:hover a {
   background: var(--sol-blue-subtle);
   color: var(--sol-blue-primary);
+  border-color: rgba(0, 70, 255, 0.2);
 }
 
-.nav-item.active a {
+.top-nav-menu .nav-item.active a {
   background: var(--sol-blue-primary);
   color: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 70, 255, 0.35);
+  border-color: var(--sol-blue-primary);
 }
 
-.menu-badge {
-  margin-left: auto;
+.top-nav-menu .nav-item.active a .text-brand {
+  color: #FFFFFF !important;
+}
+
+.top-nav-menu .menu-badge {
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   padding: 2px 7px;
   border-radius: var(--radius-full);
   background: #FF5252;
   color: #FFF;
 }
 
-.pulse {
-  animation: pulse-glow 2s infinite;
+.top-nav-menu .nav-item.active a .menu-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFF;
 }
 
-@keyframes pulse-glow {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.06); opacity: 0.85; }
-  100% { transform: scale(1); opacity: 1; }
+.top-nav-right-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-.sidebar-guide-card {
-  background: var(--bg-app);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  margin-top: 8px;
-}
-
-.guide-title {
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 6px;
+.top-risk-mini-badge {
   display: flex;
   align-items: center;
   gap: 6px;
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 12px;
 }
 
-.guide-desc {
-  font-size: 11px;
+.top-risk-mini-badge .label {
   color: var(--text-secondary);
-  line-height: 1.45;
-  margin-bottom: 10px;
 }
 
-.progress-bar-bg {
-  position: relative;
-  height: 8px;
-  background: var(--border-light);
-  border-radius: var(--radius-full);
-  overflow: visible;
-  margin-bottom: 6px;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-safe) 0%, var(--sol-blue-primary) 70%, var(--color-risk) 100%);
-  border-radius: var(--radius-full);
-  transition: width 0.6s ease;
-}
-
-.progress-limit-marker {
-  position: absolute;
-  top: -3px;
-  width: 2px;
-  height: 14px;
-  background: var(--color-danger);
-  box-shadow: 0 0 4px rgba(217, 45, 32, 0.8);
-}
-
-.gauge-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  margin-bottom: 4px;
-}
-
-.limit-caption {
-  font-size: 10.5px;
+.top-risk-mini-badge .pill-safe {
+  background: var(--color-safe-bg);
   color: var(--color-safe);
-  font-weight: 600;
-  text-align: right;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
 }
 
-.sidebar-bottom-tools {
-  margin-top: auto;
-  padding-top: 16px;
-}
-
-.btn-sidebar-action {
-  width: 100%;
-  padding: 10px;
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--sol-blue-primary);
+.btn-top-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: var(--sol-blue-subtle);
+  border: 1px solid rgba(0, 70, 255, 0.25);
+  border-radius: var(--radius-full);
+  padding: 7px 16px;
   color: var(--sol-blue-primary);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   transition: var(--transition-fast);
 }
 
-.btn-sidebar-action:hover {
+.btn-top-export:hover {
   background: var(--sol-blue-primary);
   color: #FFF;
+}
+
+/* ==========================================================================
+   5. 바디 레이아웃 (100% 풀와이드 위-아래 단순 구조)
+   ========================================================================== */
+.app-body.full-width-layout {
+  display: block;
+  width: 100%;
+}
+
+.app-main-content.full-width {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px 32px 60px;
 }
 
 /* ==========================================================================
