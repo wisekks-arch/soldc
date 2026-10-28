@@ -517,6 +517,8 @@ function initNavigationTabs() {
     });
 
     if (tabKey === "dashboard") {
+      renderPortfolioDonut();
+      renderPerformanceChart("1y");
       resizeCharts();
     } else if (tabKey === "holdings") {
       renderDetailedHoldingsPane();
@@ -681,6 +683,191 @@ function updateDashboardData() {
 
   const countEl = document.getElementById("holdingsCount");
   if (countEl) countEl.textContent = pensionState.holdings.length;
+}
+
+// ============================================================================
+// 5-1. [신규 UX] 실 보유자산 배분 도넛 차트 & 적립금/수익률 시계열 추이 차트
+// ============================================================================
+function renderPortfolioDonut() {
+  const ctx = document.getElementById("portfolioDonutChart");
+  if (!ctx) return;
+
+  if (donutChartInstance) {
+    donutChartInstance.destroy();
+  }
+
+  donutChartInstance = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: [
+        "테마/섹터 주식형 (위험)",
+        "채권혼합형 ETF (안전)",
+        "원리금보장 예금 (안전)",
+        "타겟데이트 TDF (안전)",
+        "배당주식형 ETF (위험)"
+      ],
+      datasets: [
+        {
+          data: [55.5, 34.2, 4.7, 2.9, 2.7],
+          backgroundColor: ["#F79009", "#0046FF", "#12B76A", "#00C4DF", "#FF7675"],
+          borderWidth: 0,
+          hoverOffset: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "74%",
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "rgba(10, 25, 49, 0.9)",
+          callbacks: {
+            label: (context) => ` ${context.label}: ${context.parsed}%`
+          }
+        }
+      }
+    }
+  });
+
+  const listEl = document.getElementById("assetCategoryList");
+  if (!listEl) return;
+
+  const categories = [
+    { name: "테마/섹터 주식형 (위험)", pct: "55.5%", amount: "2,311만원", color: "#F79009" },
+    { name: "채권혼합형 ETF (안전)", pct: "34.2%", amount: "1,421만원", color: "#0046FF" },
+    { name: "원리금보장 예금 (안전)", pct: "4.7%", amount: "194만원", color: "#12B76A" },
+    { name: "타겟데이트 TDF 2040 (안전)", pct: "2.9%", amount: "118만원", color: "#00C4DF" },
+    { name: "배당주식형 ETF (위험)", pct: "2.7%", amount: "113만원", color: "#FF7675" }
+  ];
+
+  listEl.innerHTML = categories.map(cat => `
+    <div class="category-row">
+      <div class="category-name-group">
+        <span class="category-color-bar" style="background: ${cat.color};"></span>
+        <span>${cat.name}</span>
+      </div>
+      <div class="category-val-group">
+        <strong>${cat.pct}</strong>
+        <span class="text-muted" style="font-size: 11px; margin-left: 6px;">(${cat.amount})</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+const perfChartData = {
+  "1m": {
+    labels: ["4주 전", "3주 전", "2주 전", "1주 전", "현재"],
+    assets: [4130, 4140, 4120, 4150, 4160],
+    principal: [4345, 4345, 4346, 4346, 4347]
+  },
+  "3m": {
+    labels: ["8월", "9월", "10월(현재)"],
+    assets: [4120, 4140, 4160],
+    principal: [4345, 4346, 4347]
+  },
+  "6m": {
+    labels: ["5월", "6월", "7월", "8월", "9월", "10월"],
+    assets: [4390, 4280, 4210, 4150, 4140, 4160],
+    principal: [4300, 4320, 4330, 4340, 4346, 4347]
+  },
+  "1y": {
+    labels: ["25.11", "25.12", "26.01", "26.02", "26.03", "26.04", "26.05", "26.06", "26.07", "26.08", "26.09", "26.10"],
+    assets: [4450, 4410, 4320, 4380, 4420, 4390, 4280, 4210, 4150, 4120, 4140, 4160],
+    principal: [4100, 4150, 4200, 4250, 4280, 4300, 4320, 4330, 4340, 4345, 4346, 4347]
+  },
+  "all": {
+    labels: ["24년 상반기", "24년 하반기", "25년 상반기", "25년 하반기", "26년 현재"],
+    assets: [3800, 4050, 4350, 4450, 4160],
+    principal: [3500, 3800, 4100, 4250, 4347]
+  }
+};
+
+function renderPerformanceChart(period) {
+  const ctx = document.getElementById("performanceChart");
+  if (!ctx) return;
+
+  const periodMap = {
+    "1m": "1m", "1개월": "1m",
+    "3m": "3m", "3개월": "3m",
+    "6m": "6m", "6개월": "6m",
+    "1y": "1y", "1년": "1y",
+    "all": "all", "전체": "all"
+  };
+  const normalizedKey = periodMap[period] || periodMap[String(period || "").toLowerCase()] || "1y";
+  const dataConfig = perfChartData[normalizedKey] || perfChartData["1y"];
+
+  if (perfChartInstance) {
+    perfChartInstance.destroy();
+  }
+
+  perfChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: dataConfig.labels,
+      datasets: [
+        {
+          label: "총 평가금액 (만원)",
+          data: dataConfig.assets,
+          borderColor: "#0046FF",
+          backgroundColor: "rgba(0, 70, 255, 0.08)",
+          fill: true,
+          tension: 0.35,
+          borderWidth: 3,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          pointBackgroundColor: "#0046FF"
+        },
+        {
+          label: "납입 원금 (만원)",
+          data: dataConfig.principal,
+          borderColor: "#98A2B3",
+          borderDash: [4, 4],
+          fill: false,
+          tension: 0.2,
+          borderWidth: 2,
+          pointRadius: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "rgba(10, 25, 49, 0.9)",
+          callbacks: {
+            label: (c) => ` ${c.dataset.label}: ${c.parsed.y.toLocaleString()}만원`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: {
+          grid: { color: "rgba(0,0,0,0.05)" },
+          ticks: { callback: v => `${v}만` }
+        }
+      }
+    }
+  });
+
+  // 기간 버튼 이벤트 바인딩
+  const periodBtns = document.querySelectorAll(".period-toggle-group .period-btn");
+  periodBtns.forEach(btn => {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      const selPeriod = btn.getAttribute("data-period");
+      periodBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderPerformanceChart(selPeriod);
+    };
+  });
 }
 
 // ============================================================================
@@ -2483,9 +2670,16 @@ window.toggleAiCoachModal = function() {
   const backdrop = document.getElementById("aiCoachBackdrop");
   if (!modal) return;
 
-  const isHidden = modal.style.display === "none" || !modal.style.display;
-  modal.style.display = isHidden ? "flex" : "none";
-  if (backdrop) backdrop.style.display = isHidden ? "block" : "none";
+  const isClosed = modal.style.display === "none" || getComputedStyle(modal).display === "none";
+  if (isClosed) {
+    modal.style.display = "flex";
+    if (backdrop) backdrop.style.display = "block";
+    const input = document.getElementById("coachUserInput");
+    if (input) setTimeout(() => input.focus(), 100);
+  } else {
+    modal.style.display = "none";
+    if (backdrop) backdrop.style.display = "none";
+  }
 };
 
 window.sendCoachQuickQuestion = function(questionText) {
