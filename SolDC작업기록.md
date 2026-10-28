@@ -159,8 +159,10 @@
    - 💬 **AI 투자 코치 챗봇 모달 (`#floatingAiCoachBtn`, `#aiCoachModal`)**:
      - 우측 하단 플로팅 버튼 및 상단 GNB 퀵 버튼 연동.
      - "은퇴 자산 부족금액은 얼마인가요?", "지금 조정하면 은퇴자산이 얼마나 늘어나나요?", "추천 매수 상품은?" 등 퀵 질의응답 및 사용자 질문 응대 챗봇 엔진 탑재.
-3. **품질 검증 및 무결점 확인**:
-   - `validate_clean_js.ps1` 검증 통과: `Clean Parens: 926/926`, `Clean Braces: 333/333`, `Clean Brackets: 77/77`.
-   - 모든 스크립트 문법 오류 0건, 브라우저 렌더링 무결점 확인.
+4. **GitHub Pages 배포 및 Jekyll 빌드 우회(.nojekyll) 적용**:
+   - GitHub Pages `gh-pages` 브랜치 자동 빌드 시 한글 마크다운 문서로 인한 Jekyll 빌드 실패 현상 규명.
+   - 루트 경로에 `.nojekyll` 설정 파일을 추가하여 Jekyll 컴파일을 완전 우회하고 순수 정적 웹 호스팅 모드로 전환.
+   - `main` 및 `gh-pages` 브랜치에 동기화 반영하여 실서버 100% 정상 개통 보장.
+
 
 
