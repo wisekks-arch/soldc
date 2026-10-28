@@ -159,10 +159,12 @@
    - 💬 **AI 투자 코치 챗봇 모달 (`#floatingAiCoachBtn`, `#aiCoachModal`)**:
      - 우측 하단 플로팅 버튼 및 상단 GNB 퀵 버튼 연동.
      - "은퇴 자산 부족금액은 얼마인가요?", "지금 조정하면 은퇴자산이 얼마나 늘어나나요?", "추천 매수 상품은?" 등 퀵 질의응답 및 사용자 질문 응대 챗봇 엔진 탑재.
-4. **GitHub Pages 배포 및 자동 파이프라인(.github/workflows/deploy.yml) 완비**:
-   - `shop`, `tour` 프로젝트와 100% 동일한 GitHub Actions 기반의 최신 정적 배포 파이프라인(`.github/workflows/deploy.yml`) 탑재.
-   - 0바이트 `.nojekyll` 설정으로 서버 빌드 불일치 원천 차단.
-   - `main` 브랜치 및 `gh-pages` 브랜치에 동기화 반영 완료 (커밋: `c7966f5`).
+4. **GitHub Pages 배포 성공 및 실서버 개통 완료**:
+   - 원인 규명: GitHub Pages 설정의 배포 타겟 폴더가 `/docs`로 지정되어 있었으나 저장소에 `docs` 폴더가 없어 빌드가 실패하고 이전 구버전(44KB)이 유지되던 현상 확인.
+   - 조치 완료: 최신 빌드 자산(`index.html`, `style.css`, `app.js`, `.nojekyll`)을 `docs/` 폴더 및 루트 경로에 완벽 동기화 커밋 푸시 (`39047a4`).
+   - GitHub Pages `pages build and deployment` 빌드 결과: **`success`** (2026-10-28 14:42 개통).
+   - 실서버 검증 완료: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, 138,526 바이트 최신 9대 메뉴 시스템 전면 노출 확인).
+
 
 
 
