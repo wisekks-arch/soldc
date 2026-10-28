@@ -117,3 +117,16 @@
      3) style.css & app.js: .ai-coach-modal z-index를 3001로 상향, 상단 헤더 및 하단 플로팅 버튼 onclick="toggleAiCoachModal()" 연결, getComputedStyle 기반 안전 토글 로직, 4대 추천 질문 칩 클릭 시 즉시 질문 발송 및 전문 연금 어드바이저 자동 답변 출력 엔진(sendCoachQuickQuestion) 정상화
    - 품질 검증: validate_clean_js.ps1 통과 (Clean Parens 976/976, Braces 382/382, Brackets 103/103)
    - Git 실서버 배포: docs/ 최신화 후 main 및 gh-pages 브랜치 푸시 (321a93b), pages build and deployment 'success' 달성 (Content-Length: 136176, HTTP 200 OK 실서버 개통 완료)
+17. 헤더 SOL 로고 삭제, 버튼 텍스트 한줄 고정 표시, 김광수 고객명 전면 변경, 모바일 슬라이딩 사이드바 드로어 및 닫기 기능 전면 구축 (2026-10-28 18:07)
+   - 사용자 요청 사항:
+     1) 첨부한 이미지 영역의 SOL 신한은행 퇴직연금 DC SMART 삭제
+     2) 각각이 텍스트 버튼 한줄로 표시 변경 개선해줘
+     3) 홍길동 => 김광수 변경 적용
+     4) 핸드폰 구성UI 개선해줘 볼수가 없어 화가난다 화가나. UI개선 해!!!!!!!! 좌측메뉴 리스트 슬라이딩방식으로 누르면 나타나고 닫기 누르면 안보이는 기능 적용
+   - 주요 작업 내역:
+     1) index.html: 헤더 brand-logo 마크업 완전 삭제
+     2) style.css: account-selector-dropdown, top-risk-mini-badge, btn-top-export, user-profile-badge, user-meta에 white-space: nowrap !important; flex-shrink: 0 !important; 적용하여 글자가 두 줄로 쪼개지지 않고 깔끔한 한 줄 텍스트 버튼으로 표시되도록 개선
+     3) index.html & app.js: 헤더(김, 김광수 님), 대시보드 환영 인사말(김광수 님), 코어 데이터(accountName), AI 챗봇 첫인사말까지 "김광수"로 전면 변경
+     4) index.html & style.css & app.js: 모바일(1024px 이하 및 갤럭시 뷰) 화면에서 사이드바를 화면 밖(-320px)으로 완전 숨기고, 상단 햄버거 메뉴(mobileMenuTrigger) 클릭 시 스르륵 슬라이딩되어 노출되고, 사이드바 상단 [X 닫기] 버튼(sidebarCloseBtn), 어두운 배경(sidebarBackdrop) 터치, 또는 메뉴 탭 클릭 시 자동으로 부드럽게 닫히는 오프캔버스 드로어 시스템 구축. 모바일 본문 영역 100% 쾌적 확장
+   - 품질 검증: validate_clean_js.ps1 통과 (Clean Parens 992/992, Braces 389/389, Brackets 103/103)
+   - Git 실서버 배포: docs/ 최신화 후 main 및 gh-pages 브랜치 푸시 (a9080ec), pages build and deployment 'success' 달성 (Content-Length: 136424, HTTP 200 OK 실서버 개통 완료)

@@ -306,3 +306,43 @@
    - Git 커밋(`321a93b`) 및 `main`, `gh-pages` 브랜치 원격 푸시 완료.
    - GitHub Actions `pages build and deployment`: **`success`** 달성.
    - 실서버 응답 검증: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, `Content-Length: 136176`, 실서버 정상 서비스 중).
+
+---
+
+## 15. 14차 개선 작업: 헤더 SOL 로고 삭제, 버튼 텍스트 한줄 고정 표시, 김광수 고객명 전면 변경, 모바일 슬라이딩 사이드바 드로어 및 닫기 기능 전면 구축 (2026-10-28 18:07)
+1. **사용자 요청 사항**:
+   - *"첨부한 이미지 영역의 SOL 신한은행 퇴직연금 DC SMART 삭제"*
+   - *"각각이 텍스트 버튼 한줄로 표시 변경 개선해줘"*
+   - *"홍길동 => 김광수 변경 적용"*
+   - *"핸드폰 구성UI 개선해줘 볼수가 없어 화가난다 화가나. UI개선 해!!!!!!!! 좌측메뉴 리스트 슬라이딩방식으로 누르면 나타나고 닫기 누르면 안보이는 기능 적용"*
+
+2. **문제 원인 및 개선 내용**:
+   - 📌 **상단 헤더 로고 삭제 및 버튼 텍스트 한 줄(`Single-line`) 고정 표시**:
+     - 원인: 상단 좌측 `brand-logo`가 가로폭을 과다 점유하고, 우측의 계좌/건강점수/AI코치/사용자 배지에 `white-space: nowrap`이 누락되어 화면 폭 축소 시 글자가 두세 줄로 쪼개져 찌그러졌던 현상.
+     - 조치: 
+       1) 파란색 SOL 아이콘 및 "신한은행 퇴직연금 DC Smart" 로고 마크업 완전 삭제.
+       2) `account-selector-dropdown`, `top-risk-mini-badge`, `btn-top-export`, `user-profile-badge`, `user-meta`에 `white-space: nowrap !important; flex-shrink: 0 !important;` 및 한 줄 flex 정렬을 전면 적용하여 글자가 절대 줄바꿈되지 않고 깔끔한 단일 라인 버튼으로 완벽 유지되도록 개선.
+   - 📌 **고객명 "홍길동" ➔ "김광수" 님 전면 변경**:
+     - 헤더 프로필 아바타: `홍` ➔ `김`
+     - 헤더 사용자명: `홍길동 님` ➔ `김광수 님`
+     - 대시보드 환영 인사말: `안녕하세요, 홍길동 님!` ➔ `안녕하세요, 김광수 님!`
+     - 코어 비즈니스 데이터 및 AI 코치 첫인사말: `김광수 님`으로 100% 전면 변경.
+   - 📌 **핸드폰(스마트폰/갤럭시) 모바일 UI 전면 혁신 & 좌측 메뉴 슬라이딩 오프캔버스 드로어 구축**:
+     - 원인: 모바일(1024px 이하 및 갤럭시 뷰) 환경에서 `.app-sidebar-lnb`가 슬라이딩 오프캔버스가 아닌 일반 블록(`width: 100%; position: relative`)으로 본문 상단에 떡하니 펼쳐져 화면 전체를 가로막아 본문을 볼 수 없었던 치명적 결함 규명.
+     - 조치:
+       1) 모바일 환경에서 `.app-sidebar-lnb`를 평소 화면 왼쪽 밖(`left: -320px; position: fixed; height: 100vh; z-index: 2500;`)으로 완전 숨김 처리.
+       2) 사이드바 상단에 모바일 전용 **`[X 닫기]`** 버튼(`sidebarCloseBtn`) 신설.
+       3) 뒷배경에 어두운 반투명 블러 백드롭(`.sidebar-backdrop`) 배치.
+       4) 상단 햄버거 메뉴 버튼(`mobileMenuTrigger`, `☰`) 터치 시 좌측에서 스르륵 부드럽게 슬라이딩되어 노출(`left: 0;`).
+       5) `[X 닫기]` 버튼 클릭, 어두운 백드롭 터치, 메뉴 탭 클릭 시 **자동으로 스르륵 닫히도록 완벽 구현**.
+       6) 모바일 본문 영역(`.app-main-content`)이 검은 메뉴 방해 없이 100% 쾌적하게 펼쳐지도록 1열 카드 그리드 및 모바일 패딩 최적화.
+
+3. **스크립트 및 품질 무결성 검증**:
+   - `validate_clean_js.ps1` 검증 결과: 괄호/중괄호/대괄호 에러 0건 통과
+     (`Clean Parens: 992/992`, `Clean Braces: 389/389`, `Clean Brackets: 103/103`).
+
+4. **GitHub 실서버 배포 및 반영 확인**:
+   - `docs/` 디렉터리에 `index.html`, `style.css`, `app.js` 최신 동기화 완료.
+   - Git 커밋(`a9080ec`) 및 `main`, `gh-pages` 브랜치 원격 푸시 완료.
+   - GitHub Actions `pages build and deployment`: **`success`** 달성.
+   - 실서버 응답 검증: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, `Content-Length: 136424`, 실서버 정상 서비스 중).
