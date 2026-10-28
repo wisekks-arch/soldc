@@ -86,3 +86,11 @@
      5) AI추천: 매수/축소/유지 의견 배너 및 3대 추천 프리미엄 상품 카드 가로 3열(pc-three-column-grid) 정렬
    - 품질 검증: validate_clean_js.ps1 통과 (Clean Parens 926/926, Braces 333/333, Brackets 77/77)
    - GitHub Pages 실서버 배포: docs/ 동기화 푸시 후 pages build and deployment 'success' 달성 (Content-Length: 133683, HTTP 200 OK 개통 완료)
+14. 방안1 전면 적용(좌측 슬림 LNB 사이드바 220px 및 56px 헤더) & 20년 절세 스케줄 팝업 모달창 전환 완료 (2026-10-28 15:28)
+   - 사용자 피드백: "화면 구성이 이상해 공간활용도 이상하고 메뉴선택도 힘든 상황이잖어 개선해줘 / 방안1로 개선해줘 / 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 팝업창으로 뜨면 될거 같은데.."
+   - 핵심 문제 해결:
+     1) 상단 280px 과다 점유 및 9개 메뉴 과밀 해소: 좌측 슬림 LNB 사이드바(220px, 4대 카테고리 계층화) 구축 및 상단 56px 단일 헤더 통합 (상단 가시 영역 80% 확대)
+     2) 우측 절반을 가로막아 화면을 망가뜨리던 '20년 상세 연금수령 및 절세 추이' 패널을 본문에서 완전히 분리하여 [전용 대형 팝업 모달창(taxScheduleModal)]으로 전환
+     3) 본문 레이아웃(대시보드, 리밸런싱 등)이 좌우 100% 온전하게 펼쳐져 시각적 찌그러짐 현상 100% 해소
+   - 품질 검증: validate_clean_js.ps1 통과 (Clean Parens: 935/935, Clean Braces: 337/337, Clean Brackets: 77/77)
+   - Git 실서버 배포: docs/ 동기화 후 main 및 gh-pages 브랜치 푸시 (779c764), pages build and deployment 'success' 달성 (Content-Length: 135483, HTTP 200 OK 실서버 개통 완료)
