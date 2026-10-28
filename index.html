@@ -824,6 +824,27 @@
         </div>
       </div>
 
+      <!-- ===================================================================
+           [보유상품 15종 개별 심층 분석 전문 상세 팝업 모달]
+           =================================================================== -->
+      <div class="modal-backdrop" id="productDeepDetailBackdrop" onclick="closeProductDeepDetail()" style="display: none;"></div>
+      <div class="modal-dialog deep-detail-modal" id="productDeepDetailModal" style="display: none;">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <div class="modal-brand-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> 신한SOL 상품정밀분석</div>
+            <h3 class="modal-title">보유상품 심층 분석 및 포트폴리오 가이드</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeProductDeepDetail()" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="productDeepDetailContent">
+          <!-- JS openProductDeepDetail에서 동적으로 상세 리포트 렌더링 -->
+        </div>
+        <div class="modal-footer">
+          <button class="btn-outline" onclick="closeProductDeepDetail()">닫기</button>
+          <button class="btn-primary" onclick="closeProductDeepDetail()"><i class="fa-solid fa-check"></i> 분석 확인 완료</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
