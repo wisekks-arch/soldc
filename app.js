@@ -520,12 +520,16 @@ function initNavigationTabs() {
       resizeCharts();
     } else if (tabKey === "holdings") {
       renderDetailedHoldingsPane();
+    } else if (tabKey === "product-manage") {
+      renderRegisteredProductList();
+    } else if (tabKey === "return-analysis") {
+      renderBenchmarkComparisonChart();
+    } else if (tabKey === "forecast") {
+      renderScenarioGrowthChart();
     } else if (tabKey === "rebalance") {
-      renderRebalanceSimulation();
-    } else if (tabKey === "tax-calculator") {
-      renderTaxPayoutSchedule();
-    } else if (tabKey === "report-sync") {
-      renderExcelRawDataGrid();
+      renderRebalanceSliderSimulator();
+    } else if (tabKey === "report-manage") {
+      // 리포트 탭
     }
   }
 
@@ -2059,4 +2063,463 @@ function initExcelDropzone() {
     });
   }
 }
+
+// ============================================================================
+// 16. [신규 기획안 4] 투자상품관리: 등록 목록 렌더링, 수동 추가 및 삭제 엔진
+// ============================================================================
+function renderRegisteredProductList() {
+  const tbody = document.getElementById("registeredProductTableBody");
+  if (!tbody) return;
+
+  const totalVal = pensionState.holdings.reduce((sum, i) => sum + i.currentVal, 0);
+  const countEl = document.getElementById("manageProdCount");
+  if (countEl) countEl.innerText = pensionState.holdings.length;
+
+  tbody.innerHTML = pensionState.holdings.map((item, idx) => {
+    const weight = ((item.currentVal / totalVal) * 100).toFixed(1);
+    const isPositive = item.profit >= 0;
+    const accountType = item.category.includes("원리금") ? "DC" : (item.id === "P001" ? "IRP" : "DC");
+
+    return `
+      <tr>
+        <td class="text-center font-bold text-muted">${idx + 1}</td>
+        <td><span class="badge-pill badge-safe">${accountType}</span></td>
+        <td class="font-bold">${item.name} <small class="text-muted">(${item.code})</small></td>
+        <td class="text-right">${formatWon(item.quantity || 100)} 주</td>
+        <td class="text-right font-bold text-brand">${formatWon(item.currentVal)} 원</td>
+        <td class="text-right ${isPositive ? 'text-positive' : 'text-negative'} font-bold">
+          ${isPositive ? '+' : ''}${item.returnRate}%
+        </td>
+        <td class="text-right font-bold">${weight}%</td>
+        <td class="text-center">
+          <button class="btn btn-outline-primary btn-sm me-1" onclick="openProductDeepDetail('${item.id}')">상세</button>
+          <button class="btn btn-outline-danger btn-sm" onclick="deleteRegisteredProduct('${item.id}')">삭제</button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+window.deleteRegisteredProduct = function(productId) {
+  if (!confirm("선택한 상품을 포트폴리오에서 삭제하시겠습니까?")) return;
+  pensionState.holdings = pensionState.holdings.filter(h => h.id !== productId);
+  updateDashboardData();
+  renderDetailedHoldingsPane();
+  renderRegisteredProductList();
+  renderPortfolioDonut();
+  alert("상품이 성공적으로 삭제되었습니다.");
+};
+
+window.quickAddSampleProd = function(name, val, ret, assetClass) {
+  const newId = "P" + String(pensionState.holdings.length + 1).padStart(3, "0");
+  const isRisk = assetClass.includes("주식");
+  const principal = Math.round(val / (1 + ret / 100));
+  const profit = val - principal;
+
+  pensionState.holdings.unshift({
+    id: newId,
+    name: name,
+    code: String(Math.floor(100000 + Math.random() * 900000)),
+    issuer: "신한/글로벌운용",
+    category: `실적배당형 (${assetClass})`,
+    group: assetClass,
+    type: isRisk ? "risk" : "safe",
+    principal: principal,
+    profit: profit,
+    currentVal: val,
+    returnRate: parseFloat(ret.toFixed(2)),
+    riskLevel: isRisk ? "위험(주식형)" : "안전(채권/혼합)",
+    nav: 10000,
+    quantity: Math.round(val / 10000),
+    buyDate: "2026.01.01",
+    expenseRatio: 0.25,
+    return1M: 2.1,
+    return3M: 5.4,
+    return6M: 10.2,
+    return1Y: ret,
+    equityRatio: isRisk ? 100 : 0,
+    bondRatio: isRisk ? 0 : 100,
+    strategy: `${name} 상품이 포트폴리오에 성공적으로 편입되었습니다. AI 맞춤 관리가 시작됩니다.`
+  });
+
+  updateDashboardData();
+  renderDetailedHoldingsPane();
+  renderRegisteredProductList();
+  renderPortfolioDonut();
+  alert(`[${name}] 상품이 포트폴리오에 성공적으로 등록되었습니다!\n총 자산 및 비중이 즉시 재계산되었습니다.`);
+};
+
+function initManualProductAddForm() {
+  const btnAdd = document.getElementById("btnAddManualProduct");
+  if (!btnAdd) return;
+
+  btnAdd.onclick = () => {
+    const nameInput = document.getElementById("manualProdSearch");
+    const priceInput = document.getElementById("manualProdPrice");
+    const qtyInput = document.getElementById("manualProdQty");
+    const assetClassSelect = document.getElementById("manualProdAssetClass");
+
+    const name = nameInput.value.trim() || "TIGER 미국S&P500 ETF";
+    const price = parseInt(priceInput.value) || 12500;
+    const qty = parseInt(qtyInput.value) || 100;
+    const total = price * qty;
+    const assetClass = assetClassSelect.value || "해외주식";
+
+    quickAddSampleProd(name, total, 12.0, assetClass);
+    nameInput.value = "";
+  };
+}
+
+// ============================================================================
+// 17. [신규 기획안 6] 수익률분석: 벤치마크 지수 다중 비교 차트 (Chart.js)
+// ============================================================================
+let benchmarkChartInstance = null;
+
+function renderBenchmarkComparisonChart() {
+  const canvas = document.getElementById("benchmarkComparisonChart");
+  if (!canvas) return;
+
+  if (benchmarkChartInstance) {
+    benchmarkChartInstance.destroy();
+  }
+
+  const labels = ["2025.10", "2025.11", "2025.12", "2026.01", "2026.02", "2026.03", "2026.04", "2026.05", "2026.06", "2026.07", "2026.08", "2026.09", "2026.10"];
+  
+  benchmarkChartInstance = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "내 포트폴리오 (+18.8%)",
+          data: [0, 2.1, 3.8, 5.2, 4.9, 7.8, 9.4, 11.2, 13.5, 12.8, 15.4, 17.2, 18.8],
+          borderColor: "#0046FF",
+          backgroundColor: "rgba(0, 70, 255, 0.08)",
+          borderWidth: 3,
+          fill: true,
+          tension: 0.35,
+          pointRadius: 4
+        },
+        {
+          label: "S&P500 (+15.2%)",
+          data: [0, 1.8, 3.2, 4.5, 5.8, 6.9, 8.2, 10.1, 11.5, 12.4, 13.8, 14.5, 15.2],
+          borderColor: "#DC2626",
+          borderWidth: 2,
+          borderDash: [4, 4],
+          fill: false,
+          tension: 0.3,
+          pointRadius: 2
+        },
+        {
+          label: "NASDAQ100 (+22.1%)",
+          data: [0, 2.5, 4.8, 6.9, 7.5, 9.8, 12.4, 14.8, 16.5, 15.9, 18.4, 20.5, 22.1],
+          borderColor: "#10B981",
+          borderWidth: 2,
+          borderDash: [2, 2],
+          fill: false,
+          tension: 0.3,
+          pointRadius: 2
+        },
+        {
+          label: "KOSPI (+3.5%)",
+          data: [0, -0.5, 1.2, 0.8, -1.2, 0.5, 1.8, 2.4, 1.9, 2.2, 2.8, 3.1, 3.5],
+          borderColor: "#64748B",
+          borderWidth: 1.5,
+          fill: false,
+          tension: 0.3,
+          pointRadius: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: ${ctx.raw >= 0 ? '+' : ''}${ctx.raw}%`
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: { callback: v => `${v}%` }
+        }
+      }
+    }
+  });
+}
+
+// ============================================================================
+// 18. [신규 기획안 7 & 8] 미래예측: 3대 시나리오 복리 성장곡선 차트 (Chart.js)
+// ============================================================================
+let scenarioChartInstance = null;
+
+function renderScenarioGrowthChart() {
+  const canvas = document.getElementById("scenarioGrowthCurveChart");
+  if (!canvas) return;
+
+  if (scenarioChartInstance) {
+    scenarioChartInstance.destroy();
+  }
+
+  const periods = ["현재 (40세)", "1년 후", "3년 후", "5년 후", "10년 후", "15년 후", "20년 후", "은퇴 시점 (65세)"];
+  
+  scenarioChartInstance = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: periods,
+      datasets: [
+        {
+          label: "공격적 시나리오 (연 8%)",
+          data: [1.5, 1.72, 2.24, 2.88, 5.12, 6.85, 7.95, 9.20],
+          borderColor: "#10B981",
+          borderWidth: 2.5,
+          tension: 0.35,
+          fill: false
+        },
+        {
+          label: "중립적 시나리오 (연 6%) [신한추천]",
+          data: [1.5, 1.68, 2.08, 2.54, 4.15, 5.20, 5.85, 6.50],
+          borderColor: "#0046FF",
+          backgroundColor: "rgba(0, 70, 255, 0.08)",
+          borderWidth: 3.5,
+          tension: 0.35,
+          fill: true
+        },
+        {
+          label: "보수적 시나리오 (연 4%)",
+          data: [1.5, 1.62, 1.89, 2.18, 3.25, 3.85, 4.30, 4.80],
+          borderColor: "#94A3B8",
+          borderWidth: 2,
+          borderDash: [5, 5],
+          tension: 0.35,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top" },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}억 원`
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: { callback: v => `${v}억` }
+        }
+      }
+    }
+  });
+}
+
+function initAiForecastSim() {
+  const btn = document.getElementById("btnRunAiRetireSim");
+  if (!btn) return;
+
+  btn.onclick = () => {
+    const ageCurr = parseInt(document.getElementById("inputAiAgeCurrent").value) || 40;
+    const ageRet = parseInt(document.getElementById("inputAiAgeRetire").value) || 65;
+    const assetInit = parseInt(document.getElementById("inputAiAssetInit").value) || 150000000;
+    const monthly = parseInt(document.getElementById("inputAiMonthlyPay").value) || 500000;
+    const rate = parseFloat(document.getElementById("inputAiReturnRate").value) || 7.0;
+
+    const years = Math.max(1, ageRet - ageCurr);
+    const r = rate / 100;
+    // 복리 계산
+    let fv = assetInit * Math.pow(1 + r, years) + (monthly * 12) * ((Math.pow(1 + r, years) - 1) / r);
+    const fvEok = (fv / 100000000).toFixed(1);
+
+    alert(`[AI 은퇴자산 시뮬레이션 완료]\n고객님의 ${ageRet}세 은퇴 예상 적립금은 약 ${fvEok}억 원입니다!\n현재 목표(10억 원) 달성을 위한 최적 궤도에 진입하고 있습니다.`);
+    renderScenarioGrowthChart();
+  };
+}
+
+// ============================================================================
+// 19. [신규 기획안 8 핵심] 양방향 인터랙티브 비중 조절 슬라이더 시뮬레이터
+// ============================================================================
+window.onRebalanceSliderChange = function() {
+  const sSp = parseInt(document.getElementById("sliderSp500").value) || 40;
+  const sNas = parseInt(document.getElementById("sliderNas").value) || 20;
+  const sBond = parseInt(document.getElementById("sliderBond").value) || 25;
+  const sDiv = parseInt(document.getElementById("sliderDiv").value) || 10;
+  const sCash = parseInt(document.getElementById("sliderCash").value) || 5;
+
+  document.getElementById("valSliderSp500").innerText = sSp + "%";
+  document.getElementById("valSliderNas").innerText = sNas + "%";
+  document.getElementById("valSliderBond").innerText = sBond + "%";
+  document.getElementById("valSliderDiv").innerText = sDiv + "%";
+  document.getElementById("valSliderCash").innerText = sCash + "%";
+
+  // 실시간 예상 수익률 및 변동성 연산
+  // 자산별 기대수익: S&P(9%), 나스닥(12%), 채권(4.5%), 배당(7.5%), 현금(2.5%)
+  const expectedReturn = ((sSp * 9.0 + sNas * 12.0 + sBond * 4.5 + sDiv * 7.5 + sCash * 2.5) / 100).toFixed(1);
+  // 자산별 변동성: S&P(16%), 나스닥(22%), 채권(5%), 배당(12%), 현금(1%)
+  const expectedVol = ((sSp * 16.0 + sNas * 22.0 + sBond * 5.0 + sDiv * 12.0 + sCash * 1.0) / 100 * 0.85).toFixed(1);
+  const sharpe = ((expectedReturn - 2.5) / expectedVol).toFixed(2);
+  
+  // 은퇴 시 자산 추산 (기존 7.8억 기준 수익률 비례)
+  const retireAsset = (7.8 * (1 + (expectedReturn - 6.4) * 0.15)).toFixed(1);
+
+  const elReturn = document.getElementById("simLiveReturn");
+  const elVol = document.getElementById("simLiveVol");
+  const elSharpe = document.getElementById("simLiveSharpe");
+  const elRetire = document.getElementById("simLiveRetireAsset");
+
+  if (elReturn) elReturn.innerText = expectedReturn + "%";
+  if (elVol) elVol.innerText = expectedVol + "%";
+  if (elSharpe) elSharpe.innerText = sharpe;
+  if (elRetire) elRetire.innerText = retireAsset + "억 원";
+
+  updateRebalanceCompareChart(sSp, sNas, sBond, sDiv, sCash);
+};
+
+window.applyAiRecommendedWeights = function() {
+  document.getElementById("sliderSp500").value = 40;
+  document.getElementById("sliderNas").value = 20;
+  document.getElementById("sliderBond").value = 25;
+  document.getElementById("sliderDiv").value = 10;
+  document.getElementById("sliderCash").value = 5;
+  onRebalanceSliderChange();
+  alert("신한SOL AI 최적 밸런스드 비중 (S&P 40% / 나스닥 20% / 채권 25% / 배당 10% / 현금 5%)이 적용되었습니다!");
+};
+
+let rebalanceCompareChartInstance = null;
+
+function renderRebalanceSliderSimulator() {
+  const canvas = document.getElementById("rebalanceCompareChart");
+  if (!canvas) return;
+
+  if (rebalanceCompareChartInstance) {
+    rebalanceCompareChartInstance.destroy();
+  }
+
+  rebalanceCompareChartInstance = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: ["S&P500", "나스닥100", "채권ETF", "배당다우", "현금/단기"],
+      datasets: [
+        {
+          label: "기존 비중 (%)",
+          data: [50, 30, 10, 0, 10],
+          backgroundColor: "#94A3B8"
+        },
+        {
+          label: "조정 추천 비중 (%)",
+          data: [40, 20, 25, 10, 5],
+          backgroundColor: "#0046FF"
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          ticks: { callback: v => `${v}%` }
+        }
+      }
+    }
+  });
+}
+
+function updateRebalanceCompareChart(sp, nas, bond, div, cash) {
+  if (!rebalanceCompareChartInstance) {
+    renderRebalanceSliderSimulator();
+    return;
+  }
+  rebalanceCompareChartInstance.data.datasets[1].data = [sp, nas, bond, div, cash];
+  rebalanceCompareChartInstance.update();
+}
+
+// ============================================================================
+// 20. [신규 기획안 13 & 14] 리포트 생성 및 AI 설정 로직
+// ============================================================================
+window.generateAiReport = function() {
+  alert("신한SOL Pension AI Advisor 정밀 진단 보고서 생성이 완료되었습니다!\n현재 포트폴리오의 리스크 감소 효과와 은퇴 자산 +2.4억원 증대 시뮬레이션이 반영되었습니다.");
+};
+
+window.exportReportPdf = function() {
+  alert("고객님의 [퇴직연금 종합 자산관리 리포트.pdf] 다운로드가 시작되었습니다.");
+};
+
+window.saveAiSettings = function() {
+  alert("AI 시나리오별 기대수익률 정책(보수 4.0%, 중립 6.0%, 공격 8.0%)이 시스템에 성공적으로 저장되었습니다.");
+};
+
+// ============================================================================
+// 21. [신규 UX] AI 투자 코치 챗봇 모달창 인터랙션
+// ============================================================================
+window.toggleAiCoachModal = function() {
+  const modal = document.getElementById("aiCoachModal");
+  const backdrop = document.getElementById("aiCoachBackdrop");
+  if (!modal) return;
+
+  const isHidden = modal.style.display === "none" || !modal.style.display;
+  modal.style.display = isHidden ? "flex" : "none";
+  if (backdrop) backdrop.style.display = isHidden ? "block" : "none";
+};
+
+window.sendCoachQuickQuestion = function(questionText) {
+  const history = document.getElementById("coachChatHistory");
+  if (!history) return;
+
+  // 유저 메시지
+  history.innerHTML += `
+    <div class="chat-msg user">
+      <div class="bubble">${questionText}</div>
+    </div>
+  `;
+
+  let reply = "";
+  if (questionText.includes("부족금액")) {
+    reply = "고객님의 현재 적립 추세(월 50만 원) 기준 65세 은퇴 시 예상 자산은 <strong>7.8억 원</strong>이며, 목표 10억 원 대비 <strong>약 2억 2천만 원이 부족</strong>한 상태입니다.";
+  } else if (questionText.includes("늘어나나요") || questionText.includes("증가")) {
+    reply = "💡 지금 AI 추천대로 미국 주식 비중을 일부 낮추고 채권 및 배당 ETF로 리밸런싱하시면 변동성이 -18% 줄어들고 복리 효과로 <strong>은퇴 자산이 +2.4억 원 증가하여 10.2억 원을 달성</strong>할 수 있습니다!";
+  } else if (questionText.includes("매수")) {
+    reply = "현재 시장 환경 및 수수료 측면에서 <strong>ACE 미국S&P500 ETF (총보수 0.07%)</strong>와 <strong>TIGER 미국배당다우존스(SCHD)</strong>를 최우선 매수 상품으로 추천해 드립니다.";
+  } else {
+    reply = "AI 추천 최적 리밸런싱 비중은 <strong>S&P500 40%, 나스닥 20%, 채권 25%, 배당 10%, 현금 5%</strong>입니다. [리밸런싱] 탭에서 실시간으로 시뮬레이션해 보세요!";
+  }
+
+  // 봇 답변
+  setTimeout(() => {
+    history.innerHTML += `
+      <div class="chat-msg bot">
+        <div class="bot-avatar"><i class="fa-solid fa-robot"></i></div>
+        <div class="bubble">${reply}</div>
+      </div>
+    `;
+    history.scrollTop = history.scrollHeight;
+  }, 300);
+
+  history.scrollTop = history.scrollHeight;
+};
+
+window.sendCoachMessage = function() {
+  const input = document.getElementById("coachUserInput");
+  if (!input || !input.value.trim()) return;
+  const text = input.value.trim();
+  input.value = "";
+  sendCoachQuickQuestion(text);
+};
+
+// 상단 GNB 'AI 투자코치' 버튼 바인딩
+document.addEventListener("DOMContentLoaded", () => {
+  const btnTopCoach = document.getElementById("btnOpenAiCoach");
+  if (btnTopCoach) {
+    btnTopCoach.onclick = () => {
+      toggleAiCoachModal();
+    };
+  }
+  initManualProductAddForm();
+  initAiForecastSim();
+});
+
 

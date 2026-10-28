@@ -3383,7 +3383,718 @@ body {
   .holdings-search-input-wrap .sol-input-sm {
     width: 100%;
   }
+}/* ==========================================================================
+   20. [SOL퇴직연금 Pension AI Advisor 기획안 9대 메뉴 전용 프리미엄 디자인 시스템]
+   ========================================================================== */
+
+/* 사용자 환영 헤더 & 상단 3대 지표 바 */
+.user-greeting-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: linear-gradient(135deg, #0A1931 0%, #152C5B 100%);
+  color: #FFF;
+  border-radius: var(--radius-lg);
+  padding: 22px 28px;
+  box-shadow: 0 8px 24px rgba(10, 25, 49, 0.15);
 }
 
+.greeting-left .greeting-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: #93C5FD;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}
 
+.greeting-left .greeting-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+}
 
+.greeting-left .greeting-title strong {
+  color: #60A5FA;
+}
+
+.greeting-kpi-bar {
+  display: flex;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  backdrop-filter: blur(8px);
+}
+
+.kpi-mini-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kpi-mini-col .label {
+  font-size: 11.5px;
+  color: #CBD5E1;
+  font-weight: 600;
+}
+
+.kpi-mini-col .val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFF;
+}
+
+.kpi-mini-col .val small {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 은퇴 목표 달성률 패널 */
+.retirement-goal-panel {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+}
+
+.goal-shortage-badge {
+  background: #FEF2F2;
+  color: #DC2626;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.goal-amounts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+
+.goal-amount-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.goal-amount-item .sub {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.goal-amount-item .main {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.goal-progress-wrap {
+  width: 100%;
+}
+
+.goal-progress-track {
+  width: 100%;
+  height: 24px;
+  background: #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.goal-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0046FF 0%, #10B981 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.goal-progress-fill .fill-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #FFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.goal-markers-flex {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* 퇴직연금 건강점수 CTA 배너 */
+.pension-health-cta-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  border: 1px solid rgba(0, 70, 255, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+}
+
+.health-cta-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.health-score-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #0046FF;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.health-score-circle .score-num {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.health-score-circle .score-lbl {
+  font-size: 11px;
+  margin-top: 4px;
+  margin-left: 2px;
+}
+
+.health-meta .health-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0A1931;
+  margin: 0;
+}
+
+.health-meta .badge-status-safe {
+  background: #FEE2E2;
+  color: #DC2626;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.health-meta .health-desc {
+  font-size: 13px;
+  color: #1E3A8A;
+  margin: 4px 0 0 0;
+}
+
+.btn-cta-rebalance {
+  background: #0046FF;
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(0, 70, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-cta-rebalance:hover {
+  background: #0030B8;
+  transform: translateY(-2px);
+}
+
+/* AI 요약 분석 카드 */
+.ai-summary-highlight-card {
+  background: var(--bg-surface);
+  border: 1px solid rgba(0, 70, 255, 0.15);
+  border-left: 5px solid #0046FF;
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.ai-bot-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0046FF 0%, #3B82F6 100%);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.ai-summary-content .summary-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 6px 0;
+}
+
+.ai-summary-content .summary-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.summary-tags-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.summary-tags-flex .tag-pill {
+  font-size: 11.5px;
+  font-weight: 700;
+  background: var(--bg-app);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+}
+
+/* 계좌 선택 라디오 그룹 */
+.account-type-radio-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.account-type-radio-group .group-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.sol-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.sol-radio-label input[type="radio"] {
+  accent-color: #0046FF;
+  width: 16px;
+  height: 16px;
+}
+
+/* 입력 검색 폼 및 엑셀 드롭 박스 */
+.input-with-search-btn {
+  display: flex;
+  gap: 8px;
+}
+
+.input-with-search-btn input {
+  flex: 1;
+}
+
+.btn-search-trigger {
+  height: 44px;
+  padding: 0 16px;
+  background: var(--sol-blue-primary);
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.excel-quick-drop-box {
+  background: var(--bg-app);
+  border: 2px dashed rgba(0, 70, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.btn-outline-primary-upload {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 18px;
+  border: 1px solid #0046FF;
+  border-radius: var(--radius-md);
+  color: #0046FF;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #FFF;
+}
+
+.chip-sample-add {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.chip-sample-add:hover {
+  background: #EFF6FF;
+  border-color: #0046FF;
+  color: #0046FF;
+}
+
+/* 기간별 성과 5대 카드 */
+.return-periods-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.return-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.return-stat-card.highlight-rate {
+  background: #EFF6FF;
+  border-color: #0046FF;
+}
+
+.return-stat-card .period {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.return-stat-card .rate {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.return-stat-card .desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.benchmark-legend-flex {
+  display: flex;
+  gap: 14px;
+}
+
+.benchmark-legend-flex .badge-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+/* 미래예측 시나리오 리스트 */
+.scenarios-vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scenario-item {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  background: var(--bg-app);
+}
+
+.scenario-item.neutral.active {
+  background: #EFF6FF;
+  border-color: #0046FF;
+}
+
+.scenario-item .badge-type {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.scenario-item .amount {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* 실시간 시뮬레이션 지표 */
+.sim-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.sim-kpi-card {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sim-kpi-card.highlight-sim {
+  background: #EFF6FF;
+  border-color: #0046FF;
+  grid-column: span 2;
+}
+
+.sim-kpi-card .lbl {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.sim-kpi-card .val {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+/* AI 투자 의견 3단 배너 */
+.ai-opinions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.opinion-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.opinion-card.buy { border-top: 4px solid #10B981; }
+.opinion-card.sell { border-top: 4px solid #DC2626; }
+.opinion-card.hold { border-top: 4px solid #64748B; }
+
+.opinion-card .score-tag {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.opinion-card .prod-name {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.opinion-card .reason-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.btn-opinion-action {
+  width: 100%;
+  height: 36px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--bg-app);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-opinion-action:hover:not(:disabled) {
+  background: #0046FF;
+  color: #FFF;
+  border-color: #0046FF;
+}
+
+/* 리포트 문서 프리뷰 */
+.report-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.report-box {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.report-box .box-tag {
+  font-size: 12.5px;
+  font-weight: 800;
+}
+
+.report-box.danger-box { background: #FEF2F2; border-color: #FECACA; }
+.report-box.brand-box { background: #EFF6FF; border-color: #BFDBFE; }
+.report-box.success-box { background: #ECFDF5; border-color: #A7F3D0; }
+
+/* AI 투자 코치 플로팅 버튼 및 모달 */
+.floating-ai-coach-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0046FF 0%, #152C5B 100%);
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 70, 255, 0.4);
+  cursor: pointer;
+  z-index: 1050;
+  transition: transform 0.2s ease;
+}
+
+.floating-ai-coach-btn:hover {
+  transform: scale(1.08);
+}
+
+.floating-ai-coach-btn i {
+  font-size: 22px;
+}
+
+.coach-badge-pulse {
+  font-size: 9px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.ai-coach-modal {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 400px;
+  max-width: 90vw;
+  background: #FFF;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-coach-body {
+  padding: 16px;
+}
+
+.coach-chat-history {
+  height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 6px;
+}
+
+.chat-msg {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-msg.bot .bubble {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E3A8A;
+  border-radius: 12px 12px 12px 2px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.chat-msg.user {
+  justify-content: flex-end;
+}
+
+.chat-msg.user .bubble {
+  background: #0046FF;
+  color: #FFF;
+  border-radius: 12px 12px 2px 12px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+}
+
+.quick-questions-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-q {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+}
+
+.chip-q:hover {
+  background: #E2E8F0;
+  color: #0046FF;
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-send-chat {
+  width: 44px;
+  height: 44px;
+  background: #0046FF;
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .user-greeting-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .greeting-kpi-bar {
+    justify-content: space-between;
+  }
+  .goal-amounts-grid {
+    grid-template-columns: 1fr;
+  }
+  .return-periods-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ai-opinions-grid {
+    grid-template-columns: 1fr;
+  }
+  .report-sections-grid {
+    grid-template-columns: 1fr;
+  }
+}
