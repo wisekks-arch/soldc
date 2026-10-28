@@ -274,3 +274,35 @@
    - Git 커밋(`ffec8d7`) 및 `main`, `gh-pages` 브랜치 원격 푸시 완료.
    - GitHub Actions `pages build and deployment` (id: 40650196861): **`success`** 달성.
    - 실서버 응답 검증: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, `Content-Length: 136145`, 실서버 정상 서비스 중).
+
+---
+
+## 14. 13차 개선 작업: 보유자산 15종 상세분석 팝업 중앙고정, 대시보드 자산배분 도넛 & 기간별 선그래프 차트 복원 및 기간버튼 연동, AI코치 모달 z-index 및 챗봇 엔진 정상화 (2026-10-28 17:55)
+1. **사용자 요청 사항**:
+   - *"보유자산 15종에서 상세분석팝업보기 화면이 안보임 개선해줘"*
+   - *"메인페이지의 실 보유자산배분형황 / 적립금 및 수익률 추이 1개월 3개월 6개월 1년 전체 버튼 미작동 개선해줘"*
+   - *"AI 코치 미작동함 개선해줘"*
+
+2. **문제 원인 및 개선 내용**:
+   - 📌 **보유자산 15종 심층 분석 팝업 모달창 화면 미노출 결함 완벽 해결**:
+     - 원인: `style.css`에서 `.modal-dialog.deep-detail-modal`에 화면 중앙 고정 레이아웃(`position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3001;`)이 누락되어, 모달이 열려도 반투명 배경 뒤(`z-index: 3000` 뒤)에 가려져 보이지 않았던 결함 확인.
+     - 조치: `.modal-dialog.deep-detail-modal` 및 `.modal-dialog.rebalance-confirm-modal`에 `position: fixed`, `top: 50%`, `left: 50%`, `z-index: 3001`, `box-shadow`, `animation`을 완벽 적용하여 클릭 즉시 화면 정중앙에 시원하게 팝업되도록 개선.
+   - 📌 **메인 대시보드 실 보유자산배분 도넛 차트 & 적립금/수익률 시계열 선그래프 복원 및 5대 기간 버튼 연동**:
+     - 원인: 리팩토링 과정에서 `app.js` 내의 `renderPortfolioDonut()` 및 `renderPerformanceChart(period)` 함수가 누락되어 캔버스가 비어 있었고 기간 토글 버튼(`.period-btn`)이 작동하지 않았음.
+     - 조치: 
+       1) `renderPortfolioDonut()`: 실제 보유 15종 기반 5대 자산군(테마/섹터 주식 55.5%, 채권혼합 34.2%, 원리금보장예금 4.7%, TDF 2.9%, 배당 2.7%) 도넛 차트 및 우측 범례 카드 실시간 렌더링.
+       2) `renderPerformanceChart(period)`: 1개월(`1m`), 3개월(`3m`), 6개월(`6m`), 1년(`1y`), 전체(`all`) 5개 기간별 시계열 자산가치 및 납입원금 데이터 세트 구성. 기간 버튼 클릭 시 `.active` 클래스 전환 및 부드러운 차트 시계열 데이터 재렌더링 이벤트 바인딩.
+       3) `switchTab('dashboard')` 및 `DOMContentLoaded` 시 자동 렌더링 체인 연결.
+   - 📌 **AI 투자코치 챗봇 모달창 z-index 상향 및 인터랙티브 엔진 정상화**:
+     - 원인: `style.css`에서 `.ai-coach-modal`의 `z-index`가 `1060`으로 설정되어 있어 배경 백드롭(`z-index: 3000`) 뒤에 깔려 화면이 가려졌던 문제 해결.
+     - 조치: `z-index: 3001`로 상향, 상단 헤더 `#btnOpenAiCoach`에 `onclick="toggleAiCoachModal()"` 바인딩, `toggleAiCoachModal()`에 getComputedStyle 기반 안전 토글 로직 적용, 은퇴 부족금액/조정 시 증가금액/추천 매수 상품/리밸런싱 비중 4대 추천 질문 칩 클릭 시 즉시 질문 발송 및 전문 연금 어드바이저 자동 답변 출력 엔진(`sendCoachQuickQuestion`) 정상화.
+
+3. **스크립트 및 품질 무결성 검증**:
+   - `validate_clean_js.ps1` 검증 결과: 괄호/중괄호/대괄호 에러 0건 통과
+     (`Clean Parens: 976/976`, `Clean Braces: 382/382`, `Clean Brackets: 103/103`).
+
+4. **GitHub 실서버 배포 및 반영 확인**:
+   - `docs/` 디렉터리에 `index.html`, `style.css`, `app.js` 최신 동기화 완료.
+   - Git 커밋(`321a93b`) 및 `main`, `gh-pages` 브랜치 원격 푸시 완료.
+   - GitHub Actions `pages build and deployment`: **`success`** 달성.
+   - 실서버 응답 검증: `https://wisekks-arch.github.io/soldc/index.html` (HTTP 200 OK, `Content-Length: 136176`, 실서버 정상 서비스 중).
