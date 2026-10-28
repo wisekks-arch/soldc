@@ -499,14 +499,14 @@ function resizeCharts() {
 // 4. 네비게이션 탭
 // ============================================================================
 function initNavigationTabs() {
-  const topNavItems = document.querySelectorAll(".app-top-nav .nav-item");
+  const sidebarNavItems = document.querySelectorAll(".app-sidebar-lnb .nav-item, .app-top-nav .nav-item");
   const bottomNavItems = document.querySelectorAll(".galaxy-bottom-nav .bottom-nav-item");
   const tabPanes = document.querySelectorAll(".tab-pane");
 
   function switchTab(tabKey) {
     if (tabKey === "add-product") return; // 모달 액션
 
-    topNavItems.forEach(item => {
+    sidebarNavItems.forEach(item => {
       item.classList.toggle("active", item.getAttribute("data-tab") === tabKey);
     });
     bottomNavItems.forEach(item => {
@@ -535,7 +535,7 @@ function initNavigationTabs() {
 
   window.triggerTabSwitch = switchTab;
 
-  topNavItems.forEach(item => {
+  sidebarNavItems.forEach(item => {
     item.addEventListener("click", (e) => {
       const tab = item.getAttribute("data-tab");
       if (tab) {
@@ -557,6 +557,26 @@ function initNavigationTabs() {
     btnGoRebalance.addEventListener("click", () => switchTab("rebalance"));
   }
 }
+
+// 20년 상세 연금수령 및 절세 추이 모달 열기/닫기
+window.openTaxScheduleModal = function() {
+  const modal = document.getElementById("taxScheduleModal");
+  const backdrop = document.getElementById("taxScheduleBackdrop");
+  if (modal && backdrop) {
+    modal.style.display = "flex";
+    backdrop.style.display = "block";
+    renderTaxPayoutSchedule();
+  }
+};
+
+window.closeTaxScheduleModal = function() {
+  const modal = document.getElementById("taxScheduleModal");
+  const backdrop = document.getElementById("taxScheduleBackdrop");
+  if (modal && backdrop) {
+    modal.style.display = "none";
+    backdrop.style.display = "none";
+  }
+};
 
 function initMobileDrawer() {
   const trigger = document.getElementById("mobileMenuTrigger");

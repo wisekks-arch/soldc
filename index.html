@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <!-- [글로벌 헤더 GNB - PC 및 모바일 공용 적응형] -->
+      <!-- [글로벌 헤더 GNB - 슬림 56px 일체형 헤더] -->
       <header class="app-header">
         <div class="header-left">
           <button class="mobile-menu-trigger" id="mobileMenuTrigger" aria-label="메뉴 열기">
@@ -85,6 +85,14 @@
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" placeholder="보유 15개 상품 검색..." id="globalSearchInput">
           </div>
+          <div class="top-risk-mini-badge d-none-mobile" title="퇴직연금 건강점수 및 법정 70% 준수">
+            <span class="label">건강점수</span>
+            <strong class="val text-brand" id="headerHealthScore">82점</strong>
+            <span class="pill-safe">공격형</span>
+          </div>
+          <button class="btn-top-export" id="btnOpenAiCoach">
+            <i class="fa-solid fa-comment-dots text-brand"></i> <span>AI 투자코치</span>
+          </button>
           <div class="header-action-btn notification-wrap" id="notificationBtn" title="알림">
             <i class="fa-regular fa-bell"></i>
             <span class="notification-badge">2</span>
@@ -99,57 +107,78 @@
         </div>
       </header>
 
-      <!-- ===================================================================
-           [상단 가로 탭 내비게이션 바: 기획안 9대 핵심 메뉴 체계]
-           =================================================================== -->
-      <nav class="app-top-nav" id="appTopNav">
-        <div class="top-nav-inner">
-          <ul class="top-nav-menu">
-            <li class="nav-item active" data-tab="dashboard">
-              <a href="#dashboard"><i class="fa-solid fa-house"></i><span>대시보드</span></a>
-            </li>
-            <li class="nav-item" data-tab="holdings">
-              <a href="#holdings"><i class="fa-solid fa-chart-pie"></i><span>자산현황</span></a>
-            </li>
-            <li class="nav-item" data-tab="product-manage">
-              <a href="#product-manage"><i class="fa-solid fa-coins"></i><span>투자상품관리</span></a>
-            </li>
-            <li class="nav-item" data-tab="return-analysis">
-              <a href="#return-analysis"><i class="fa-solid fa-chart-line"></i><span>수익률분석</span></a>
-            </li>
-            <li class="nav-item" data-tab="forecast">
-              <a href="#forecast"><i class="fa-solid fa-wand-magic-sparkles"></i><span>미래예측</span></a>
-            </li>
-            <li class="nav-item" data-tab="rebalance">
-              <a href="#rebalance"><i class="fa-solid fa-scale-balanced"></i><span>리밸런싱</span><span class="menu-badge pulse">AI추천</span></a>
-            </li>
-            <li class="nav-item" data-tab="ai-recommend">
-              <a href="#ai-recommend"><i class="fa-solid fa-robot"></i><span>AI 추천</span></a>
-            </li>
-            <li class="nav-item" data-tab="report-manage">
-              <a href="#report-manage"><i class="fa-solid fa-file-invoice"></i><span>리포트관리</span></a>
-            </li>
-            <li class="nav-item" data-tab="settings">
-              <a href="#settings"><i class="fa-solid fa-gear"></i><span>설정</span></a>
-            </li>
-          </ul>
-
-          <div class="top-nav-right-tools">
-            <div class="top-risk-mini-badge" title="퇴직연금 건강점수 및 법정 70% 준수">
-              <span class="label">건강점수</span>
-              <strong class="val text-brand" id="headerHealthScore">82점</strong>
-              <span class="pill-safe">공격형</span>
-            </div>
-            <button class="btn-top-export" id="btnOpenAiCoach">
-              <i class="fa-solid fa-comment-dots text-brand"></i> <span>AI 투자코치</span>
-            </button>
+      <!-- [메인 바디 레이아웃: 좌측 슬림 LNB 사이드바 + 우측 본문] -->
+      <div class="app-body app-layout-with-sidebar">
+        <!-- 좌측 슬림 LNB 사이드바 (220px) -->
+        <aside class="app-sidebar-lnb" id="appSidebarLnb">
+          <!-- 카테고리 1: 포트폴리오 분석 -->
+          <div class="sidebar-category">
+            <span class="category-title"><i class="fa-solid fa-chart-pie me-1"></i> 포트폴리오 분석</span>
+            <ul class="sidebar-menu">
+              <li class="nav-item active" data-tab="dashboard">
+                <a href="#dashboard"><i class="fa-solid fa-house"></i><span>종합 대시보드</span></a>
+              </li>
+              <li class="nav-item" data-tab="holdings">
+                <a href="#holdings"><i class="fa-solid fa-vault"></i><span>보유자산 15종</span></a>
+              </li>
+              <li class="nav-item" data-tab="return-analysis">
+                <a href="#return-analysis"><i class="fa-solid fa-chart-line"></i><span>수익률 정밀분석</span></a>
+              </li>
+            </ul>
           </div>
-        </div>
-      </nav>
 
-      <!-- [메인 바디 레이아웃: 100% 풀와이드 본문] -->
-      <div class="app-body full-width-layout">
-        <main class="app-main-content full-width" id="mainContent">
+          <!-- 카테고리 2: 투자상품 관리 -->
+          <div class="sidebar-category">
+            <span class="category-title"><i class="fa-solid fa-coins me-1"></i> 투자상품 관리</span>
+            <ul class="sidebar-menu">
+              <li class="nav-item" data-tab="product-manage">
+                <a href="#product-manage"><i class="fa-solid fa-circle-plus"></i><span>보유상품 등록/관리</span></a>
+              </li>
+              <li class="nav-item" data-tab="report-sync">
+                <a href="#report-sync"><i class="fa-solid fa-file-excel"></i><span>엑셀 데이터 연동</span></a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 카테고리 3: AI 어드바이저 -->
+          <div class="sidebar-category">
+            <span class="category-title"><i class="fa-solid fa-robot me-1"></i> AI 어드바이저</span>
+            <ul class="sidebar-menu">
+              <li class="nav-item" data-tab="forecast">
+                <a href="#forecast"><i class="fa-solid fa-wand-magic-sparkles"></i><span>미래은퇴 시뮬레이션</span></a>
+              </li>
+              <li class="nav-item" data-tab="rebalance">
+                <a href="#rebalance"><i class="fa-solid fa-scale-balanced"></i><span>AI 스마트 리밸런싱</span><span class="menu-badge pulse">AI추천</span></a>
+              </li>
+              <li class="nav-item" data-tab="ai-recommend">
+                <a href="#ai-recommend"><i class="fa-solid fa-gem"></i><span>맞춤 상품 추천</span></a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 카테고리 4: 리포트 & 도구 -->
+          <div class="sidebar-category">
+            <span class="category-title"><i class="fa-solid fa-file-lines me-1"></i> 리포트 & 도구</span>
+            <ul class="sidebar-menu">
+              <li class="nav-item" data-tab="report-manage">
+                <a href="#report-manage"><i class="fa-solid fa-file-invoice"></i><span>AI 종합 리포트</span></a>
+              </li>
+              <li class="nav-item" data-tab="settings">
+                <a href="#settings"><i class="fa-solid fa-gear"></i><span>시스템 설정</span></a>
+              </li>
+              <li class="nav-item-tool mt-2">
+                <button type="button" class="btn-sidebar-tax-popup" onclick="openTaxScheduleModal()">
+                  <i class="fa-solid fa-calendar-days text-positive"></i>
+                  <span>20년 절세 스케줄 팝업</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square font-10 ms-auto"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- 우측 본문 콘텐츠 -->
+        <main class="app-main-content" id="mainContent">
 
           <!-- =================================================================
                [탭 1: 종합 대시보드]
@@ -1717,73 +1746,6 @@
               </div>
             </div>
           </section>
-                <h3 class="panel-title mb-3"><i class="fa-solid fa-award text-brand"></i> 절세 시뮬레이션 결과</h3>
-
-                <div class="calc-highlight-box">
-                  <div class="label">연금 수령 시 총 절세 혜택 (감면액)</div>
-                  <div class="value text-positive" id="calcTaxSavedAmount">약 2,096,787 원 절세!</div>
-                  <div class="desc">일시금 수령 대비 퇴직소득세의 <strong>30%~40%</strong>가 영구 감면됩니다.</div>
-                </div>
-
-                <div class="calc-breakdown-list">
-                  <div class="breakdown-item">
-                    <span class="name">예상 월 연금 수령액 (세전)</span>
-                    <span class="val font-bold" id="calcMonthlyPayout">약 310,000 원/월</span>
-                  </div>
-                  <div class="breakdown-item">
-                    <span class="name">은퇴 기간 총 수령 예상액</span>
-                    <span class="val text-brand font-bold" id="calcTotalPayout">약 74,400,000 원</span>
-                  </div>
-                  <div class="breakdown-item">
-                    <span class="name">일시금 수령 시 예상 세액</span>
-                    <span class="val text-danger" id="calcLumpSumTax">5,990,822 원</span>
-                  </div>
-                  <div class="breakdown-item">
-                    <span class="name">연금 수령 시 납부 세액</span>
-                    <span class="val text-positive" id="calcPensionTax">3,894,035 원</span>
-                  </div>
-                </div>
-
-                <div class="calc-tip-box">
-                  <i class="fa-solid fa-lightbulb text-warning"></i>
-                  <span>연금 수령 11년차부터는 감면율이 30%에서 40%로 확대되어 실수령액이 더욱 커집니다.</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- [신규 화면구성] 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 -->
-            <div class="dashboard-panel mt-4">
-              <div class="panel-header">
-                <div class="panel-title-wrap">
-                  <h3 class="panel-title"><i class="fa-solid fa-calendar-days text-brand"></i> 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이</h3>
-                  <span class="panel-subtitle">은퇴 나이 및 수령 기간에 따른 연차별 세전/세후 수령액과 영구 절세 누적 혜택 분석</span>
-                </div>
-              </div>
-              <div class="tax-schedule-chart-wrap mb-4" style="height: 250px; position: relative;">
-                <canvas id="taxScheduleChart"></canvas>
-              </div>
-              <div class="table-responsive-desktop">
-                <table class="sol-datagrid" id="taxScheduleTable">
-                  <thead>
-                    <tr>
-                      <th class="text-center">연차</th>
-                      <th class="text-center">나이</th>
-                      <th class="text-right">기초 적립금</th>
-                      <th class="text-right">연간 예상 운용수익</th>
-                      <th class="text-right">연간 연금 수령액 (세전)</th>
-                      <th class="text-center">적용 감면율</th>
-                      <th class="text-right">실수령액 (세후)</th>
-                      <th class="text-right">기말 잔여 적립금</th>
-                      <th class="text-right font-bold text-positive">누적 절세 혜택</th>
-                    </tr>
-                  </thead>
-                  <tbody id="taxScheduleTableBody">
-                    <!-- JS 동적 렌더링 -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
 
 
           <!-- =================================================================
@@ -2079,6 +2041,80 @@
           <button class="btn-outline" onclick="closeRebalanceConfirmModal()">취소</button>
           <button class="btn-primary" id="btnConfirmRebalanceSubmit" onclick="confirmRebalanceExecution()"><i class="fa-solid fa-bolt"></i> 리밸런싱 즉시 체결 및 실시간 반영</button>
         </div>
+      </div>
+
+      <!-- ===================================================================
+           [사용자 요청 전용 팝업창] 연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이 모달
+           =================================================================== -->
+      <div class="modal-backdrop" id="taxScheduleBackdrop" onclick="closeTaxScheduleModal()" style="display: none;"></div>
+      <div class="modal-dialog tax-schedule-modal-dialog" id="taxScheduleModal" style="display: none;">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <div class="modal-brand-tag"><i class="fa-solid fa-calendar-days"></i> 신한SOL 절세 시뮬레이터</div>
+            <h3 class="modal-title">연도별 20년 상세 연금 수령 스케줄 및 누적 절세 추이</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeTaxScheduleModal()" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body modal-body-scroll">
+          <!-- 절세 요약 하이라이트 -->
+          <div class="calc-highlight-box mb-3">
+            <div class="label">연금 수령 시 총 절세 혜택 (감면액)</div>
+            <div class="value text-positive" id="calcTaxSavedAmount">약 2,096,787 원 절세!</div>
+            <div class="desc">일시금 수령 대비 퇴직소득세의 <strong>30%~40%</strong>가 영구 감면됩니다. (11년차부터 40% 감면율 적용)</div>
+          </div>
+
+          <div class="calc-breakdown-list mb-4">
+            <div class="breakdown-item">
+              <span class="name">예상 월 연금 수령액 (세전)</span>
+              <span class="val font-bold" id="calcMonthlyPayout">약 310,000 원/월</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="name">은퇴 기간 총 수령 예상액</span>
+              <span class="val text-brand font-bold" id="calcTotalPayout">약 74,400,000 원</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="name">일시금 수령 시 예상 세액</span>
+              <span class="val text-danger" id="calcLumpSumTax">5,990,822 원</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="name">연금 수령 시 납부 세액</span>
+              <span class="val text-positive" id="calcPensionTax">3,894,035 원</span>
+            </div>
+          </div>
+
+          <!-- 누적 절세 추이 차트 -->
+          <div class="tax-schedule-chart-wrap mb-4" style="height: 260px; position: relative;">
+            <canvas id="taxScheduleChart"></canvas>
+          </div>
+
+          <!-- 20년 상세 스케줄 데이터그리드 -->
+          <div class="table-responsive-desktop">
+            <table class="sol-datagrid" id="taxScheduleTable">
+              <thead>
+                <tr>
+                  <th class="text-center">연차</th>
+                  <th class="text-center">나이</th>
+                  <th class="text-right">기초 적립금</th>
+                  <th class="text-right">연간 예상 운용수익</th>
+                  <th class="text-right">연간 연금 수령액 (세전)</th>
+                  <th class="text-center">적용 감면율</th>
+                  <th class="text-right">실수령액 (세후)</th>
+                  <th class="text-right">기말 잔여 적립금</th>
+                  <th class="text-right font-bold text-positive">누적 절세 혜택</th>
+                </tr>
+              </thead>
+              <tbody id="taxScheduleTableBody">
+                <!-- JS 동적 렌더링 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-outline" onclick="closeTaxScheduleModal()">닫기</button>
+          <button class="btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> 스케줄 인쇄 / PDF 저장</button>
+        </div>
+      </div>
+
       <!-- ===================================================================
            [신규 UX] AI 투자 코치 챗봇 플로팅 버튼 및 인터랙티브 상담 모달창
            =================================================================== -->

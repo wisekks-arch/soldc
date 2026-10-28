@@ -4176,3 +4176,172 @@ body {
   }
 }
 
+/* ==========================================================================
+   22. [좌측 슬림 LNB 사이드바 및 20년 절세 모달 전용 스타일]
+   ========================================================================== */
+.app-header {
+  height: 56px !important;
+  background: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 24px !important;
+  position: sticky !important;
+  top: 49px !important;
+  z-index: 100 !important;
+}
+
+.app-layout-with-sidebar {
+  display: flex !important;
+  width: 100% !important;
+  min-height: calc(100vh - 105px) !important;
+  background: var(--bg-app) !important;
+}
+
+.app-sidebar-lnb {
+  width: 220px !important;
+  background: #0A1931 !important; /* 신한 딥 네이비 */
+  color: #FFFFFF !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 16px 10px !important;
+  position: sticky !important;
+  top: 105px !important;
+  height: calc(100vh - 105px) !important;
+  overflow-y: auto !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  z-index: 90 !important;
+}
+
+.sidebar-category {
+  margin-bottom: 16px !important;
+}
+
+.category-title {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #94A3B8 !important;
+  letter-spacing: 0.3px !important;
+  padding: 0 8px 6px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin-bottom: 6px !important;
+}
+
+.sidebar-menu {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+.sidebar-menu .nav-item a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  color: #CBD5E1 !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  transition: all 0.15s ease !important;
+  border: 1px solid transparent !important;
+}
+
+.sidebar-menu .nav-item a i {
+  font-size: 13.5px !important;
+  width: 16px !important;
+  text-align: center !important;
+  color: #94A3B8 !important;
+}
+
+.sidebar-menu .nav-item:hover a {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+}
+
+.sidebar-menu .nav-item:hover a i {
+  color: #38BDF8 !important;
+}
+
+.sidebar-menu .nav-item.active a {
+  background: #0046FF !important; /* 신한 시그니처 블루 */
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.45) !important;
+}
+
+.sidebar-menu .nav-item.active a i {
+  color: #FFFFFF !important;
+}
+
+.sidebar-menu .menu-badge {
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  padding: 1px 6px !important;
+  border-radius: 10px !important;
+  background: #FF5252 !important;
+  color: #FFF !important;
+  margin-left: auto !important;
+}
+
+.btn-sidebar-tax-popup {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 9px 12px !important;
+  margin-top: 4px !important;
+  border-radius: 8px !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  color: #34D399 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-sidebar-tax-popup:hover {
+  background: #10B981 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+}
+
+.btn-sidebar-tax-popup:hover i {
+  color: #FFFFFF !important;
+}
+
+/* 20년 절세 스케줄 전용 대형 팝업 모달 */
+.tax-schedule-modal-dialog {
+  max-width: 1080px !important;
+  width: 95% !important;
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.tax-schedule-modal-dialog .modal-body-scroll {
+  overflow-y: auto !important;
+  max-height: calc(90vh - 130px) !important;
+  padding: 22px 24px !important;
+}
+
+@media (max-width: 1024px) {
+  .app-layout-with-sidebar {
+    flex-direction: column !important;
+  }
+  .app-sidebar-lnb {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+
+
